@@ -7,11 +7,12 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
+      darkMode: 'class',
       theme: {
         extend: {
           colors: {
@@ -25,6 +26,7 @@
           fontFamily: {
             'display': ['"Playfair Display"', 'Georgia', 'serif'],
             'body': ['"Inter"', '"Helvetica Neue"', 'Arial', 'sans-serif'],
+            'mono': ['"JetBrains Mono"', 'ui-monospace', 'Menlo', 'monospace'],
           },
         },
       },
@@ -43,23 +45,58 @@
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: #fff; }
     ::-webkit-scrollbar-thumb { background: #111; }
+    html.dark ::-webkit-scrollbar-track { background: #121212; }
+    html.dark ::-webkit-scrollbar-thumb { background: #555; }
 
-    .article-card { transition: background-color 0.12s ease, color 0.12s ease; }
-    .article-card:hover { background-color: #111111; color: #FFFFFF; }
+    .article-card { transition: background-color 0.12s ease, color 0.12s ease, border-color 0.12s ease; }
+    .article-card:hover { background-color: #111111; color: #FFFFFF; border-color: #111111; }
     .article-card:hover .card-title { color: #FFFFFF; }
     .article-card:hover .card-excerpt { color: #BBBBBB; }
     .article-card:hover .card-link { color: #7BB8FF; }
     .article-card:hover .card-date { color: #888888; }
     .article-card:hover .card-tag { color: #999999; border-color: #444444; }
 
-    .nav-link-bracket:hover { background-color: #111; color: #FFF; }
-    .nav-link-bracket:hover span { color: #7BB8FF; }
+    html.dark .article-card:hover { background-color: #e5e7eb; color: #111111; border-color: #111111; }
+    html.dark .article-card:hover .card-title { color: #111111; }
+    html.dark .article-card:hover .card-excerpt { color: #444444; }
+    html.dark .article-card:hover .card-link { color: #0645AD; }
+    html.dark .article-card:hover .card-date { color: #555555; }
+    html.dark .article-card:hover .card-tag { color: #333333; border-color: #999999; }
 
-    .nav-link-active { background-color: #111; color: #FFF; }
-    .nav-link-active span { color: #7BB8FF; }
+    .intro-box { background: rgba(248, 249, 255, 0.7); }
+    html.dark .intro-box { background: rgba(30, 30, 60, 0.4); }
+
+    /* Ampersand normalization — prevent serif/italic fallback in headings */
+    .article-body h2 amp, .article-body h3 amp,
+    .article-body h2 .amp, .article-body h3 .amp {
+      font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+      font-style: normal;
+      font-weight: 400;
+    }
+
+    /* Article body — table cell breathing room */
+    .article-body table th,
+    .article-body table td { padding: 12px 16px; }
+
+    /* Article body — list bullet spacing */
+    .article-body ul,
+    .article-body ol { padding-left: 1.5em; list-style-position: outside; }
+    .article-body li { margin-bottom: 0.25em; }
+
+    /* Article body dark mode (injected HTML can't use Tailwind dark:) */
+    html.dark .article-body { color: #d1d5db; }
+    html.dark .article-body h2,
+    html.dark .article-body h3 { color: #e5e7eb; }
+    html.dark .article-body strong { color: #f3f4f6; }
+    html.dark .article-body table { border-color: #374151; }
+    html.dark .article-body th { color: #e5e7eb; border-color: #374151; }
+    html.dark .article-body td { border-color: #374151; }
+    html.dark .article-body thead tr { border-color: #374151; }
+    html.dark .article-body code { background: #1f2937; border-color: #374151; color: #d1d5db; }
+    html.dark .article-body a { color: #7BB8FF; }
   </style>
 </head>
-<body class="bg-wiki-white text-wiki-black">
+<body>
   <div id="root"></div>
 
   <script type="text/babel">
@@ -161,7 +198,7 @@
 
 <p class="mb-4 leading-relaxed">Both models inherit <strong>Multi-head Latent Attention (MLA)</strong> from the V3 architecture — a compression technique that reduces the KV-cache footprint during inference without sacrificing quality. The key architectural innovation in V4 is the integration of <strong>Engram Conditional Memory</strong>, which improves long-context retrieval and coding accuracy by conditioning generation on previously seen token patterns within the 1M-token context window.</p>
 
-<h2 class="font-display text-2xl font-bold mb-4 mt-8">Pros &amp; Cons</h2>
+<h2 class="font-display text-2xl font-bold mb-4 mt-8">Pros <span class="amp">&amp;</span> Cons</h2>
 
 <h3 class="font-display text-lg font-bold mb-2">V4-Pro</h3>
 <ul class="list-disc list-inside mb-4 space-y-1">
@@ -175,7 +212,7 @@
 <li><strong>Cons:</strong> Lower ceiling on complex reasoning tasks compared to V4-Pro. Smaller active parameter count limits depth of analysis. Not intended for frontier-level coding challenges.</li>
 </ul>
 
-<h2 class="font-display text-2xl font-bold mb-4 mt-8">Token Rates &amp; Economics</h2>
+<h2 class="font-display text-2xl font-bold mb-4 mt-8">Token Rates <span class="amp">&amp;</span> Economics</h2>
 <p class="mb-4 leading-relaxed">DeepSeek's pricing continues to be aggressively competitive:</p>
 <table class="w-full border border-black mb-4 text-sm">
 <thead><tr class="border-b border-black"><th class="p-2 text-left border-r border-black">Model</th><th class="p-2 text-left border-r border-black">Input / 1M tokens</th><th class="p-2 text-left border-r border-black">Output / 1M tokens</th><th class="p-2 text-left">Context</th></tr></thead>
@@ -285,7 +322,7 @@
 `,
 
       4: `
-<h2 class="font-display text-2xl font-bold mb-4">History &amp; Background</h2>
+<h2 class="font-display text-2xl font-bold mb-4">History <span class="amp">&amp;</span> Background</h2>
 <p class="mb-4 leading-relaxed">Cloudflare was founded in 2009 by Matthew Prince, Lee Holloway, and Michelle Zatlyn, emerging from Project Honey Pot — an open-source initiative that tracked online spam and malicious activity. The founders recognized that the web's infrastructure was fundamentally insecure and slow, and that a shared performance and security layer could serve millions of sites simultaneously.</p>
 <p class="mb-4 leading-relaxed">The company launched at TechCrunch Disrupt in 2010 and went public on the NYSE in September 2019. By 2026, Cloudflare serves approximately one-third of all internet traffic, operates in 330+ cities across 120+ countries, and has expanded from a simple CDN into a comprehensive cloud platform.</p>
 
@@ -386,21 +423,21 @@
 <p class="mb-4 leading-relaxed">Linux uses a <strong>monolithic kernel</strong> architecture where the entire OS (process management, memory management, device drivers, file systems, networking) runs in kernel space. However, it supports loadable kernel modules (LKMs), allowing drivers and features to be loaded and unloaded dynamically — giving it much of the flexibility of a microkernel without the performance overhead of context switching.</p>
 <p class="mb-4 leading-relaxed">The Linux kernel is developed independently of any particular distribution. Companies like Red Hat, Canonical, and SUSE build their distributions on top of the same upstream kernel. The kernel itself supports more hardware architectures than any other OS (x86, ARM, RISC-V, PowerPC, s390, and dozens more).</p>
 
-<h2 class="font-display text-2xl font-bold mb-4 mt-8">Performance &amp; Hardware</h2>
+<h2 class="font-display text-2xl font-bold mb-4 mt-8">Performance <span class="amp">&amp;</span> Hardware</h2>
 <ul class="list-disc list-inside mb-4 space-y-2">
 <li><strong>Windows</strong> excels at gaming (DirectX 12, Game Mode) and broad hardware compatibility. Resource usage is moderate — Windows 11 requires 4GB RAM minimum but runs best with 16GB+. The NT kernel handles multitasking well but has historically struggled with long uptime stability compared to Linux.</li>
 <li><strong>macOS</strong> benefits enormously from Apple Silicon's unified memory architecture. M-series chips deliver desktop-class performance at laptop power envelopes (15-30W vs. 45-100W for comparable Intel/AMD). The trade-off is zero hardware upgradeability — RAM and storage are soldered.</li>
 <li><strong>Linux</strong> is the most resource-efficient, running comfortably on 2GB RAM with lightweight desktop environments. It offers the most granular control over system resources (cgroups, namespaces, kernel parameters). Performance tuning is a first-class feature, not an afterthought.</li>
 </ul>
 
-<h2 class="font-display text-2xl font-bold mb-4 mt-8">Ecosystem &amp; Developer Experience</h2>
+<h2 class="font-display text-2xl font-bold mb-4 mt-8">Ecosystem <span class="amp">&amp;</span> Developer Experience</h2>
 <ul class="list-disc list-inside mb-4 space-y-2">
 <li><strong>Windows:</strong> WSL2 (Windows Subsystem for Linux) has made Windows a credible development platform, providing a real Linux kernel alongside Windows. Visual Studio remains the strongest IDE for .NET and C++. PowerShell has improved but remains less ergonomic than Unix shells. Package management (winget, Chocolatey) is functional but fragmented.</li>
 <li><strong>macOS:</strong> The de facto standard for web and mobile development. Xcode for Apple-platform development, Homebrew for package management, and native Unix tooling (zsh, git, SSH) without emulation. The "walled garden" extends to distribution: macOS apps must be notarized by Apple, and the App Store takes a 15-30% cut.</li>
 <li><strong>Linux:</strong> The most open ecosystem. Package managers (apt, dnf, pacman, nix) are powerful and scriptable. Docker, Kubernetes, and the entire cloud-native stack were born on Linux. The philosophical divide: freedom to modify anything vs. the responsibility to maintain it yourself. Tooling is unmatched for systems programming, DevOps, and infrastructure work.</li>
 </ul>
 
-<h2 class="font-display text-2xl font-bold mb-4 mt-8">Pros &amp; Cons</h2>
+<h2 class="font-display text-2xl font-bold mb-4 mt-8">Pros <span class="amp">&amp;</span> Cons</h2>
 <h3 class="font-display text-lg font-bold mb-2">Windows</h3>
 <ul class="list-disc list-inside mb-4 space-y-1">
 <li><strong>Pros:</strong> Largest software library. Best gaming platform. Enterprise standard for office productivity. WSL2 bridges the Linux gap.</li>
@@ -432,10 +469,41 @@
       return qi === q.length;
     }
 
+    /* ── Dark mode toggle icon ─────────────────────────────── */
+
+    function DarkModeToggle({ darkMode, toggle }) {
+      return (
+        <button
+          onClick={toggle}
+          className="w-9 h-9 flex items-center justify-center border border-black dark:border-gray-600 hover:bg-wiki-black hover:text-white dark:hover:bg-gray-600 dark:hover:text-white transition-colors"
+          aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+          title={darkMode ? "Light mode" : "Dark mode"}
+        >
+          {darkMode ? (
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <circle cx="8" cy="8" r="3.5" />
+              <line x1="8" y1="1" x2="8" y2="3" />
+              <line x1="8" y1="13" x2="8" y2="15" />
+              <line x1="1" y1="8" x2="3" y2="8" />
+              <line x1="13" y1="8" x2="15" y2="8" />
+              <line x1="3.05" y1="3.05" x2="4.46" y2="4.46" />
+              <line x1="11.54" y1="11.54" x2="12.95" y2="12.95" />
+              <line x1="3.05" y1="12.95" x2="4.46" y2="11.54" />
+              <line x1="11.54" y1="4.46" x2="12.95" y2="3.05" />
+            </svg>
+          ) : (
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <path d="M14 9.68A6.5 6.5 0 0 1 6.32 2 6 6 0 1 0 14 9.68z" />
+            </svg>
+          )}
+        </button>
+      );
+    }
+
     /* ── Components ─────────────────────────────────────────── */
 
     /* Mobile fullscreen overlay nav */
-    function MobileNav({ isOpen, onClose, onNavigate, currentView }) {
+    function MobileNav({ isOpen, onClose, onNavigate, currentView, darkMode, toggleDark }) {
       useEffect(() => {
         if (isOpen) {
           document.body.style.overflow = "hidden";
@@ -447,31 +515,38 @@
 
       return (
         <div
-          className={`fixed inset-0 z-50 bg-white transition-transform duration-200 ${isOpen ? "translate-x-0" : "translate-x-full"}`}
+          className={`fixed inset-0 z-50 bg-white dark:bg-[#121212] transition-transform duration-200 ${isOpen ? "translate-x-0" : "translate-x-full"}`}
           style={{ display: isOpen ? "block" : "none" }}
         >
-          <div className="flex items-center justify-between px-5 py-4 border-b border-black">
-            <span className="font-display text-xl font-bold text-wiki-black">ATM Blog</span>
-            <button
-              onClick={onClose}
-              className="w-10 h-10 flex items-center justify-center border border-black hover:bg-wiki-black hover:text-white transition-colors"
-              aria-label="Close menu"
-            >
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="2">
-                <line x1="2" y1="2" x2="16" y2="16" />
-                <line x1="16" y1="2" x2="2" y2="16" />
-              </svg>
-            </button>
+          <div className="flex items-center justify-between px-5 py-4 border-b border-black dark:border-gray-700">
+            <span className="font-display text-xl font-bold text-wiki-black dark:text-gray-100">ATM Blog</span>
+            <div className="flex items-center gap-2">
+              <DarkModeToggle darkMode={darkMode} toggle={toggleDark} />
+              <button
+                onClick={onClose}
+                className="w-10 h-10 flex items-center justify-center border border-black dark:border-gray-600 hover:bg-wiki-black hover:text-white dark:hover:bg-gray-600 dark:hover:text-white transition-colors"
+                aria-label="Close menu"
+              >
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="2">
+                  <line x1="2" y1="2" x2="16" y2="16" />
+                  <line x1="16" y1="2" x2="2" y2="16" />
+                </svg>
+              </button>
+            </div>
           </div>
           <nav className="px-5 pt-4">
             {navLinks.map((link) => (
               <button
                 key={link.view}
                 onClick={() => onNavigate(link.view)}
-                className={`nav-link-bracket block w-full text-left py-3 px-2 text-lg border-b border-neutral-200 transition-colors ${currentView === link.view ? "nav-link-active" : ""}`}
+                className={`block w-full text-left py-3 px-3 text-lg border-b border-neutral-200 dark:border-gray-700 transition-colors border-l-2 ${
+                  currentView === link.view
+                    ? "border-l-black dark:border-l-white font-bold text-wiki-black dark:text-gray-100 bg-gray-50 dark:bg-gray-800/50"
+                    : "border-l-transparent text-neutral-500 dark:text-gray-500 hover:text-wiki-black dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800"
+                }`}
                 style={{ textDecoration: "none" }}
               >
-                [ <span className="text-wiki-blue">{link.label}</span> ]
+                {link.label}
               </button>
             ))}
           </nav>
@@ -480,41 +555,79 @@
     }
 
     /* Desktop left sidebar */
-    function SidebarNav({ currentView, onNavigate }) {
+    function SidebarNav({ currentView, onNavigate, darkMode, toggleDark }) {
       return (
-        <aside className="hidden lg:flex lg:flex-col lg:w-60 xl:w-64 border-r border-black bg-white h-screen sticky top-0 overflow-y-auto flex-shrink-0">
+        <aside className="hidden lg:flex lg:flex-col lg:w-60 xl:w-64 border-r border-black dark:border-gray-700 bg-white dark:bg-[#181818] h-screen sticky top-0 overflow-y-auto flex-shrink-0">
           <div className="p-6 pb-0">
             <button
               onClick={() => onNavigate('home')}
-              className="font-display text-2xl font-bold text-wiki-black block text-left"
+              className="font-display text-2xl font-bold text-wiki-black dark:text-gray-100 block text-left"
               style={{ textDecoration: "none" }}
             >
               ATM Blog
             </button>
-            <p className="text-xs text-neutral-500 mt-1">Personal notebook</p>
+            <p className="text-xs text-neutral-500 dark:text-gray-500 mt-1">Personal notebook</p>
           </div>
 
           <div className="p-6">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-neutral-400 mb-3">Navigation</p>
+            <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-neutral-400 dark:text-gray-600 mb-3">Navigation</p>
             <nav className="space-y-1">
               {navLinks.map((link) => (
                 <button
                   key={link.view}
                   onClick={() => onNavigate(link.view)}
-                  className={`nav-link-bracket block w-full text-left py-1.5 text-sm transition-colors ${currentView === link.view ? "nav-link-active px-1" : ""}`}
+                  className={`flex items-center gap-2.5 w-full text-left py-2 pl-0 text-base transition-colors ${
+                    currentView === link.view
+                      ? "font-bold text-wiki-black dark:text-gray-100"
+                      : "text-neutral-500 dark:text-gray-500 hover:text-wiki-black dark:hover:text-white"
+                  }`}
                   style={{ textDecoration: "none" }}
                 >
-                  [ <span className="text-wiki-blue hover:underline">{link.label}</span> ]
+                  <span className={"w-[2px] h-4 flex-shrink-0 transition-colors " + (
+                    currentView === link.view
+                      ? "bg-wiki-black dark:bg-gray-200"
+                      : "bg-transparent"
+                  )} />
+                  {link.label}
                 </button>
               ))}
             </nav>
           </div>
 
-          <div className="px-6 pb-6 mt-auto border-t border-neutral-200 pt-6">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-neutral-400 mb-2">About</p>
-            <p className="text-xs text-neutral-500 leading-relaxed">
+          <div className="px-6 pb-4 mt-auto border-t border-neutral-200 dark:border-gray-700 pt-5">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-neutral-400 dark:text-gray-600 mb-2">About</p>
+            <p className="text-xs text-neutral-500 dark:text-gray-500 leading-relaxed">
               A personal notebook on AI, infrastructure, open-source, and quantitative analysis.
             </p>
+          </div>
+
+          <div className="px-6 pb-6 pt-2 border-t border-neutral-200 dark:border-gray-700">
+            <button
+              onClick={toggleDark}
+              className="flex items-center gap-2 text-neutral-500 dark:text-gray-500 hover:text-wiki-black dark:hover:text-gray-300 transition-colors"
+              aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+              title={darkMode ? "Light mode" : "Dark mode"}
+              style={{ background: 'none', border: 'none', padding: 0 }}
+            >
+              {darkMode ? (
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <circle cx="8" cy="8" r="3.5" />
+                  <line x1="8" y1="1" x2="8" y2="3" />
+                  <line x1="8" y1="13" x2="8" y2="15" />
+                  <line x1="1" y1="8" x2="3" y2="8" />
+                  <line x1="13" y1="8" x2="15" y2="8" />
+                  <line x1="3.05" y1="3.05" x2="4.46" y2="4.46" />
+                  <line x1="11.54" y1="11.54" x2="12.95" y2="12.95" />
+                  <line x1="3.05" y1="12.95" x2="4.46" y2="11.54" />
+                  <line x1="11.54" y1="4.46" x2="12.95" y2="3.05" />
+                </svg>
+              ) : (
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M14 9.68A6.5 6.5 0 0 1 6.32 2 6 6 0 1 0 14 9.68z" />
+                </svg>
+              )}
+              <span className="text-[10px] uppercase tracking-[0.15em]">{darkMode ? 'Light' : 'Dark'}</span>
+            </button>
           </div>
         </aside>
       );
@@ -522,105 +635,155 @@
 
     /* Desktop right sidebar */
     function RightSidebar({ currentView }) {
-      const showWebsitesStats = currentView === 'websites';
+      var showWebsitesStats = currentView === 'websites';
+      var showTimelineYears = currentView === 'timeline';
+
+      /* Extract unique years from timeline */
+      var uniqueYears = [];
+      if (showTimelineYears) {
+        var seen = {};
+        timelineEvents.forEach(function (evt) {
+          if (!seen[evt.date]) { seen[evt.date] = true; uniqueYears.push(evt.date); }
+        });
+      }
+
+      function scrollToYear(year) {
+        var el = document.getElementById('year-' + year);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
       return (
-        <aside className="hidden lg:flex lg:flex-col lg:w-60 xl:w-64 border-l border-black bg-white h-screen sticky top-0 overflow-y-auto flex-shrink-0">
-          <div className="p-6">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-neutral-400 mb-3">Quick stats</p>
-            <div className="space-y-2 text-xs">
+        <aside className="hidden lg:flex lg:flex-col lg:w-60 xl:w-64 border-l border-black dark:border-gray-700 bg-white dark:bg-[#181818] h-screen sticky top-0 overflow-y-auto flex-shrink-0">
+          <div className="p-6 w-full">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-neutral-400 dark:text-gray-600 mb-4">Quick stats</p>
+            <div className="space-y-0 text-xs w-full">
               {showWebsitesStats ? (
                 <>
-                  <div className="flex justify-between border-b border-neutral-200 pb-2">
-                    <span className="text-neutral-500">Total Websites</span>
-                    <span className="font-semibold text-wiki-black tabular-nums">{websitesData.length}</span>
+                  <div className="flex justify-between items-center border-b border-neutral-200 dark:border-gray-700 py-2.5 w-full">
+                    <span className="text-neutral-500 dark:text-gray-500">Total Websites</span>
+                    <span className="font-semibold text-wiki-black dark:text-gray-200 font-mono tabular-nums">{websitesData.length}</span>
                   </div>
-                  <div className="flex justify-between pb-1">
-                    <span className="text-neutral-500">Active</span>
-                    <span className="font-semibold text-wiki-black tabular-nums">{websitesData.filter(w => w.status === 'Active').length}</span>
+                  <div className="flex justify-between items-center py-2.5 w-full">
+                    <span className="text-neutral-500 dark:text-gray-500">Active</span>
+                    <span className="font-semibold text-wiki-black dark:text-gray-200 font-mono tabular-nums">{websitesData.filter(w => w.status === 'Active').length}</span>
                   </div>
                 </>
               ) : (
                 <>
-                  <div className="flex justify-between border-b border-neutral-200 pb-2">
-                    <span className="text-neutral-500">Articles</span>
-                    <span className="font-semibold text-wiki-black tabular-nums">{articles.length}</span>
+                  <div className="flex justify-between items-center border-b border-neutral-200 dark:border-gray-700 py-2.5 w-full">
+                    <span className="text-neutral-500 dark:text-gray-500">Articles</span>
+                    <span className="font-semibold text-wiki-black dark:text-gray-200 font-mono tabular-nums">{articles.length}</span>
                   </div>
-                  <div className="flex justify-between border-b border-neutral-200 pb-2">
-                    <span className="text-neutral-500">Topics</span>
-                    <span className="font-semibold text-wiki-black tabular-nums">6</span>
+                  <div className="flex justify-between items-center border-b border-neutral-200 dark:border-gray-700 py-2.5 w-full">
+                    <span className="text-neutral-500 dark:text-gray-500">Topics</span>
+                    <span className="font-semibold text-wiki-black dark:text-gray-200 font-mono tabular-nums">6</span>
                   </div>
-                  <div className="flex justify-between border-b border-neutral-200 pb-2">
-                    <span className="text-neutral-500">Websites</span>
-                    <span className="font-semibold text-wiki-black tabular-nums">{websitesData.length}</span>
+                  <div className="flex justify-between items-center border-b border-neutral-200 dark:border-gray-700 py-2.5 w-full">
+                    <span className="text-neutral-500 dark:text-gray-500">Websites</span>
+                    <span className="font-semibold text-wiki-black dark:text-gray-200 font-mono tabular-nums">{websitesData.length}</span>
                   </div>
-                  <div className="flex justify-between pb-1">
-                    <span className="text-neutral-500">Writing since</span>
-                    <span className="font-semibold text-wiki-black">2023</span>
+                  <div className="flex justify-between items-center py-2.5 w-full">
+                    <span className="text-neutral-500 dark:text-gray-500">Writing since</span>
+                    <span className="font-semibold text-wiki-black dark:text-gray-200 font-mono tabular-nums">2023</span>
                   </div>
                 </>
               )}
             </div>
           </div>
 
-          <div className="mx-6 border-t border-neutral-200" />
+          {/* Jump to Year — only on Timeline view */}
+          {showTimelineYears && uniqueYears.length > 0 && (
+            <>
+              <div className="mx-6 border-t border-neutral-200 dark:border-gray-700" />
+              <div className="p-6 pt-5 w-full">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-neutral-400 dark:text-gray-600 mb-3">Jump to Year</p>
+                <nav className="space-y-1.5">
+                  {uniqueYears.map(function (year) {
+                    return (
+                      <button
+                        key={year}
+                        onClick={function () { scrollToYear(year); }}
+                        className="block text-sm text-gray-500 dark:text-gray-500 hover:text-wiki-black dark:hover:text-white hover:font-bold font-mono tabular-nums transition-colors"
+                        style={{ textDecoration: 'none' }}
+                      >
+                        {year}
+                      </button>
+                    );
+                  })}
+                </nav>
+              </div>
+            </>
+          )}
+
+          <div className="mx-6 border-t border-neutral-200 dark:border-gray-700" />
 
           <div className="p-6 mt-auto">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-neutral-400 mb-3">EMAIL</p>
-            <p className="text-xs text-neutral-700 leading-relaxed">superherocheng@163.com</p>
+            <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-neutral-400 dark:text-gray-600 mb-3">EMAIL</p>
+            <p className="text-xs text-neutral-700 dark:text-gray-400 leading-relaxed">superherocheng@163.com</p>
           </div>
         </aside>
       );
     }
 
     /* Tablet top navigation bar */
-    function TabletNavBar({ currentView, onNavigate }) {
+    function TabletNavBar({ currentView, onNavigate, darkMode, toggleDark }) {
       return (
-        <header className="hidden md:flex lg:hidden items-center justify-between px-6 py-3 border-b border-black bg-white sticky top-0 z-40">
+        <header className="hidden md:flex lg:hidden items-center justify-between px-6 py-3 border-b border-black dark:border-gray-700 bg-white dark:bg-[#121212] sticky top-0 z-40">
           <button
             onClick={() => onNavigate('home')}
-            className="font-display text-xl font-bold text-wiki-black"
+            className="font-display text-xl font-bold text-wiki-black dark:text-gray-100"
             style={{ textDecoration: "none" }}
           >
             ATM Blog
           </button>
-          <nav className="flex items-center gap-5">
-            {navLinks.map((link) => (
-              <button
-                key={link.view}
-                onClick={() => onNavigate(link.view)}
-                className={`text-sm transition-colors px-1 ${currentView === link.view ? "bg-wiki-black" : ""}`}
-                style={{ textDecoration: "none" }}
-              >
-                [ <span className={`hover:underline ${currentView === link.view ? "text-wiki-blue" : "text-wiki-blue"}`}>{link.label}</span> ]
-              </button>
-            ))}
-          </nav>
+          <div className="flex items-center gap-4">
+            <nav className="flex items-center gap-4">
+              {navLinks.map((link) => (
+                <button
+                  key={link.view}
+                  onClick={() => onNavigate(link.view)}
+                  className={`text-sm transition-colors px-1 border-b-2 pb-0.5 ${
+                    currentView === link.view
+                      ? "border-black dark:border-gray-200 font-bold text-wiki-black dark:text-gray-100"
+                      : "border-transparent text-neutral-500 dark:text-gray-500 hover:text-wiki-black dark:hover:text-gray-300"
+                  }`}
+                  style={{ textDecoration: "none" }}
+                >
+                  {link.label}
+                </button>
+              ))}
+            </nav>
+            <DarkModeToggle darkMode={darkMode} toggle={toggleDark} />
+          </div>
         </header>
       );
     }
 
     /* Mobile top bar with hamburger */
-    function MobileTopBar({ onMenuClick }) {
+    function MobileTopBar({ onMenuClick, darkMode, toggleDark }) {
       return (
-        <header className="flex items-center justify-between px-4 py-3 border-b border-black bg-white sticky top-0 z-40 md:hidden">
+        <header className="flex items-center justify-between px-4 py-3 border-b border-black dark:border-gray-700 bg-white dark:bg-[#121212] sticky top-0 z-40 md:hidden">
           <button
             onClick={onMenuClick}
-            className="font-display text-lg font-bold text-wiki-black"
+            className="font-display text-lg font-bold text-wiki-black dark:text-gray-100"
             style={{ textDecoration: "none" }}
           >
             ATM Blog
           </button>
-          <button
-            onClick={onMenuClick}
-            className="w-10 h-10 flex items-center justify-center border border-black hover:bg-wiki-black hover:text-white transition-colors"
-            aria-label="Open menu"
-          >
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2">
-              <line x1="3" y1="5" x2="17" y2="5" />
-              <line x1="3" y1="10" x2="17" y2="10" />
-              <line x1="3" y1="15" x2="17" y2="15" />
-            </svg>
-          </button>
+          <div className="flex items-center gap-2">
+            <DarkModeToggle darkMode={darkMode} toggle={toggleDark} />
+            <button
+              onClick={onMenuClick}
+              className="w-10 h-10 flex items-center justify-center border border-black dark:border-gray-600 hover:bg-wiki-black hover:text-white dark:hover:bg-gray-600 dark:hover:text-white transition-colors"
+              aria-label="Open menu"
+            >
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2">
+                <line x1="3" y1="5" x2="17" y2="5" />
+                <line x1="3" y1="10" x2="17" y2="10" />
+                <line x1="3" y1="15" x2="17" y2="15" />
+              </svg>
+            </button>
+          </div>
         </header>
       );
     }
@@ -628,43 +791,142 @@
     /* Article card */
     function ArticleCard({ article, onOpen }) {
       return (
-        <article className="article-card border border-black p-5 cursor-pointer" onClick={() => onOpen && onOpen(article.id)}>
+        <article
+          className="article-card border border-black dark:border-gray-700 bg-white dark:bg-[#1a1a1a] p-6 md:p-8 cursor-pointer h-full flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-lg dark:hover:shadow-gray-900/50 hover:border-gray-400 dark:hover:border-gray-600"
+          onClick={() => onOpen && onOpen(article.id)}
+        >
           <div className="flex items-center gap-2 mb-3">
-            <span className="card-tag text-[10px] font-semibold uppercase tracking-[0.15em] text-neutral-500 border border-neutral-300 px-2 py-0.5">
+            <span className="card-tag text-[10px] font-semibold uppercase tracking-[0.15em] text-neutral-500 dark:text-gray-500 border border-neutral-300 dark:border-gray-600 px-2 py-0.5">
               {article.tag}
             </span>
-            <span className="text-neutral-300 text-xs">·</span>
-            <span className="card-date text-[11px] text-neutral-400 tabular-nums">{article.readTime}</span>
+            <span className="text-neutral-300 dark:text-gray-600 text-xs">·</span>
+            <span className="card-date text-[11px] text-neutral-400 dark:text-gray-500 tabular-nums">{article.readTime}</span>
           </div>
-          <h3 className="card-title font-display text-lg font-bold text-wiki-black mb-2 leading-snug">
-            {article.title}
-          </h3>
-          <p className="card-excerpt text-sm text-neutral-600 mb-4 leading-relaxed">
-            {article.excerpt}
-          </p>
-          <div className="flex items-center justify-between">
+          <div className="flex-grow">
+            <h3 className="card-title font-display text-lg font-bold text-wiki-black dark:text-gray-100 mb-2 leading-snug">
+              {article.title}
+            </h3>
+            <p className="card-excerpt text-sm text-neutral-600 dark:text-gray-400 mb-4 leading-relaxed">
+              {article.excerpt}
+            </p>
+          </div>
+          <div className="flex items-center justify-between mt-auto pt-2">
             <span className="card-link text-sm text-wiki-blue font-medium hover:underline">
               Read article →
             </span>
-            <time className="card-date text-[11px] text-neutral-400 tabular-nums">{article.date}</time>
+            <time className="card-date text-[11px] text-neutral-400 dark:text-gray-500 tabular-nums">{article.date}</time>
           </div>
         </article>
       );
     }
 
-    /* Timeline — accepts events array */
+    /* Timeline — accepts events array, groups by year with scroll reveal */
     function TimelineList({ events }) {
+      const itemRefs = useRef([]);
+
+      useEffect(function () {
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.style.opacity = '1';
+              entry.target.style.transform = 'translateY(0)';
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+        itemRefs.current.forEach(function (el) {
+          if (el) observer.observe(el);
+        });
+
+        return function () { observer.disconnect(); };
+      }, [events]);
+
+      /* Group events by year */
+      var grouped = [];
+      var currentYear = null;
+      events.forEach(function (evt) {
+        if (evt.date !== currentYear) {
+          currentYear = evt.date;
+          grouped.push({ year: evt.date, events: [evt] });
+        } else {
+          grouped[grouped.length - 1].events.push(evt);
+        }
+      });
+
       return (
-        <div className="relative pl-8">
-          <div className="absolute left-0 top-0 bottom-0 w-px bg-black" />
-          {events.map((evt, i) => (
-            <div key={i} className={`relative ${i < events.length - 1 ? "pb-8" : ""}`}>
-              <div className="absolute left-[-32px] top-[7px] w-4 h-px bg-black" />
-              <div className="absolute left-[-35px] top-[4px] w-[7px] h-[7px] bg-wiki-black" />
-              <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-neutral-400 mb-1">{evt.date}</p>
-              <p className="text-sm text-neutral-700 leading-relaxed">{evt.event}</p>
+        <div className="relative pl-6">
+          {/* Vertical spine — subtle 1px light gray */}
+          <div className="absolute left-0 top-0 bottom-0 w-[1px] bg-gray-200 dark:bg-gray-800" />
+          {grouped.map(function (group, gi) {
+            return (
+              <div key={gi} className={gi > 0 ? "mt-8" : ""}>
+                {/* Year header — separate block, no overlap with axis */}
+                <h3
+                  id={'year-' + group.year}
+                  className="font-display text-lg font-bold text-wiki-black dark:text-gray-200 mb-6"
+                >
+                  {group.year}
+                </h3>
+                {group.events.map(function (evt, ei) {
+                  var globalIdx = events.indexOf(evt);
+                  var isLast = globalIdx === events.length - 1;
+                  var isFirstInYear = ei === 0;
+                  return (
+                    <div
+                      key={gi + '-' + ei}
+                      ref={function (el) { itemRefs.current[globalIdx] = el; }}
+                      className={"relative " + (isLast ? "" : "mb-10")}
+                      style={{ opacity: 0, transform: 'translateY(12px)', transition: 'opacity 0.5s ease, transform 0.5s ease' }}
+                    >
+                      {/* Horizontal tick from dot to content */}
+                      <div className="absolute left-[-20px] top-[0.6em] w-5 h-px bg-gray-300 dark:bg-gray-700" />
+                      {/* Dot — solid for first event of year, hollow for rest */}
+                      <div
+                        className={
+                          "absolute left-[-28px] top-[calc(0.6em-4px)] w-[8px] h-[8px] rounded-full " +
+                          (isFirstInYear
+                            ? "bg-wiki-black dark:bg-gray-200"
+                            : "border-2 border-wiki-black bg-white dark:border-gray-400 dark:bg-[#181818]"
+                          )
+                        }
+                      />
+                      <p className="text-sm text-neutral-700 dark:text-gray-400 leading-relaxed">{evt.event}</p>
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })}
+        </div>
+      );
+    }
+
+    /* ── Mobile bottom bar (stats + email below content on small screens) ── */
+
+    function MobileBottomBar() {
+      return (
+        <div className="lg:hidden border-t border-black dark:border-gray-700">
+          <div className="p-6">
+            <div className="flex flex-wrap gap-x-8 gap-y-2 text-xs mb-4">
+              <div className="flex justify-between gap-2">
+                <span className="text-neutral-500 dark:text-gray-500">Articles</span>
+                <span className="font-semibold text-wiki-black dark:text-gray-200 font-mono tabular-nums">{articles.length}</span>
+              </div>
+              <div className="flex justify-between gap-2">
+                <span className="text-neutral-500 dark:text-gray-500">Topics</span>
+                <span className="font-semibold text-wiki-black dark:text-gray-200 font-mono tabular-nums">6</span>
+              </div>
+              <div className="flex justify-between gap-2">
+                <span className="text-neutral-500 dark:text-gray-500">Websites</span>
+                <span className="font-semibold text-wiki-black dark:text-gray-200 font-mono tabular-nums">{websitesData.length}</span>
+              </div>
             </div>
-          ))}
+            <div>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-neutral-400 dark:text-gray-600 mb-1">Email</p>
+              <p className="text-xs text-neutral-700 dark:text-gray-400">superherocheng@163.com</p>
+            </div>
+          </div>
         </div>
       );
     }
@@ -674,15 +936,14 @@
     function HomePage({ onNavigate, onOpenArticle }) {
       return (
         <>
-          {/* Hero / Intro */}
-          <section className="border-b border-neutral-300">
+          <section className="border-b border-neutral-300 dark:border-gray-700">
             <div className="p-6 md:p-10 lg:p-14">
-              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-black text-wiki-black mb-6 leading-[1.1]">
+              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-black text-wiki-black dark:text-gray-100 mb-6 leading-[1.1]">
                 ATM Blog
               </h1>
-              <div className="border border-black p-5 md:p-6 max-w-3xl" style={{ background: "rgba(248, 249, 255, 0.7)" }}>
-                <p className="text-sm md:text-[15px] leading-relaxed text-neutral-800">
-                  <strong className="text-wiki-black">ATM Blog</strong> is a personal notebook covering artificial
+              <div className="intro-box border border-black dark:border-gray-700 p-5 md:p-6 max-w-3xl">
+                <p className="text-sm md:text-[15px] leading-relaxed text-neutral-800 dark:text-gray-300">
+                  <strong className="text-wiki-black dark:text-gray-100">ATM Blog</strong> is a personal notebook covering artificial
                   intelligence, systems engineering, open-source infrastructure, and quantitative finance. Written as a public record
                   of technical research and analytical deep dives — from LLM architecture comparisons to cloud-native infrastructure
                   to the mathematics of trading strategies. New posts arrive weekly.
@@ -691,12 +952,11 @@
             </div>
           </section>
 
-          {/* Recent Articles — latest 4 */}
-          <section className="border-b border-neutral-300">
+          <section className="border-b border-neutral-300 dark:border-gray-700">
             <div className="p-6 md:p-10 lg:p-14">
               <div className="flex items-baseline justify-between mb-8">
-                <h2 className="font-display text-2xl md:text-3xl font-bold text-wiki-black">Recent Articles</h2>
-                <span className="text-[10px] text-neutral-400 uppercase tracking-[0.2em]">{articles.length} published</span>
+                <h2 className="font-display text-2xl md:text-3xl font-bold text-wiki-black dark:text-gray-100">Recent Articles</h2>
+                <span className="text-[10px] text-neutral-400 dark:text-gray-500 uppercase tracking-[0.2em]">{articles.length} published</span>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {articles.slice(0, 4).map((article) => (
@@ -706,7 +966,7 @@
               <div className="mt-6">
                 <button
                   onClick={() => onNavigate('articles')}
-                  className="text-sm text-wiki-blue font-medium hover:underline"
+                  className="text-sm text-wiki-blue dark:text-blue-400 font-medium hover:underline"
                   style={{ textDecoration: "none" }}
                 >
                   View all {articles.length} published articles →
@@ -715,12 +975,11 @@
             </div>
           </section>
 
-          {/* Timeline Preview — latest 3 */}
-          <section className="border-b border-neutral-300">
+          <section className="border-b border-neutral-300 dark:border-gray-700">
             <div className="p-6 md:p-10 lg:p-14">
               <div className="flex items-baseline justify-between mb-8">
-                <h2 className="font-display text-2xl md:text-3xl font-bold text-wiki-black">Timeline</h2>
-                <span className="text-[10px] text-neutral-400 uppercase tracking-[0.2em]">Key milestones</span>
+                <h2 className="font-display text-2xl md:text-3xl font-bold text-wiki-black dark:text-gray-100">Timeline</h2>
+                <span className="text-[10px] text-neutral-400 dark:text-gray-500 uppercase tracking-[0.2em]">Key milestones</span>
               </div>
               <div className="max-w-2xl">
                 <TimelineList events={timelineEvents.slice(0, 3)} />
@@ -728,7 +987,7 @@
               <div className="mt-6">
                 <button
                   onClick={() => onNavigate('timeline')}
-                  className="text-sm text-wiki-blue font-medium hover:underline"
+                  className="text-sm text-wiki-blue dark:text-blue-400 font-medium hover:underline"
                   style={{ textDecoration: "none" }}
                 >
                   View full timeline →
@@ -759,11 +1018,10 @@
 
       return (
         <>
-          <section className="border-b border-neutral-300">
+          <section className="border-b border-neutral-300 dark:border-gray-700">
             <div className="p-6 md:p-10 lg:p-14">
-              <h1 className="font-display text-3xl md:text-4xl font-bold text-wiki-black mb-6">Articles</h1>
+              <h1 className="font-display text-3xl md:text-4xl font-bold text-wiki-black dark:text-gray-100 mb-6">Articles</h1>
 
-              {/* Search bar */}
               <div className="mb-8 max-w-2xl">
                 <div className="relative">
                   <input
@@ -773,21 +1031,20 @@
                     onChange={(e) => setQuery(e.target.value)}
                     onKeyDown={handleKeyDown}
                     placeholder="Search articles by title, topic, or content…"
-                    className="w-full border border-black p-3 pr-10 text-sm font-body bg-white focus:outline-none focus:border-wiki-blue"
+                    className="w-full border border-black dark:border-gray-600 p-3 pr-10 text-sm font-body bg-white dark:bg-[#1a1a1a] dark:text-gray-200 focus:outline-none focus:border-wiki-blue dark:focus:border-blue-400 placeholder-neutral-400 dark:placeholder-gray-600"
                     style={{ borderRadius: 0 }}
                   />
-                  <div className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 text-sm select-none">
+                  <div className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 dark:text-gray-600 text-sm select-none">
                     ↵
                   </div>
                 </div>
-                <p className="text-[10px] text-neutral-400 mt-2 uppercase tracking-[0.15em]">
+                <p className="text-[10px] text-neutral-400 dark:text-gray-500 mt-2 uppercase tracking-[0.15em]">
                   {filtered.length === articles.length
                     ? `Showing all ${articles.length} articles`
                     : `${filtered.length} result${filtered.length !== 1 ? 's' : ''} for "${query}"`}
                 </p>
               </div>
 
-              {/* Article grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {filtered.map((article) => (
                   <ArticleCard key={article.id} article={article} onOpen={onOpenArticle} />
@@ -795,8 +1052,8 @@
               </div>
 
               {filtered.length === 0 && (
-                <div className="border border-neutral-300 p-8 text-center">
-                  <p className="text-sm text-neutral-500">No articles match your search.</p>
+                <div className="border border-neutral-300 dark:border-gray-700 p-8 text-center">
+                  <p className="text-sm text-neutral-500 dark:text-gray-500">No articles match your search.</p>
                 </div>
               )}
             </div>
@@ -807,11 +1064,11 @@
 
     function TimelinePage() {
       return (
-        <section className="border-b border-neutral-300">
+        <section className="border-b border-neutral-300 dark:border-gray-700">
           <div className="p-6 md:p-10 lg:p-14">
             <div className="flex items-baseline justify-between mb-8">
-              <h1 className="font-display text-3xl md:text-4xl font-bold text-wiki-black">Timeline</h1>
-              <span className="text-[10px] text-neutral-400 uppercase tracking-[0.2em]">{timelineEvents.length} milestones</span>
+              <h1 className="font-display text-3xl md:text-4xl font-bold text-wiki-black dark:text-gray-100">Timeline</h1>
+              <span className="text-[10px] text-neutral-400 dark:text-gray-500 uppercase tracking-[0.2em]">{timelineEvents.length} milestones</span>
             </div>
             <div className="max-w-2xl">
               <TimelineList events={timelineEvents} />
@@ -826,32 +1083,32 @@
       const article = articles.find((a) => a.id === articleId);
       if (!article) return (
         <section className="p-6 md:p-10 lg:p-14">
-          <p className="text-sm text-neutral-500">Article not found.</p>
-          <button onClick={onBack} className="text-sm text-wiki-blue hover:underline mt-2">← Back to articles</button>
+          <p className="text-sm text-neutral-500 dark:text-gray-500">Article not found.</p>
+          <button onClick={onBack} className="text-sm text-wiki-blue dark:text-blue-400 hover:underline mt-2">← Back to articles</button>
         </section>
       );
       const body = articleBodies[articleId] || "<p>Full article content coming soon.</p>";
       return (
         <>
-          <section className="border-b border-neutral-300">
-            <div className="p-8 md:p-12 lg:p-16 w-full">
-              <button onClick={onBack} className="text-sm text-wiki-blue hover:underline mb-8 block">← Back to articles</button>
-              <div className="flex items-center gap-2 mb-5">
-                <span className="text-[10px] font-semibold uppercase tracking-[0.15em] text-neutral-500 border border-neutral-300 px-2 py-0.5">
-                  {article.tag}
-                </span>
-                <span className="text-neutral-300 text-xs">·</span>
-                <span className="text-[11px] text-neutral-400 tabular-nums">{article.readTime}</span>
-                <span className="text-neutral-300 text-xs">·</span>
-                <time className="text-[11px] text-neutral-400 tabular-nums">{article.date}</time>
-              </div>
-              <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-wiki-black mb-8 leading-tight">
+          <section className="border-b border-neutral-300 dark:border-gray-700">
+            <div className="p-8 md:p-12 lg:p-16 lg:pr-12 xl:pr-16 w-full">
+              <button onClick={onBack} className="text-sm text-wiki-blue dark:text-blue-400 hover:underline mb-8 block">← Back to articles</button>
+              <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-wiki-black dark:text-gray-100 mb-6 leading-tight">
                 {article.title}
               </h1>
-              <div className="border border-black p-6 mb-10" style={{ background: "rgba(248, 249, 255, 0.7)" }}>
-                <p className="text-sm md:text-[15px] leading-relaxed text-neutral-800">{article.excerpt}</p>
+              <div className="flex items-center gap-2 mb-8">
+                <span className="text-[10px] font-semibold uppercase tracking-[0.15em] text-neutral-500 dark:text-gray-500 border border-neutral-300 dark:border-gray-600 px-2 py-0.5">
+                  {article.tag}
+                </span>
+                <span className="text-gray-300 dark:text-gray-700 text-[10px]">·</span>
+                <span className="text-[11px] text-neutral-400 dark:text-gray-500 tabular-nums">{article.readTime}</span>
+                <span className="text-gray-300 dark:text-gray-700 text-[10px]">·</span>
+                <time className="text-[11px] text-neutral-400 dark:text-gray-500 tabular-nums">{article.date}</time>
               </div>
-              <div className="article-body text-sm md:text-[15px] leading-relaxed text-neutral-800 [&_h2]:mt-10 [&_h2]:mb-4 [&_h3]:mt-6 [&_h3]:mb-2 [&_p]:mb-4 [&_ul]:mb-4 [&_ol]:mb-4 [&_table]:mb-4 [&_table]:w-full [&_code]:bg-neutral-100 [&_code]:px-1 [&_code]:border [&_code]:border-neutral-300 [&_code]:text-sm [&_a]:text-wiki-blue [&_a]:hover:underline [&_li]:leading-relaxed" dangerouslySetInnerHTML={{ __html: body }} />
+              <div className="intro-box border border-black dark:border-gray-700 p-6 mb-10">
+                <p className="text-sm md:text-[15px] leading-relaxed text-neutral-800 dark:text-gray-300">{article.excerpt}</p>
+              </div>
+              <div className="article-body text-sm md:text-[15px] leading-relaxed text-neutral-800 dark:text-gray-300 pr-8 lg:pr-12 xl:pr-16 [&_h2]:mt-10 [&_h2]:mb-4 [&_h3]:mt-6 [&_h3]:mb-2 [&_p]:mb-4 [&_ul]:mb-4 [&_ol]:mb-4 [&_table]:mb-4 [&_table]:w-full [&_code]:bg-neutral-100 [&_code]:dark:bg-[#1f2937] [&_code]:px-1 [&_code]:border [&_code]:border-neutral-300 [&_code]:dark:border-gray-600 [&_code]:text-sm [&_a]:text-wiki-blue [&_a]:dark:text-blue-400 [&_a]:hover:underline [&_li]:leading-relaxed" dangerouslySetInnerHTML={{ __html: body }} />
             </div>
           </section>
         </>
@@ -861,30 +1118,30 @@
     /* Websites page */
     function WebsitesPage() {
       return (
-        <section className="border-b border-neutral-300">
+        <section className="border-b border-neutral-300 dark:border-gray-700">
           <div className="p-6 md:p-10 lg:p-14">
             <div className="flex items-baseline justify-between mb-8">
-              <h1 className="font-display text-3xl md:text-4xl font-bold text-wiki-black">My Websites</h1>
-              <span className="text-[10px] text-neutral-400 uppercase tracking-[0.2em]">{websitesData.length} project{websitesData.length !== 1 ? 's' : ''}</span>
+              <h1 className="font-display text-3xl md:text-4xl font-bold text-wiki-black dark:text-gray-100">My Websites</h1>
+              <span className="text-[10px] text-neutral-400 dark:text-gray-500 uppercase tracking-[0.2em]">{websitesData.length} project{websitesData.length !== 1 ? 's' : ''}</span>
             </div>
 
             <div className="space-y-4">
               {websitesData.map((site) => (
-                <article key={site.id} className="border border-black p-6 hover:bg-neutral-50 transition-colors">
+                <article key={site.id} className="border border-black dark:border-gray-700 bg-white dark:bg-[#1a1a1a] p-6 hover:bg-neutral-50 dark:hover:bg-[#222] transition-colors">
                   <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3 mb-3">
-                    <h3 className="font-display text-xl font-bold text-wiki-black">{site.name}</h3>
-                    <span className={`text-[10px] font-semibold uppercase tracking-[0.15em] px-2 py-0.5 border ${site.status === 'Active' ? 'text-wiki-black border-black' : 'text-neutral-400 border-neutral-300'}`}>
+                    <h3 className="font-display text-xl font-bold text-wiki-black dark:text-gray-100">{site.name}</h3>
+                    <span className={`text-[10px] font-semibold uppercase tracking-[0.15em] px-2 py-0.5 border ${site.status === 'Active' ? 'text-wiki-black dark:text-gray-200 border-black dark:border-gray-500' : 'text-neutral-400 dark:text-gray-500 border-neutral-300 dark:border-gray-600'}`}>
                       {site.status}
                     </span>
                   </div>
-                  <p className="text-sm text-neutral-600 leading-relaxed mb-4">{site.description}</p>
+                  <p className="text-sm text-neutral-600 dark:text-gray-400 leading-relaxed mb-4">{site.description}</p>
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                    <span className="text-[10px] text-neutral-400 uppercase tracking-[0.15em]">{site.tech}</span>
+                    <span className="text-[10px] text-neutral-400 dark:text-gray-500 uppercase tracking-[0.15em]">{site.tech}</span>
                     <a
                       href={site.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-sm text-wiki-blue font-medium hover:underline"
+                      className="text-sm text-wiki-blue dark:text-blue-400 font-medium hover:underline"
                     >
                       Visit site →
                     </a>
@@ -894,8 +1151,8 @@
             </div>
 
             {websitesData.length === 0 && (
-              <div className="border border-neutral-300 p-8 text-center">
-                <p className="text-sm text-neutral-500">No websites yet. Check back soon.</p>
+              <div className="border border-neutral-300 dark:border-gray-700 p-8 text-center">
+                <p className="text-sm text-neutral-500 dark:text-gray-500">No websites yet. Check back soon.</p>
               </div>
             )}
           </div>
@@ -907,8 +1164,8 @@
     function Footer() {
       return (
         <footer className="p-6 md:p-10 lg:p-14">
-          <div className="border-t border-black pt-6">
-            <p className="text-xs text-neutral-400">© 2026 ATM Blog. All rights reserved.</p>
+          <div className="border-t border-black dark:border-gray-700 pt-6">
+            <p className="text-xs text-neutral-400 dark:text-gray-600">© 2026 ATM Blog. All rights reserved.</p>
           </div>
         </footer>
       );
@@ -921,6 +1178,24 @@
       const [menuOpen, setMenuOpen] = useState(false);
       const [selectedArticleId, setSelectedArticleId] = useState(null);
       const [isFading, setIsFading] = useState(false);
+      const [darkMode, setDarkMode] = useState(() => {
+        try {
+          const stored = localStorage.getItem('atm-blog-dark');
+          if (stored !== null) return stored === 'true';
+          return window.matchMedia('(prefers-color-scheme: dark)').matches;
+        } catch (_) { return false; }
+      });
+
+      useEffect(() => {
+        if (darkMode) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+        try { localStorage.setItem('atm-blog-dark', String(darkMode)); } catch (_) {}
+      }, [darkMode]);
+
+      function toggleDark() { setDarkMode(function (d) { return !d; }); }
 
       function handleNavigation(newView, articleId) {
         if (isFading) return;
@@ -943,13 +1218,13 @@
       }
 
       return (
-        <div className="min-h-screen bg-white text-wiki-black font-body">
-          <MobileTopBar onMenuClick={() => setMenuOpen(true)} />
-          <TabletNavBar currentView={currentView} onNavigate={navigate} />
-          <MobileNav isOpen={menuOpen} onClose={() => setMenuOpen(false)} onNavigate={navigate} currentView={currentView} />
+        <div className="min-h-screen bg-white dark:bg-[#121212] text-wiki-black dark:text-gray-200 font-body">
+          <MobileTopBar onMenuClick={() => setMenuOpen(true)} darkMode={darkMode} toggleDark={toggleDark} />
+          <TabletNavBar currentView={currentView} onNavigate={navigate} darkMode={darkMode} toggleDark={toggleDark} />
+          <MobileNav isOpen={menuOpen} onClose={() => setMenuOpen(false)} onNavigate={navigate} currentView={currentView} darkMode={darkMode} toggleDark={toggleDark} />
 
           <div className="flex">
-            <SidebarNav currentView={currentView} onNavigate={navigate} />
+            <SidebarNav currentView={currentView} onNavigate={navigate} darkMode={darkMode} toggleDark={toggleDark} />
 
             <main className={"flex-1 min-w-0 transition-opacity duration-150 ease-in-out " + (isFading ? "opacity-0" : "opacity-100")}>
               {currentView === 'home' && <HomePage onNavigate={navigate} onOpenArticle={openArticle} />}
@@ -958,6 +1233,7 @@
               {currentView === 'websites' && <WebsitesPage />}
               {currentView === 'article' && <ArticleDetailPage articleId={selectedArticleId} onBack={() => navigate('articles')} />}
               <Footer />
+              <MobileBottomBar />
             </main>
 
             <div className={"transition-opacity duration-150 ease-in-out " + (isFading ? "opacity-0" : "opacity-100")}>

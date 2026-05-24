@@ -8,13 +8,15 @@ A clean, wiki-inspired blog built with React and Tailwind CSS — zero build ste
 
 ## Features
 
-- **Home** — featured article spotlight
+- **Home** — featured article spotlight with introduction box
 - **Articles** — full article listing with tags and read time
-- **Timeline** — chronological view of all posts
+- **Timeline** — chronological timeline grouped by year, with "Jump to Year" sidebar navigation and scroll-triggered fade-in animations
 - **Websites** — curated external links collection
 - **Article Detail** — full content view with back navigation
-- **Responsive** — desktop sidebar, tablet top nav, mobile slide-out menu
-- **Smooth transitions** — cross-view fade animation
+- **Dark Mode** — toggleable dark theme, system-preference-aware, with full dark styling for all views and injected article HTML
+- **Responsive** — desktop sidebar, tablet top nav with dark mode toggle, mobile slide-out menu
+- **Smooth transitions** — cross-view fade animation and IntersectionObserver-based scroll reveals
+- **Typography** — Playfair Display (headings), Inter (body), JetBrains Mono (code/monospace), with ampersand normalization and proper table/list spacing
 
 ## Quick Start
 
@@ -63,6 +65,6 @@ yourdomain.com {
 ## Tech Stack
 
 - **React 18** — component-based UI, rendered via CDN with Babel standalone
-- **Tailwind CSS** — utility-first styling via CDN
+- **Tailwind CSS** — utility-first styling via CDN, with custom wiki theme colors
 - **HTML5** — single-page, no build step
 - **Nginx** (Docker) — static file serving with gzip and caching

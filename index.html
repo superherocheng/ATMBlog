@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ATM Blog</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'wiki-black': '#111111',
+            'wiki-white': '#FFFFFF',
+            'wiki-blue': '#0645AD',
+            'wiki-blue-visited': '#0B0080',
+            'wiki-lightblue': '#F8F9FF',
+            'wiki-border': '#A2A9B1',
+          },
+          fontFamily: {
+            'display': ['"Playfair Display"', 'Georgia', 'serif'],
+            'body': ['"Inter"', '"Helvetica Neue"', 'Arial', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+  <style>
+    *, *::before, *::after { border-radius: 0 !important; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #fff; }
+    ::-webkit-scrollbar-thumb { background: #111; }
+
+    .article-card { transition: background-color 0.12s ease, color 0.12s ease; }
+    .article-card:hover { background-color: #111111; color: #FFFFFF; }
+    .article-card:hover .card-title { color: #FFFFFF; }
+    .article-card:hover .card-excerpt { color: #BBBBBB; }
+    .article-card:hover .card-link { color: #7BB8FF; }
+    .article-card:hover .card-date { color: #888888; }
+    .article-card:hover .card-tag { color: #999999; border-color: #444444; }
+
+    .nav-link-bracket:hover { background-color: #111; color: #FFF; }
+    .nav-link-bracket:hover span { color: #7BB8FF; }
+
+    .nav-link-active { background-color: #111; color: #FFF; }
+    .nav-link-active span { color: #7BB8FF; }
+  </style>
+</head>
+<body class="bg-wiki-white text-wiki-black">
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect, useRef, useMemo } = React;
+
+    /* ── Data ───────────────────────────────────────────────── */
+
+    const articles = [
+      {
+        id: 1,
+        title: "DeepSeek V4: Architecture, Economics, and the New MoE Frontier",
+        excerpt: "A technical breakdown of DeepSeek V4-Pro (1.6T parameters) and V4-Flash (284B parameters) — two open-source Mixture-of-Experts models released under the MIT license that challenge frontier pricing at roughly one-tenth the cost of GPT-5.5.",
+        date: "2026-05-20",
+        readTime: "14 min",
+        tag: "AI",
+      },
+      {
+        id: 2,
+        title: "The Global LLM Leaderboard: Top 5 Models of 2026",
+        excerpt: "An analytical survey of the five highest-ranked large language models — GPT-5.5, Claude Opus 4.7, Gemini 3 Pro, DeepSeek V4, and Llama 4 Maverick — across benchmarks, pricing, and real-world deployment performance.",
+        date: "2026-05-15",
+        readTime: "16 min",
+        tag: "AI",
+      },
+      {
+        id: 3,
+        title: "GitHub Digest: The 20 Repositories Defining 2026",
+        excerpt: "From the all-time most-starred (build-your-own-x at 503K, awesome at 469K) to the fastest climbers this month (claude-plugins-official, codegraph, andrej-karpathy-skills) — a data-driven tour of the open-source landscape.",
+        date: "2026-05-10",
+        readTime: "12 min",
+        tag: "Open Source",
+      },
+      {
+        id: 4,
+        title: "Cloudflare: The Encyclopedia Entry",
+        excerpt: "From a 2009 MIT project to a global edge network spanning 330+ cities — how Cloudflare's CDN, DNS, DDoS protection, and Workers platform became critical infrastructure for a third of the internet.",
+        date: "2026-05-05",
+        readTime: "18 min",
+        tag: "Infrastructure",
+      },
+      {
+        id: 5,
+        title: "Quantitative Trading: Methods, Markets, and Mindset",
+        excerpt: "A comprehensive guide to the quantitative trading landscape — from statistical arbitrage and high-frequency trading to the philosophical divide between Chinese and international markets, and how quants think differently about risk.",
+        date: "2026-04-28",
+        readTime: "20 min",
+        tag: "Finance",
+      },
+      {
+        id: 6,
+        title: "Desktop OS in 2026: macOS vs. Linux vs. Windows",
+        excerpt: "A data-driven architectural comparison of the three major desktop operating systems — market share trends (Linux at an all-time 5%), kernel architectures, hardware transitions, and the developer experience on each platform.",
+        date: "2026-04-20",
+        readTime: "15 min",
+        tag: "Systems",
+      },
+    ];
+
+    const timelineEvents = [
+      { date: "2026", event: "Launched ATM Blog — a public notebook covering AI, infrastructure, finance, and systems engineering." },
+      { date: "2026", event: "Published DeepSeek V4 analysis and Global LLM Leaderboard within the first month of publishing." },
+      { date: "2025", event: "Deep dive into the evolving LLM landscape — benchmarked GPT-5, Claude Opus, and Gemini 3 across production workloads." },
+      { date: "2025", event: "Researched Cloudflare Workers and edge-computing patterns for globally distributed applications." },
+      { date: "2024", event: "Explored quantitative trading methodologies — statistical arbitrage, HFT strategies, and market microstructure." },
+      { date: "2024", event: "Began systematic comparison of desktop OS architectures (NT kernel vs. XNU vs. Linux) for developer workflows." },
+      { date: "2023", event: "Tracked the open-source AI boom on GitHub — from Stable Diffusion to Llama to the agent ecosystem." },
+      { date: "2023", event: "First published writing on the intersection of AI infrastructure and developer tooling." },
+      { date: "2022", event: "Started documenting technical research as a private notebook — the foundation for ATM Blog." },
+    ];
+
+    const navLinks = [
+      { label: "Home", view: "home" },
+      { label: "Articles", view: "articles" },
+      { label: "Timeline", view: "timeline" },
+      { label: "Websites", view: "websites" },
+    ];
+
+    const websitesData = [
+      {
+        id: 1,
+        name: "Stock Market Dashboard",
+        url: "https://stock.gaodeqingchuda.icu",
+        description: "A real-time financial tracking and analytics platform for monitoring stock market data, portfolio performance, and market trends.",
+        tech: "React · Tailwind CSS · Financial APIs",
+        status: "Active",
+      },
+    ];
+
+    /* ── Full article bodies (HTML) ─────────────────────────── */
+
+    const articleBodies = {
+      1: `
+<h2 class="font-display text-2xl font-bold mb-4">Architectural Logic</h2>
+<p class="mb-4 leading-relaxed">On April 24, 2026, DeepSeek released two models under the V4 banner: <strong>V4-Pro</strong> and <strong>V4-Flash</strong>. Both use a <strong>Mixture-of-Experts (MoE)</strong> architecture, continuing the lineage established by DeepSeek-V3 (671B total, 37B active per token) but scaled substantially further.</p>
+
+<p class="mb-4 leading-relaxed"><strong>V4-Pro</strong> is a 1.6-trillion-parameter model with approximately 49B active parameters per token. It targets frontier-class reasoning, coding, and multimodal tasks. The model introduces <strong>Multi-scale Hierarchical Co-attention (mHC)</strong>, described by DeepSeek as a "third scaling axis" beyond depth and width — a mechanism that allows the model to attend across multiple representation granularities simultaneously.</p>
+
+<p class="mb-4 leading-relaxed"><strong>V4-Flash</strong> is a 284B-parameter model with approximately 13B active parameters per token. It is engineered for low-latency inference and high-throughput serving, making it suitable for chat, summarization, and lightweight coding tasks where cost per token is the primary constraint.</p>
+
+<p class="mb-4 leading-relaxed">Both models inherit <strong>Multi-head Latent Attention (MLA)</strong> from the V3 architecture — a compression technique that reduces the KV-cache footprint during inference without sacrificing quality. The key architectural innovation in V4 is the integration of <strong>Engram Conditional Memory</strong>, which improves long-context retrieval and coding accuracy by conditioning generation on previously seen token patterns within the 1M-token context window.</p>
+
+<h2 class="font-display text-2xl font-bold mb-4 mt-8">Pros &amp; Cons</h2>
+
+<h3 class="font-display text-lg font-bold mb-2">V4-Pro</h3>
+<ul class="list-disc list-inside mb-4 space-y-1">
+<li><strong>Pros:</strong> Competitive with GPT-5.5 and Claude Opus 4.7 on reasoning and coding benchmarks (~81% SWE-bench). Fully open-source under the MIT license. 1M-token context window. Multimodal capabilities (text, image, video).</li>
+<li><strong>Cons:</strong> Massive compute requirements for self-hosting. Inference latency is higher than Flash-tier models. Requires significant GPU memory for full-parameter deployment.</li>
+</ul>
+
+<h3 class="font-display text-lg font-bold mb-2">V4-Flash</h3>
+<ul class="list-disc list-inside mb-4 space-y-1">
+<li><strong>Pros:</strong> Extremely low inference cost. Fast response times suitable for real-time applications. Open-source MIT license. Strong performance-per-dollar for general NLP tasks.</li>
+<li><strong>Cons:</strong> Lower ceiling on complex reasoning tasks compared to V4-Pro. Smaller active parameter count limits depth of analysis. Not intended for frontier-level coding challenges.</li>
+</ul>
+
+<h2 class="font-display text-2xl font-bold mb-4 mt-8">Token Rates &amp; Economics</h2>
+<p class="mb-4 leading-relaxed">DeepSeek's pricing continues to be aggressively competitive:</p>
+<table class="w-full border border-black mb-4 text-sm">
+<thead><tr class="border-b border-black"><th class="p-2 text-left border-r border-black">Model</th><th class="p-2 text-left border-r border-black">Input / 1M tokens</th><th class="p-2 text-left border-r border-black">Output / 1M tokens</th><th class="p-2 text-left">Context</th></tr></thead>
+<tbody>
+<tr class="border-b border-neutral-300"><td class="p-2 border-r border-black">V4-Pro</td><td class="p-2 border-r border-black">$1.74</td><td class="p-2 border-r border-black">$3.48</td><td class="p-2">1M tokens</td></tr>
+<tr class="border-b border-neutral-300"><td class="p-2 border-r border-black">V4-Flash</td><td class="p-2 border-r border-black">$0.14</td><td class="p-2 border-r border-black">$0.28</td><td class="p-2">1M tokens</td></tr>
+<tr class="border-b border-neutral-300"><td class="p-2 border-r border-black">V3.2</td><td class="p-2 border-r border-black">$0.14</td><td class="p-2 border-r border-black">$0.28</td><td class="p-2">128K tokens</td></tr>
+<tr><td class="p-2 border-r border-black">R1</td><td class="p-2 border-r border-black">$0.55</td><td class="p-2 border-r border-black">$2.19</td><td class="p-2">128K tokens</td></tr>
+</tbody>
+</table>
+<p class="mb-4 leading-relaxed">For comparison: GPT-5.5 charges $5 per 1M input tokens, and Claude Opus 4.6 charges $5/$25. V4-Pro delivers comparable quality at roughly <strong>3-7× lower cost</strong>.</p>
+
+<h2 class="font-display text-2xl font-bold mb-4 mt-8">Version Comparison: V3 → R1 → V4</h2>
+<ul class="list-disc list-inside mb-4 space-y-2">
+<li><strong>V3 (Dec 2024):</strong> 671B total / 37B active. Introduced MLA attention. General-purpose base model trained on 14.8T tokens.</li>
+<li><strong>R1 (Jan 2025):</strong> Same architecture as V3. Added reinforcement learning and chain-of-thought training for reasoning tasks. 98% on HumanEval.</li>
+<li><strong>V3.1 / V3.2 (2025):</strong> Incremental improvements to V3. Better instruction following, longer context, optimized serving.</li>
+<li><strong>V4 (Apr 2026):</strong> New MoE architecture with mHC co-attention and Engram Memory. 1.6T total (Pro) / 284B (Flash). 1M context. Multimodal. Open-source MIT.</li>
+</ul>
+
+<h2 class="font-display text-2xl font-bold mb-4 mt-8">Latest Rankings</h2>
+<p class="mb-4 leading-relaxed">As of May 2026, DeepSeek V4-Pro ranks among the top 5 models globally on Artificial Analysis and Vellum leaderboards. On AIME 2025 math benchmarks, it scores competitively with GPT-5.2 and Gemini 3 Pro. On SWE-bench (coding), its ~81% score places it in the top tier alongside Claude Opus 4.7. The model is particularly notable for being the <strong>highest-ranked open-source model</strong> across most major benchmarks — a significant milestone for the open-weight AI community.</p>
+`,
+
+      2: `
+<h2 class="font-display text-2xl font-bold mb-4">Introduction</h2>
+<p class="mb-4 leading-relaxed">The large language model landscape in 2026 is defined by five frontier models from four organizations. Rankings vary by benchmark, but a consistent top tier has emerged across coding, reasoning, math, and general-purpose tasks. This report draws from Artificial Analysis, Vellum, OpenRouter, and Scale Labs leaderboards as of May 2026.</p>
+
+<h2 class="font-display text-2xl font-bold mb-4 mt-8">1. GPT-5.5 — OpenAI</h2>
+<p class="mb-4 leading-relaxed"><strong>Background:</strong> The latest iteration of OpenAI's flagship model, GPT-5.5 builds on the GPT-5 architecture with improved reasoning chains and multimodal capabilities. OpenAI remains the most widely deployed LLM provider globally.</p>
+<p class="mb-4 leading-relaxed"><strong>Unique Features:</strong> Native multimodal generation (text, image, audio, video). Extensive tool-use and function-calling infrastructure. Largest fine-tuning ecosystem via the OpenAI API.</p>
+<ul class="list-disc list-inside mb-4 space-y-1">
+<li><strong>Pros:</strong> Best overall quality on Artificial Analysis leaderboard. Massive developer ecosystem. Strong enterprise features (fine-tuning, batch API, embeddings).</li>
+<li><strong>Cons:</strong> Most expensive tier ($5/1M input tokens). Proprietary and closed-source. Limited transparency on training data and methodology.</li>
+<li><strong>Pricing:</strong> $5 per 1M input tokens; output pricing varies by usage tier.</li>
+</ul>
+
+<h2 class="font-display text-2xl font-bold mb-4 mt-8">2. Claude Opus 4.7 — Anthropic</h2>
+<p class="mb-4 leading-relaxed"><strong>Background:</strong> Anthropic's frontier model, designed with a focus on safety, reliability, and nuanced instruction following. Claude has become the preferred model for complex coding, analysis, and long-document tasks.</p>
+<p class="mb-4 leading-relaxed"><strong>Unique Features:</strong> 200K+ context window with strong retrieval accuracy. Constitutional AI safety training. Industry-leading performance on SWE-bench and coding benchmarks.</p>
+<ul class="list-disc list-inside mb-4 space-y-1">
+<li><strong>Pros:</strong> Exceptional at coding and technical analysis. Strong safety guardrails without over-refusal. Excellent long-context performance.</li>
+<li><strong>Cons:</strong> Premium pricing ($5/$25 per 1M tokens). Slower inference than smaller models. Less multimodal capability than Gemini.</li>
+<li><strong>Pricing:</strong> $5 input / $25 output per 1M tokens (Opus tier). Sonnet 4.6 at $3/$15. Haiku 4.5 at $1/$5.</li>
+</ul>
+
+<h2 class="font-display text-2xl font-bold mb-4 mt-8">3. Gemini 3 Pro — Google DeepMind</h2>
+<p class="mb-4 leading-relaxed"><strong>Background:</strong> Google's third-generation frontier model, deeply integrated into Google Cloud, Android, and Workspace products. Gemini 3 Pro achieves perfect scores on several math benchmarks (AIME 2025).</p>
+<p class="mb-4 leading-relaxed"><strong>Unique Features:</strong> Best-in-class multimodal understanding (text, image, audio, video). Native integration with Google Search grounding. Generous free tier for developers.</p>
+<ul class="list-disc list-inside mb-4 space-y-1">
+<li><strong>Pros:</strong> 100% on AIME 2025 math benchmark. Strong multimodal capabilities. Free tier with generous limits (15 prompts/min). Excellent at factual grounding.</li>
+<li><strong>Cons:</strong> Can be verbose. Less consistent on creative tasks. Google ecosystem lock-in for some features.</li>
+<li><strong>Pricing:</strong> Gemini 3 Pro at $1.25/$5 per 1M tokens. Flash-Lite at $0.075/$0.30 — cheapest quality model available.</li>
+</ul>
+
+<h2 class="font-display text-2xl font-bold mb-4 mt-8">4. DeepSeek V4-Pro — DeepSeek</h2>
+<p class="mb-4 leading-relaxed"><strong>Background:</strong> Chinese AI lab DeepSeek's frontier open-source model, released April 2026 under the MIT license. The 1.6T-parameter MoE model challenges proprietary models at a fraction of the cost.</p>
+<p class="mb-4 leading-relaxed"><strong>Unique Features:</strong> Open-source (MIT license). Multi-scale Hierarchical Co-attention (mHC). Engram Conditional Memory for long-context coding. 1M-token context window.</p>
+<ul class="list-disc list-inside mb-4 space-y-1">
+<li><strong>Pros:</strong> ~81% on SWE-bench (top-tier coding). 3-7× cheaper than GPT-5.5. Fully open-source. Multimodal.</li>
+<li><strong>Cons:</strong> Requires significant compute to self-host. Less polished developer tooling than OpenAI/Anthropic. Primarily trained on English and Chinese.</li>
+<li><strong>Pricing:</strong> $1.74/$3.48 per 1M tokens (API). Free to self-host (MIT license).</li>
+</ul>
+
+<h2 class="font-display text-2xl font-bold mb-4 mt-8">5. Llama 4 Maverick — Meta</h2>
+<p class="mb-4 leading-relaxed"><strong>Background:</strong> Meta's latest open-weight model, continuing the Llama lineage. Llama 4 Maverick is a 400B-parameter MoE model with strong multilingual capabilities and tight integration with the Meta AI ecosystem.</p>
+<p class="mb-4 leading-relaxed"><strong>Unique Features:</strong> Open-weight (custom Llama license). Best-in-class multilingual performance across 30+ languages. Optimized for efficiency on consumer hardware.</p>
+<ul class="list-disc list-inside mb-4 space-y-1">
+<li><strong>Pros:</strong> Strong multilingual support. Runs efficiently on consumer GPUs. Large open-source community. Custom Llama license allows commercial use.</li>
+<li><strong>Cons:</strong> Slightly below frontier models on pure reasoning benchmarks. Custom license has some restrictions. Less consistent on complex coding tasks than Claude/DeepSeek.</li>
+<li><strong>Pricing:</strong> Free to download and run. Hosted API pricing varies by provider (typically $0.20-$0.80/1M tokens).</li>
+</ul>
+`,
+
+      3: `
+<h2 class="font-display text-2xl font-bold mb-4">Section A: Top 10 Most-Starred Repositories of All Time</h2>
+<p class="mb-4 leading-relaxed text-neutral-600 text-sm">Source: EvanLi/Github-Ranking, updated May 20, 2026. Star counts are approximate and change daily.</p>
+
+<ol class="list-decimal list-inside mb-8 space-y-4">
+<li><strong>build-your-own-x</strong> (503,294 ★) — A compilation of step-by-step guides for recreating your favorite technologies from scratch. Build your own database, operating system, compiler, or search engine through structured tutorials. <a href="https://github.com/codecrafters-io/build-your-own-x" class="text-wiki-blue hover:underline">github.com/codecrafters-io/build-your-own-x</a></li>
+<li><strong>awesome</strong> (469,133 ★) — Sindre Sorhus's curated meta-list of awesome lists across every conceivable topic. The project that launched a thousand imitators and became GitHub's de facto discovery mechanism. <a href="https://github.com/sindresorhus/awesome" class="text-wiki-blue hover:underline">github.com/sindresorhus/awesome</a></li>
+<li><strong>freeCodeCamp</strong> (445,308 ★) — The open-source codebase and curriculum behind freeCodeCamp.org, offering free certifications in responsive web design, JavaScript, data analysis, and machine learning. <a href="https://github.com/freeCodeCamp/freeCodeCamp" class="text-wiki-blue hover:underline">github.com/freeCodeCamp/freeCodeCamp</a></li>
+<li><strong>public-apis</strong> (436,658 ★) — A collective list of free APIs for use in software and web development, categorized by topic (animals, finance, geocoding, music, weather, etc.). The go-to resource for API discovery. <a href="https://github.com/public-apis/public-apis" class="text-wiki-blue hover:underline">github.com/public-apis/public-apis</a></li>
+<li><strong>free-programming-books</strong> (388,745 ★) — Freely available programming books in dozens of languages, maintained by the EbookFoundation. Covers everything from introductory Python to advanced compiler design. <a href="https://github.com/EbookFoundation/free-programming-books" class="text-wiki-blue hover:underline">github.com/EbookFoundation/free-programming-books</a></li>
+<li><strong>openclaw</strong> (374,029 ★) — An open-source personal AI assistant designed to work across any OS and platform. A recent entrant that has climbed the ranks rapidly, reflecting the AI-agent boom of 2025-2026. <a href="https://github.com/openclaw" class="text-wiki-blue hover:underline">github.com/openclaw</a></li>
+<li><strong>developer-roadmap</strong> (355,280 ★) — Interactive roadmaps, guides, and educational content to help developers navigate career paths from frontend and backend to DevOps, AI, and cybersecurity. <a href="https://github.com/kamranahmedse/developer-roadmap" class="text-wiki-blue hover:underline">github.com/kamranahmedse/developer-roadmap</a></li>
+<li><strong>system-design-primer</strong> (349,857 ★) — Learn how to design large-scale distributed systems. Includes Anki flashcards, real-world system design examples, and interview preparation materials. <a href="https://github.com/donnemartin/system-design-primer" class="text-wiki-blue hover:underline">github.com/donnemartin/system-design-primer</a></li>
+<li><strong>coding-interview-university</strong> (347,256 ★) — A complete computer science study plan for software engineering interviews, covering data structures, algorithms, system design, and behavioral preparation. <a href="https://github.com/jwasham/coding-interview-university" class="text-wiki-blue hover:underline">github.com/jwasham/coding-interview-university</a></li>
+<li><strong>awesome-python</strong> (299,093 ★) — An opinionated list of Python frameworks, libraries, tools, and resources, organized by category (web frameworks, data science, machine learning, DevOps, etc.). <a href="https://github.com/vinta/awesome-python" class="text-wiki-blue hover:underline">github.com/vinta/awesome-python</a></li>
+</ol>
+
+<h2 class="font-display text-2xl font-bold mb-4 mt-8">Section B: Top 10 Fastest-Climbing / Trending Repositories</h2>
+<p class="mb-4 leading-relaxed text-neutral-600 text-sm">Source: GitHub Trending, May 23, 2026. Reflects daily star velocity.</p>
+
+<ol class="list-decimal list-inside mb-4 space-y-4">
+<li><strong>andrej-karpathy-skills</strong> (148,354 ★, +3,152/day) — A single CLAUDE.md file that improves Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls. The fastest-growing developer tooling repo of 2026. <a href="https://github.com/multica-ai/andrej-karpathy-skills" class="text-wiki-blue hover:underline">github.com/multica-ai/andrej-karpathy-skills</a></li>
+<li><strong>chrome-devtools-mcp</strong> (41,181 ★, +501/day) — Chrome DevTools exposed as an MCP (Model Context Protocol) server, enabling coding agents to inspect and manipulate web pages directly. A landmark project for agent-browser interaction. <a href="https://github.com/ChromeDevTools/chrome-devtools-mcp" class="text-wiki-blue hover:underline">github.com/ChromeDevTools/chrome-devtools-mcp</a></li>
+<li><strong>claude-plugins-official</strong> (25,850 ★, +2,549/day) — Anthropic's official, managed directory of high-quality Claude Code plugins. The canonical registry for extending Claude Code's capabilities. <a href="https://github.com/anthropics/claude-plugins-official" class="text-wiki-blue hover:underline">github.com/anthropics/claude-plugins-official</a></li>
+<li><strong>multica</strong> (31,633 ★, +879/day) — The open-source managed agents platform. Turn coding agents into real teammates by assigning tasks, tracking progress, and compounding skills across sessions. <a href="https://github.com/multica-ai/multica" class="text-wiki-blue hover:underline">github.com/multica-ai/multica</a></li>
+<li><strong>codegraph</strong> (17,945 ★, +3,684/day) — Pre-indexed code knowledge graphs for Claude Code, Codex, Cursor, and other coding agents. Reduces token usage and tool calls by providing structured codebase understanding. <a href="https://github.com/colbymchenry/codegraph" class="text-wiki-blue hover:underline">github.com/colbymchenry/codegraph</a></li>
+<li><strong>Understand-Anything</strong> (19,669 ★, +1,393/day) — Turns any codebase into an interactive knowledge graph you can explore, search, and query. Works with Claude Code, Codex, Cursor, Copilot, and Gemini CLI. <a href="https://github.com/Lum1104/Understand-Anything" class="text-wiki-blue hover:underline">github.com/Lum1104/Understand-Anything</a></li>
+<li><strong>ai-engineering-from-scratch</strong> (12,760 ★, +988/day) — A comprehensive educational resource for learning AI engineering fundamentals — from neural network basics to deploying production LLM systems. <a href="https://github.com/rohitg00/ai-engineering-from-scratch" class="text-wiki-blue hover:underline">github.com/rohitg00/ai-engineering-from-scratch</a></li>
+<li><strong>FinceptTerminal</strong> (22,876 ★, +367/day) — A modern finance application offering advanced market analytics, investment research, and economic data tools for data-driven decision-making. <a href="https://github.com/Fincept-Corporation/FinceptTerminal" class="text-wiki-blue hover:underline">github.com/Fincept-Corporation/FinceptTerminal</a></li>
+<li><strong>Anthropic-Cybersecurity-Skills</strong> (6,904 ★, +238/day) — 754 structured cybersecurity skills for AI agents, mapped to five major frameworks (MITRE ATT&CK, NIST CSF 2.0, MITRE ATLAS, D3FEND, NIST AI RMF). <a href="https://github.com/mukul975/Anthropic-Cybersecurity-Skills" class="text-wiki-blue hover:underline">github.com/mukul975/Anthropic-Cybersecurity-Skills</a></li>
+<li><strong>presenton</strong> (6,040 ★, +302/day) — An open-source AI presentation generator and API, positioned as an alternative to Gamma, Beautiful AI, and Decktopus. Generates slide decks from text prompts. <a href="https://github.com/presenton/presenton" class="text-wiki-blue hover:underline">github.com/presenton/presenton</a></li>
+</ol>
+`,
+
+      4: `
+<h2 class="font-display text-2xl font-bold mb-4">History &amp; Background</h2>
+<p class="mb-4 leading-relaxed">Cloudflare was founded in 2009 by Matthew Prince, Lee Holloway, and Michelle Zatlyn, emerging from Project Honey Pot — an open-source initiative that tracked online spam and malicious activity. The founders recognized that the web's infrastructure was fundamentally insecure and slow, and that a shared performance and security layer could serve millions of sites simultaneously.</p>
+<p class="mb-4 leading-relaxed">The company launched at TechCrunch Disrupt in 2010 and went public on the NYSE in September 2019. By 2026, Cloudflare serves approximately one-third of all internet traffic, operates in 330+ cities across 120+ countries, and has expanded from a simple CDN into a comprehensive cloud platform.</p>
+
+<h2 class="font-display text-2xl font-bold mb-4 mt-8">Core Infrastructure</h2>
+
+<h3 class="font-display text-lg font-bold mb-2">CDN (Content Delivery Network)</h3>
+<p class="mb-4 leading-relaxed">Cloudflare's CDN caches and serves static and dynamic content from its global edge network. When a visitor requests a page, Cloudflare routes the request to the nearest data center, reducing latency and origin server load. The CDN handles HTTP/3, automatic image optimization, and intelligent caching rules out of the box.</p>
+
+<h3 class="font-display text-lg font-bold mb-2">DNS Management</h3>
+<p class="mb-4 leading-relaxed">Cloudflare DNS is one of the fastest recursive DNS resolvers in the world (the 1.1.1.1 consumer service) and a major authoritative DNS provider. Key features include DNSSEC support, CNAME flattening (allowing CNAME records at the root domain), and Anycast routing that resolves queries from the nearest node. Moving DNS to Cloudflare is often the first step in a migration.</p>
+
+<h3 class="font-display text-lg font-bold mb-2">DDoS Protection</h3>
+<p class="mb-4 leading-relaxed">Cloudflare's DDoS mitigation operates at layers 3, 4, and 7 of the OSI model. The system uses traffic analytics to detect and absorb volumetric attacks (UDP floods, SYN floods, amplification attacks) before they reach the origin. Layer 7 protection applies rate limiting, bot management, and JavaScript challenges to HTTP traffic. Cloudflare has mitigated some of the largest DDoS attacks ever recorded, exceeding 1 Tbps.</p>
+
+<h3 class="font-display text-lg font-bold mb-2">Edge Computing / Workers</h3>
+<p class="mb-4 leading-relaxed">Cloudflare Workers is a serverless compute platform that runs JavaScript, TypeScript, Python, and WebAssembly at the edge. Workers execute in Cloudflare's V8 isolates (not containers), enabling sub-millisecond cold starts. Use cases include A/B testing, edge authentication, API aggregation, image transformation, and custom caching logic. Workers KV and Durable Objects provide distributed storage and stateful computation.</p>
+
+<h2 class="font-display text-2xl font-bold mb-4 mt-8">Practical Guide: How to Use Cloudflare</h2>
+<ol class="list-decimal list-inside mb-4 space-y-3">
+<li><strong>Create an account and add your domain.</strong> Sign up at dash.cloudflare.com, click "Add a site," and enter your domain. Cloudflare scans existing DNS records automatically.</li>
+<li><strong>Update nameservers at your registrar.</strong> Cloudflare assigns two nameservers (e.g., coco.ns.cloudflare.com). Replace your current nameservers with these at your domain registrar. DNS propagation typically completes within 24 hours.</li>
+<li><strong>Configure SSL/TLS.</strong> Cloudflare provides free SSL certificates. Choose your SSL mode: "Flexible" (Cloudflare to origin over HTTP), "Full" (HTTPS to origin, no origin validation), or "Full (Strict)" (HTTPS with validated origin certificate). For production, always use "Full (Strict)."</li>
+<li><strong>Set caching rules.</strong> Use Page Rules or Cache Rules to control TTL, bypass caching for dynamic content, or force caching for static assets. The default caching behavior handles most common cases without configuration.</li>
+<li><strong>Enable security features.</strong> Activate "Under Attack Mode" for emergencies, configure WAF (Web Application Firewall) rules for ongoing protection, and set up rate limiting for API endpoints. Bot Management uses machine learning to classify traffic.</li>
+<li><strong>Deploy a Worker (optional).</strong> Write edge logic in JavaScript/TypeScript using Wrangler (the CLI tool). Deploy with <code class="bg-neutral-100 px-1 border border-neutral-300 text-sm">wrangler deploy</code>. Workers can modify requests, implement A/B tests, authenticate users, or serve entirely from the edge.</li>
+</ol>
+`,
+
+      5: `
+<h2 class="font-display text-2xl font-bold mb-4">Historical Background</h2>
+<p class="mb-4 leading-relaxed">Quantitative trading traces its roots to the 1960s and 1970s, when mathematicians and physicists began applying statistical methods to financial markets. The seminal moment came in 1973 with the publication of the Black-Scholes option pricing model, which provided a mathematical framework for valuing derivatives. By the 1980s, firms like Renaissance Technologies (founded by mathematician Jim Simons) were deploying systematic, computer-driven strategies that would go on to generate some of the highest risk-adjusted returns in history.</p>
+<p class="mb-4 leading-relaxed">The 1990s and 2000s saw the rise of high-frequency trading (HFT), enabled by co-location, direct market access, and fiber-optic networks. By the 2010s, machine learning and alternative data sources (satellite imagery, social media sentiment, credit card transactions) became standard tools in the quant arsenal. Today, quantitative strategies account for an estimated 60-70% of US equity trading volume.</p>
+
+<h2 class="font-display text-2xl font-bold mb-4 mt-8">Market Landscape: China vs. International</h2>
+
+<h3 class="font-display text-lg font-bold mb-2">International Markets</h3>
+<p class="mb-4 leading-relaxed">The US and European quant landscape is dominated by established players: Citadel Securities, Two Sigma, D.E. Shaw, Jump Trading, and Jane Street. These firms operate across asset classes (equities, fixed income, commodities, crypto) and deploy capital at massive scale. The regulatory environment is relatively mature, with SEC and FCA oversight of algorithmic trading, market-making, and best execution.</p>
+
+<h3 class="font-display text-lg font-bold mb-2">Chinese Markets (A-Shares)</h3>
+<p class="mb-4 leading-relaxed">China's quant trading industry has grown rapidly, with firms like High-Flyer (Xunfang), Wizard Quant, and Lingjun Investments managing billions. The A-share market has structural characteristics that create unique opportunities: T+1 settlement, a large retail investor base (creating exploitable behavioral patterns), and sector rotation dynamics. However, regulatory constraints are tightening — China's securities regulator has imposed restrictions on high-frequency strategies and short selling in response to market volatility concerns.</p>
+
+<h3 class="font-display text-lg font-bold mb-2">Key Differences</h3>
+<table class="w-full border border-black mb-4 text-sm">
+<thead><tr class="border-b border-black"><th class="p-2 text-left border-r border-black">Dimension</th><th class="p-2 text-left border-r border-black">International</th><th class="p-2 text-left">China (A-Shares)</th></tr></thead>
+<tbody>
+<tr class="border-b border-neutral-300"><td class="p-2 border-r border-black">Market structure</td><td class="p-2 border-r border-black">T+0, multiple exchanges</td><td class="p-2">T+1, SSE + SZSE</td></tr>
+<tr class="border-b border-neutral-300"><td class="p-2 border-r border-black">Investor base</td><td class="p-2 border-r border-black">Institutional majority</td><td class="p-2">~70% retail</td></tr>
+<tr class="border-b border-neutral-300"><td class="p-2 border-r border-black">Short selling</td><td class="p-2 border-r border-black">Widely available</td><td class="p-2">Heavily restricted</td></tr>
+<tr class="border-b border-neutral-300"><td class="p-2 border-r border-black">HFT regulation</td><td class="p-2 border-r border-black">Established frameworks</td><td class="p-2">Tightening rapidly</td></tr>
+<tr><td class="p-2 border-r border-black">Alpha decay</td><td class="p-2 border-r border-black">Fast (hours to days)</td><td class="p-2">Slower (days to weeks)</td></tr>
+</tbody>
+</table>
+
+<h2 class="font-display text-2xl font-bold mb-4 mt-8">Core Methodologies</h2>
+
+<h3 class="font-display text-lg font-bold mb-2">Statistical Arbitrage</h3>
+<p class="mb-4 leading-relaxed">Statistical arbitrage (stat arb) exploits mean-reverting price discrepancies between correlated assets. Pairs trading — the simplest form — involves going long one asset and short another when their price spread diverges from the historical norm, then unwinding when it converges. Modern stat arb extends this to hundreds of simultaneous positions using factor models (value, momentum, volatility, quality) and cointegration analysis.</p>
+
+<h3 class="font-display text-lg font-bold mb-2">High-Frequency Trading (HFT)</h3>
+<p class="mb-4 leading-relaxed">HFT strategies operate on microsecond to millisecond timescales. Common approaches include market making (providing liquidity by quoting both sides of the order book), latency arbitrage (exploiting speed advantages to act on information before competitors), and order flow prediction (inferring near-term price moves from the pattern of incoming orders). HFT requires co-located servers, FPGA-accelerated networking, and custom hardware.</p>
+
+<h3 class="font-display text-lg font-bold mb-2">Trend Following</h3>
+<p class="mb-4 leading-relaxed">Trend following is one of the oldest systematic strategies, dating back to the "turtles" experiment by Richard Dennis in the 1980s. The core idea: buy assets making new highs, sell assets making new lows, and ride the trend with disciplined risk management. Modern implementations use time-series momentum, breakout systems, and adaptive moving averages across dozens of futures markets.</p>
+
+<h2 class="font-display text-2xl font-bold mb-4 mt-8">Quantitative Thinking: A Philosophical Framework</h2>
+<p class="mb-4 leading-relaxed">Quantitative thinking differs from traditional investment analysis in three fundamental ways:</p>
+<ul class="list-disc list-inside mb-4 space-y-2">
+<li><strong>Probabilistic reasoning over narrative.</strong> Quants don't ask "will this company succeed?" They ask "what is the probability-weighted expected return of this position, given the distribution of historical outcomes for similar setups?" Every trade is viewed as one sample from a statistical distribution — the individual outcome matters less than the edge across many trials.</li>
+<li><strong>Systematic process over discretionary judgment.</strong> The strategy is encoded before the trade is placed. Entry, exit, position sizing, and risk limits are all rules-based. This removes emotional bias and enables rigorous backtesting. The quant's job is to design the system, not to make individual trade decisions.</li>
+<li><strong>Risk as a first-class variable.</strong> Traditional investors often treat risk as an afterthought ("how much can I make?"). Quants treat risk as the primary input: Sharpe ratio, maximum drawdown, Value-at-Risk (VaR), and tail risk are measured, monitored, and optimized continuously. The Kelly criterion and position-sizing math determine how much capital to allocate to each edge.</li>
+</ul>
+`,
+
+      6: `
+<h2 class="font-display text-2xl font-bold mb-4">Market Share: The Current Landscape</h2>
+<p class="mb-4 leading-relaxed">As of mid-2026, the desktop operating system market looks like this:</p>
+<table class="w-full border border-black mb-4 text-sm">
+<thead><tr class="border-b border-black"><th class="p-2 text-left border-r border-black">OS</th><th class="p-2 text-left border-r border-black">Global Share</th><th class="p-2 text-left border-r border-black">US Share</th><th class="p-2 text-left">Trend</th></tr></thead>
+<tbody>
+<tr class="border-b border-neutral-300"><td class="p-2 border-r border-black"><strong>Windows</strong></td><td class="p-2 border-r border-black">~63-70%</td><td class="p-2 border-r border-black">~58%</td><td class="p-2">Stable (Win 10→11 migration)</td></tr>
+<tr class="border-b border-neutral-300"><td class="p-2 border-r border-black"><strong>macOS</strong></td><td class="p-2 border-r border-black">~5-8%</td><td class="p-2 border-r border-black">~24%</td><td class="p-2">Steady, US-heavy</td></tr>
+<tr><td class="p-2 border-r border-black"><strong>Linux</strong></td><td class="p-2 border-r border-black">~4.7-5.4%</td><td class="p-2 border-r border-black">~5.4%</td><td class="p-2">Rapid growth (+70% since 2022)</td></tr>
+</tbody>
+</table>
+<p class="mb-4 leading-relaxed">The biggest story is <strong>Linux crossing 5%</strong> globally for the first time — driven by improved desktop distributions (Ubuntu 24.04, Fedora 42), the Steam Deck's gaming viability, and the approaching Windows 10 end-of-support in October 2025 which pushed many users to evaluate alternatives.</p>
+
+<h2 class="font-display text-2xl font-bold mb-4 mt-8">Architectural Deep Dive</h2>
+
+<h3 class="font-display text-lg font-bold mb-2">Windows: NT Kernel</h3>
+<p class="mb-4 leading-relaxed">Windows runs on the <strong>NT kernel</strong> (New Technology), a hybrid kernel architecture that combines microkernel design principles with monolithic performance. The kernel manages the Hardware Abstraction Layer (HAL), executive services (memory management, I/O, IPC), and the Win32 subsystem that provides the Windows API. The registry serves as a centralized configuration database. NT's architecture prioritizes backward compatibility — applications written for Windows 95 can often still run on Windows 11 through compatibility layers.</p>
+<p class="mb-4 leading-relaxed">Windows 11 introduced tighter hardware requirements (TPM 2.0, Secure Boot) tied to security improvements like Virtualization-Based Security (VBS) and Hypervisor-Protected Code Integrity (HVCI). The trade-off: millions of otherwise-capable machines were excluded from the upgrade, accelerating Linux adoption.</p>
+
+<h3 class="font-display text-lg font-bold mb-2">macOS: XNU Kernel</h3>
+<p class="mb-4 leading-relaxed">macOS is built on <strong>XNU</strong> (X is Not Unix), a hybrid kernel combining the Mach microkernel (for process/thread management and IPC) with components from BSD (for the POSIX API, networking, and file systems) and the I/O Kit driver framework. macOS is a certified Unix system — it conforms to the Single UNIX Specification.</p>
+<p class="mb-4 leading-relaxed">Apple's transition from Intel x86 to <strong>Apple Silicon (ARM)</strong> beginning in 2020 was the most significant architectural shift in desktop computing in decades. The M1/M2/M3/M4 chips unified CPU, GPU, Neural Engine, and memory on a single die with a shared memory architecture, delivering industry-leading performance-per-watt. Rosetta 2 provides near-transparent x86-to-ARM binary translation.</p>
+
+<h3 class="font-display text-lg font-bold mb-2">Linux: Monolithic Kernel (Modular)</h3>
+<p class="mb-4 leading-relaxed">Linux uses a <strong>monolithic kernel</strong> architecture where the entire OS (process management, memory management, device drivers, file systems, networking) runs in kernel space. However, it supports loadable kernel modules (LKMs), allowing drivers and features to be loaded and unloaded dynamically — giving it much of the flexibility of a microkernel without the performance overhead of context switching.</p>
+<p class="mb-4 leading-relaxed">The Linux kernel is developed independently of any particular distribution. Companies like Red Hat, Canonical, and SUSE build their distributions on top of the same upstream kernel. The kernel itself supports more hardware architectures than any other OS (x86, ARM, RISC-V, PowerPC, s390, and dozens more).</p>
+
+<h2 class="font-display text-2xl font-bold mb-4 mt-8">Performance &amp; Hardware</h2>
+<ul class="list-disc list-inside mb-4 space-y-2">
+<li><strong>Windows</strong> excels at gaming (DirectX 12, Game Mode) and broad hardware compatibility. Resource usage is moderate — Windows 11 requires 4GB RAM minimum but runs best with 16GB+. The NT kernel handles multitasking well but has historically struggled with long uptime stability compared to Linux.</li>
+<li><strong>macOS</strong> benefits enormously from Apple Silicon's unified memory architecture. M-series chips deliver desktop-class performance at laptop power envelopes (15-30W vs. 45-100W for comparable Intel/AMD). The trade-off is zero hardware upgradeability — RAM and storage are soldered.</li>
+<li><strong>Linux</strong> is the most resource-efficient, running comfortably on 2GB RAM with lightweight desktop environments. It offers the most granular control over system resources (cgroups, namespaces, kernel parameters). Performance tuning is a first-class feature, not an afterthought.</li>
+</ul>
+
+<h2 class="font-display text-2xl font-bold mb-4 mt-8">Ecosystem &amp; Developer Experience</h2>
+<ul class="list-disc list-inside mb-4 space-y-2">
+<li><strong>Windows:</strong> WSL2 (Windows Subsystem for Linux) has made Windows a credible development platform, providing a real Linux kernel alongside Windows. Visual Studio remains the strongest IDE for .NET and C++. PowerShell has improved but remains less ergonomic than Unix shells. Package management (winget, Chocolatey) is functional but fragmented.</li>
+<li><strong>macOS:</strong> The de facto standard for web and mobile development. Xcode for Apple-platform development, Homebrew for package management, and native Unix tooling (zsh, git, SSH) without emulation. The "walled garden" extends to distribution: macOS apps must be notarized by Apple, and the App Store takes a 15-30% cut.</li>
+<li><strong>Linux:</strong> The most open ecosystem. Package managers (apt, dnf, pacman, nix) are powerful and scriptable. Docker, Kubernetes, and the entire cloud-native stack were born on Linux. The philosophical divide: freedom to modify anything vs. the responsibility to maintain it yourself. Tooling is unmatched for systems programming, DevOps, and infrastructure work.</li>
+</ul>
+
+<h2 class="font-display text-2xl font-bold mb-4 mt-8">Pros &amp; Cons</h2>
+<h3 class="font-display text-lg font-bold mb-2">Windows</h3>
+<ul class="list-disc list-inside mb-4 space-y-1">
+<li><strong>Pros:</strong> Largest software library. Best gaming platform. Enterprise standard for office productivity. WSL2 bridges the Linux gap.</li>
+<li><strong>Cons:</strong> Telemetry and privacy concerns. Forced updates. Bloated default installation. Declining user control over system configuration.</li>
+</ul>
+<h3 class="font-display text-lg font-bold mb-2">macOS</h3>
+<ul class="list-disc list-inside mb-4 space-y-1">
+<li><strong>Pros:</strong> Best hardware-software integration (Apple Silicon). Native Unix. Lowest-friction developer experience. Excellent creative professional tools.</li>
+<li><strong>Cons:</strong> Expensive hardware with no upgrade path. Walled garden distribution. Limited gaming support. No user-repairable hardware.</li>
+</ul>
+<h3 class="font-display text-lg font-bold mb-2">Linux</h3>
+<ul class="list-disc list-inside mb-4 space-y-1">
+<li><strong>Pros:</strong> Free and open-source. Maximum control and customization. Best performance per hardware dollar. Unmatched for server/DevOps/cloud work.</li>
+<li><strong>Cons:</strong> Desktop fragmentation (many distributions, inconsistent UX). Hardware compatibility gaps (Nvidia drivers, peripherals). Steeper learning curve. Professional creative software (Adobe, Figma) requires workarounds.</li>
+</ul>
+`,
+    };
+
+    /* ── Helpers ────────────────────────────────────────────── */
+
+    function fuzzyMatch(query, text) {
+      if (!query) return true;
+      const q = query.toLowerCase();
+      const t = text.toLowerCase();
+      let qi = 0;
+      for (let ti = 0; ti < t.length && qi < q.length; ti++) {
+        if (t[ti] === q[qi]) qi++;
+      }
+      return qi === q.length;
+    }
+
+    /* ── Components ─────────────────────────────────────────── */
+
+    /* Mobile fullscreen overlay nav */
+    function MobileNav({ isOpen, onClose, onNavigate, currentView }) {
+      useEffect(() => {
+        if (isOpen) {
+          document.body.style.overflow = "hidden";
+        } else {
+          document.body.style.overflow = "";
+        }
+        return () => { document.body.style.overflow = ""; };
+      }, [isOpen]);
+
+      return (
+        <div
+          className={`fixed inset-0 z-50 bg-white transition-transform duration-200 ${isOpen ? "translate-x-0" : "translate-x-full"}`}
+          style={{ display: isOpen ? "block" : "none" }}
+        >
+          <div className="flex items-center justify-between px-5 py-4 border-b border-black">
+            <span className="font-display text-xl font-bold text-wiki-black">ATM Blog</span>
+            <button
+              onClick={onClose}
+              className="w-10 h-10 flex items-center justify-center border border-black hover:bg-wiki-black hover:text-white transition-colors"
+              aria-label="Close menu"
+            >
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="2">
+                <line x1="2" y1="2" x2="16" y2="16" />
+                <line x1="16" y1="2" x2="2" y2="16" />
+              </svg>
+            </button>
+          </div>
+          <nav className="px-5 pt-4">
+            {navLinks.map((link) => (
+              <button
+                key={link.view}
+                onClick={() => onNavigate(link.view)}
+                className={`nav-link-bracket block w-full text-left py-3 px-2 text-lg border-b border-neutral-200 transition-colors ${currentView === link.view ? "nav-link-active" : ""}`}
+                style={{ textDecoration: "none" }}
+              >
+                [ <span className="text-wiki-blue">{link.label}</span> ]
+              </button>
+            ))}
+          </nav>
+        </div>
+      );
+    }
+
+    /* Desktop left sidebar */
+    function SidebarNav({ currentView, onNavigate }) {
+      return (
+        <aside className="hidden lg:flex lg:flex-col lg:w-60 xl:w-64 border-r border-black bg-white h-screen sticky top-0 overflow-y-auto flex-shrink-0">
+          <div className="p-6 pb-0">
+            <button
+              onClick={() => onNavigate('home')}
+              className="font-display text-2xl font-bold text-wiki-black block text-left"
+              style={{ textDecoration: "none" }}
+            >
+              ATM Blog
+            </button>
+            <p className="text-xs text-neutral-500 mt-1">Personal notebook</p>
+          </div>
+
+          <div className="p-6">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-neutral-400 mb-3">Navigation</p>
+            <nav className="space-y-1">
+              {navLinks.map((link) => (
+                <button
+                  key={link.view}
+                  onClick={() => onNavigate(link.view)}
+                  className={`nav-link-bracket block w-full text-left py-1.5 text-sm transition-colors ${currentView === link.view ? "nav-link-active px-1" : ""}`}
+                  style={{ textDecoration: "none" }}
+                >
+                  [ <span className="text-wiki-blue hover:underline">{link.label}</span> ]
+                </button>
+              ))}
+            </nav>
+          </div>
+
+          <div className="px-6 pb-6 mt-auto border-t border-neutral-200 pt-6">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-neutral-400 mb-2">About</p>
+            <p className="text-xs text-neutral-500 leading-relaxed">
+              A personal notebook on AI, infrastructure, open-source, and quantitative analysis.
+            </p>
+          </div>
+        </aside>
+      );
+    }
+
+    /* Desktop right sidebar */
+    function RightSidebar({ currentView }) {
+      const showWebsitesStats = currentView === 'websites';
+      return (
+        <aside className="hidden lg:flex lg:flex-col lg:w-60 xl:w-64 border-l border-black bg-white h-screen sticky top-0 overflow-y-auto flex-shrink-0">
+          <div className="p-6">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-neutral-400 mb-3">Quick stats</p>
+            <div className="space-y-2 text-xs">
+              {showWebsitesStats ? (
+                <>
+                  <div className="flex justify-between border-b border-neutral-200 pb-2">
+                    <span className="text-neutral-500">Total Websites</span>
+                    <span className="font-semibold text-wiki-black tabular-nums">{websitesData.length}</span>
+                  </div>
+                  <div className="flex justify-between pb-1">
+                    <span className="text-neutral-500">Active</span>
+                    <span className="font-semibold text-wiki-black tabular-nums">{websitesData.filter(w => w.status === 'Active').length}</span>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="flex justify-between border-b border-neutral-200 pb-2">
+                    <span className="text-neutral-500">Articles</span>
+                    <span className="font-semibold text-wiki-black tabular-nums">{articles.length}</span>
+                  </div>
+                  <div className="flex justify-between border-b border-neutral-200 pb-2">
+                    <span className="text-neutral-500">Topics</span>
+                    <span className="font-semibold text-wiki-black tabular-nums">6</span>
+                  </div>
+                  <div className="flex justify-between border-b border-neutral-200 pb-2">
+                    <span className="text-neutral-500">Websites</span>
+                    <span className="font-semibold text-wiki-black tabular-nums">{websitesData.length}</span>
+                  </div>
+                  <div className="flex justify-between pb-1">
+                    <span className="text-neutral-500">Writing since</span>
+                    <span className="font-semibold text-wiki-black">2023</span>
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
+
+          <div className="mx-6 border-t border-neutral-200" />
+
+          <div className="p-6 mt-auto">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-neutral-400 mb-3">EMAIL</p>
+            <p className="text-xs text-neutral-700 leading-relaxed">superherocheng@163.com</p>
+          </div>
+        </aside>
+      );
+    }
+
+    /* Tablet top navigation bar */
+    function TabletNavBar({ currentView, onNavigate }) {
+      return (
+        <header className="hidden md:flex lg:hidden items-center justify-between px-6 py-3 border-b border-black bg-white sticky top-0 z-40">
+          <button
+            onClick={() => onNavigate('home')}
+            className="font-display text-xl font-bold text-wiki-black"
+            style={{ textDecoration: "none" }}
+          >
+            ATM Blog
+          </button>
+          <nav className="flex items-center gap-5">
+            {navLinks.map((link) => (
+              <button
+                key={link.view}
+                onClick={() => onNavigate(link.view)}
+                className={`text-sm transition-colors px-1 ${currentView === link.view ? "bg-wiki-black" : ""}`}
+                style={{ textDecoration: "none" }}
+              >
+                [ <span className={`hover:underline ${currentView === link.view ? "text-wiki-blue" : "text-wiki-blue"}`}>{link.label}</span> ]
+              </button>
+            ))}
+          </nav>
+        </header>
+      );
+    }
+
+    /* Mobile top bar with hamburger */
+    function MobileTopBar({ onMenuClick }) {
+      return (
+        <header className="flex items-center justify-between px-4 py-3 border-b border-black bg-white sticky top-0 z-40 md:hidden">
+          <button
+            onClick={onMenuClick}
+            className="font-display text-lg font-bold text-wiki-black"
+            style={{ textDecoration: "none" }}
+          >
+            ATM Blog
+          </button>
+          <button
+            onClick={onMenuClick}
+            className="w-10 h-10 flex items-center justify-center border border-black hover:bg-wiki-black hover:text-white transition-colors"
+            aria-label="Open menu"
+          >
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2">
+              <line x1="3" y1="5" x2="17" y2="5" />
+              <line x1="3" y1="10" x2="17" y2="10" />
+              <line x1="3" y1="15" x2="17" y2="15" />
+            </svg>
+          </button>
+        </header>
+      );
+    }
+
+    /* Article card */
+    function ArticleCard({ article, onOpen }) {
+      return (
+        <article className="article-card border border-black p-5 cursor-pointer" onClick={() => onOpen && onOpen(article.id)}>
+          <div className="flex items-center gap-2 mb-3">
+            <span className="card-tag text-[10px] font-semibold uppercase tracking-[0.15em] text-neutral-500 border border-neutral-300 px-2 py-0.5">
+              {article.tag}
+            </span>
+            <span className="text-neutral-300 text-xs">·</span>
+            <span className="card-date text-[11px] text-neutral-400 tabular-nums">{article.readTime}</span>
+          </div>
+          <h3 className="card-title font-display text-lg font-bold text-wiki-black mb-2 leading-snug">
+            {article.title}
+          </h3>
+          <p className="card-excerpt text-sm text-neutral-600 mb-4 leading-relaxed">
+            {article.excerpt}
+          </p>
+          <div className="flex items-center justify-between">
+            <span className="card-link text-sm text-wiki-blue font-medium hover:underline">
+              Read article →
+            </span>
+            <time className="card-date text-[11px] text-neutral-400 tabular-nums">{article.date}</time>
+          </div>
+        </article>
+      );
+    }
+
+    /* Timeline — accepts events array */
+    function TimelineList({ events }) {
+      return (
+        <div className="relative pl-8">
+          <div className="absolute left-0 top-0 bottom-0 w-px bg-black" />
+          {events.map((evt, i) => (
+            <div key={i} className={`relative ${i < events.length - 1 ? "pb-8" : ""}`}>
+              <div className="absolute left-[-32px] top-[7px] w-4 h-px bg-black" />
+              <div className="absolute left-[-35px] top-[4px] w-[7px] h-[7px] bg-wiki-black" />
+              <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-neutral-400 mb-1">{evt.date}</p>
+              <p className="text-sm text-neutral-700 leading-relaxed">{evt.event}</p>
+            </div>
+          ))}
+        </div>
+      );
+    }
+
+    /* ── Page views ─────────────────────────────────────────── */
+
+    function HomePage({ onNavigate, onOpenArticle }) {
+      return (
+        <>
+          {/* Hero / Intro */}
+          <section className="border-b border-neutral-300">
+            <div className="p-6 md:p-10 lg:p-14">
+              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-black text-wiki-black mb-6 leading-[1.1]">
+                ATM Blog
+              </h1>
+              <div className="border border-black p-5 md:p-6 max-w-3xl" style={{ background: "rgba(248, 249, 255, 0.7)" }}>
+                <p className="text-sm md:text-[15px] leading-relaxed text-neutral-800">
+                  <strong className="text-wiki-black">ATM Blog</strong> is a personal notebook covering artificial
+                  intelligence, systems engineering, open-source infrastructure, and quantitative finance. Written as a public record
+                  of technical research and analytical deep dives — from LLM architecture comparisons to cloud-native infrastructure
+                  to the mathematics of trading strategies. New posts arrive weekly.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* Recent Articles — latest 4 */}
+          <section className="border-b border-neutral-300">
+            <div className="p-6 md:p-10 lg:p-14">
+              <div className="flex items-baseline justify-between mb-8">
+                <h2 className="font-display text-2xl md:text-3xl font-bold text-wiki-black">Recent Articles</h2>
+                <span className="text-[10px] text-neutral-400 uppercase tracking-[0.2em]">{articles.length} published</span>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {articles.slice(0, 4).map((article) => (
+                  <ArticleCard key={article.id} article={article} onOpen={onOpenArticle} />
+                ))}
+              </div>
+              <div className="mt-6">
+                <button
+                  onClick={() => onNavigate('articles')}
+                  className="text-sm text-wiki-blue font-medium hover:underline"
+                  style={{ textDecoration: "none" }}
+                >
+                  View all {articles.length} published articles →
+                </button>
+              </div>
+            </div>
+          </section>
+
+          {/* Timeline Preview — latest 3 */}
+          <section className="border-b border-neutral-300">
+            <div className="p-6 md:p-10 lg:p-14">
+              <div className="flex items-baseline justify-between mb-8">
+                <h2 className="font-display text-2xl md:text-3xl font-bold text-wiki-black">Timeline</h2>
+                <span className="text-[10px] text-neutral-400 uppercase tracking-[0.2em]">Key milestones</span>
+              </div>
+              <div className="max-w-2xl">
+                <TimelineList events={timelineEvents.slice(0, 3)} />
+              </div>
+              <div className="mt-6">
+                <button
+                  onClick={() => onNavigate('timeline')}
+                  className="text-sm text-wiki-blue font-medium hover:underline"
+                  style={{ textDecoration: "none" }}
+                >
+                  View full timeline →
+                </button>
+              </div>
+            </div>
+          </section>
+        </>
+      );
+    }
+
+    function ArticlesPage({ onOpenArticle }) {
+      const [query, setQuery] = useState('');
+      const inputRef = useRef(null);
+
+      const filtered = useMemo(() => {
+        if (!query.trim()) return articles;
+        return articles.filter(
+          (a) => fuzzyMatch(query, a.title) || fuzzyMatch(query, a.excerpt) || fuzzyMatch(query, a.tag)
+        );
+      }, [query]);
+
+      function handleKeyDown(e) {
+        if (e.key === 'Enter' && filtered.length > 0) {
+          onOpenArticle(filtered[0].id);
+        }
+      }
+
+      return (
+        <>
+          <section className="border-b border-neutral-300">
+            <div className="p-6 md:p-10 lg:p-14">
+              <h1 className="font-display text-3xl md:text-4xl font-bold text-wiki-black mb-6">Articles</h1>
+
+              {/* Search bar */}
+              <div className="mb-8 max-w-2xl">
+                <div className="relative">
+                  <input
+                    ref={inputRef}
+                    type="text"
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    placeholder="Search articles by title, topic, or content…"
+                    className="w-full border border-black p-3 pr-10 text-sm font-body bg-white focus:outline-none focus:border-wiki-blue"
+                    style={{ borderRadius: 0 }}
+                  />
+                  <div className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 text-sm select-none">
+                    ↵
+                  </div>
+                </div>
+                <p className="text-[10px] text-neutral-400 mt-2 uppercase tracking-[0.15em]">
+                  {filtered.length === articles.length
+                    ? `Showing all ${articles.length} articles`
+                    : `${filtered.length} result${filtered.length !== 1 ? 's' : ''} for "${query}"`}
+                </p>
+              </div>
+
+              {/* Article grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {filtered.map((article) => (
+                  <ArticleCard key={article.id} article={article} onOpen={onOpenArticle} />
+                ))}
+              </div>
+
+              {filtered.length === 0 && (
+                <div className="border border-neutral-300 p-8 text-center">
+                  <p className="text-sm text-neutral-500">No articles match your search.</p>
+                </div>
+              )}
+            </div>
+          </section>
+        </>
+      );
+    }
+
+    function TimelinePage() {
+      return (
+        <section className="border-b border-neutral-300">
+          <div className="p-6 md:p-10 lg:p-14">
+            <div className="flex items-baseline justify-between mb-8">
+              <h1 className="font-display text-3xl md:text-4xl font-bold text-wiki-black">Timeline</h1>
+              <span className="text-[10px] text-neutral-400 uppercase tracking-[0.2em]">{timelineEvents.length} milestones</span>
+            </div>
+            <div className="max-w-2xl">
+              <TimelineList events={timelineEvents} />
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    /* Article detail view */
+    function ArticleDetailPage({ articleId, onBack }) {
+      const article = articles.find((a) => a.id === articleId);
+      if (!article) return (
+        <section className="p-6 md:p-10 lg:p-14">
+          <p className="text-sm text-neutral-500">Article not found.</p>
+          <button onClick={onBack} className="text-sm text-wiki-blue hover:underline mt-2">← Back to articles</button>
+        </section>
+      );
+      const body = articleBodies[articleId] || "<p>Full article content coming soon.</p>";
+      return (
+        <>
+          <section className="border-b border-neutral-300">
+            <div className="p-8 md:p-12 lg:p-16 w-full">
+              <button onClick={onBack} className="text-sm text-wiki-blue hover:underline mb-8 block">← Back to articles</button>
+              <div className="flex items-center gap-2 mb-5">
+                <span className="text-[10px] font-semibold uppercase tracking-[0.15em] text-neutral-500 border border-neutral-300 px-2 py-0.5">
+                  {article.tag}
+                </span>
+                <span className="text-neutral-300 text-xs">·</span>
+                <span className="text-[11px] text-neutral-400 tabular-nums">{article.readTime}</span>
+                <span className="text-neutral-300 text-xs">·</span>
+                <time className="text-[11px] text-neutral-400 tabular-nums">{article.date}</time>
+              </div>
+              <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-wiki-black mb-8 leading-tight">
+                {article.title}
+              </h1>
+              <div className="border border-black p-6 mb-10" style={{ background: "rgba(248, 249, 255, 0.7)" }}>
+                <p className="text-sm md:text-[15px] leading-relaxed text-neutral-800">{article.excerpt}</p>
+              </div>
+              <div className="article-body text-sm md:text-[15px] leading-relaxed text-neutral-800 [&_h2]:mt-10 [&_h2]:mb-4 [&_h3]:mt-6 [&_h3]:mb-2 [&_p]:mb-4 [&_ul]:mb-4 [&_ol]:mb-4 [&_table]:mb-4 [&_table]:w-full [&_code]:bg-neutral-100 [&_code]:px-1 [&_code]:border [&_code]:border-neutral-300 [&_code]:text-sm [&_a]:text-wiki-blue [&_a]:hover:underline [&_li]:leading-relaxed" dangerouslySetInnerHTML={{ __html: body }} />
+            </div>
+          </section>
+        </>
+      );
+    }
+
+    /* Websites page */
+    function WebsitesPage() {
+      return (
+        <section className="border-b border-neutral-300">
+          <div className="p-6 md:p-10 lg:p-14">
+            <div className="flex items-baseline justify-between mb-8">
+              <h1 className="font-display text-3xl md:text-4xl font-bold text-wiki-black">My Websites</h1>
+              <span className="text-[10px] text-neutral-400 uppercase tracking-[0.2em]">{websitesData.length} project{websitesData.length !== 1 ? 's' : ''}</span>
+            </div>
+
+            <div className="space-y-4">
+              {websitesData.map((site) => (
+                <article key={site.id} className="border border-black p-6 hover:bg-neutral-50 transition-colors">
+                  <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3 mb-3">
+                    <h3 className="font-display text-xl font-bold text-wiki-black">{site.name}</h3>
+                    <span className={`text-[10px] font-semibold uppercase tracking-[0.15em] px-2 py-0.5 border ${site.status === 'Active' ? 'text-wiki-black border-black' : 'text-neutral-400 border-neutral-300'}`}>
+                      {site.status}
+                    </span>
+                  </div>
+                  <p className="text-sm text-neutral-600 leading-relaxed mb-4">{site.description}</p>
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                    <span className="text-[10px] text-neutral-400 uppercase tracking-[0.15em]">{site.tech}</span>
+                    <a
+                      href={site.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-wiki-blue font-medium hover:underline"
+                    >
+                      Visit site →
+                    </a>
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            {websitesData.length === 0 && (
+              <div className="border border-neutral-300 p-8 text-center">
+                <p className="text-sm text-neutral-500">No websites yet. Check back soon.</p>
+              </div>
+            )}
+          </div>
+        </section>
+      );
+    }
+
+    /* Footer */
+    function Footer() {
+      return (
+        <footer className="p-6 md:p-10 lg:p-14">
+          <div className="border-t border-black pt-6">
+            <p className="text-xs text-neutral-400">© 2026 ATM Blog. All rights reserved.</p>
+          </div>
+        </footer>
+      );
+    }
+
+    /* ── App ────────────────────────────────────────────────── */
+
+    function App() {
+      const [currentView, setCurrentView] = useState('home');
+      const [menuOpen, setMenuOpen] = useState(false);
+      const [selectedArticleId, setSelectedArticleId] = useState(null);
+      const [isFading, setIsFading] = useState(false);
+
+      function handleNavigation(newView, articleId) {
+        if (isFading) return;
+        setIsFading(true);
+        setTimeout(function () {
+          setCurrentView(newView);
+          setSelectedArticleId(articleId || null);
+          setMenuOpen(false);
+          window.scrollTo(0, 0);
+          setIsFading(false);
+        }, 150);
+      }
+
+      function navigate(view) {
+        handleNavigation(view);
+      }
+
+      function openArticle(id) {
+        handleNavigation('article', id);
+      }
+
+      return (
+        <div className="min-h-screen bg-white text-wiki-black font-body">
+          <MobileTopBar onMenuClick={() => setMenuOpen(true)} />
+          <TabletNavBar currentView={currentView} onNavigate={navigate} />
+          <MobileNav isOpen={menuOpen} onClose={() => setMenuOpen(false)} onNavigate={navigate} currentView={currentView} />
+
+          <div className="flex">
+            <SidebarNav currentView={currentView} onNavigate={navigate} />
+
+            <main className={"flex-1 min-w-0 transition-opacity duration-150 ease-in-out " + (isFading ? "opacity-0" : "opacity-100")}>
+              {currentView === 'home' && <HomePage onNavigate={navigate} onOpenArticle={openArticle} />}
+              {currentView === 'articles' && <ArticlesPage onOpenArticle={openArticle} />}
+              {currentView === 'timeline' && <TimelinePage />}
+              {currentView === 'websites' && <WebsitesPage />}
+              {currentView === 'article' && <ArticleDetailPage articleId={selectedArticleId} onBack={() => navigate('articles')} />}
+              <Footer />
+            </main>
+
+            <div className={"transition-opacity duration-150 ease-in-out " + (isFading ? "opacity-0" : "opacity-100")}>
+              {currentView !== 'article' && <RightSidebar currentView={currentView} />}
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<App />);
+  </script>
+</body>
+</html>

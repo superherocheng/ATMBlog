@@ -1,6 +1,20 @@
 # ATM Blog
 
-A clean, wiki-inspired blog built with plain HTML and Tailwind CSS.
+A clean, wiki-inspired blog built with React and Tailwind CSS — zero build step, runs entirely in the browser.
+
+## Preview
+
+![Screenshot](https://raw.githubusercontent.com/superherocheng/ATMBlog/main/screenshot.png)
+
+## Features
+
+- **Home** — featured article spotlight
+- **Articles** — full article listing with tags and read time
+- **Timeline** — chronological view of all posts
+- **Websites** — curated external links collection
+- **Article Detail** — full content view with back navigation
+- **Responsive** — desktop sidebar, tablet top nav, mobile slide-out menu
+- **Smooth transitions** — cross-view fade animation
 
 ## Quick Start
 
@@ -48,6 +62,7 @@ yourdomain.com {
 
 ## Tech Stack
 
+- **React 18** — component-based UI, rendered via CDN with Babel standalone
+- **Tailwind CSS** — utility-first styling via CDN
 - **HTML5** — single-page, no build step
-- **Tailwind CSS** — via CDN
 - **Nginx** (Docker) — static file serving with gzip and caching

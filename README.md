@@ -12,9 +12,10 @@
 
 ## 特性
 
-- **固定导航栏** — 桌面双侧栏 + 平板/移动端顶栏均 sticky 固定，滚动不丢失导航
+- **移动端顶部栏固定** — 手机端顶部导航栏 `fixed` 定位，滚动时始终可见，不遮挡内容
 - **深色模式** — 开关式切换，支持系统偏好检测，持久化到 localStorage
-- **响应式布局** — 桌面侧边栏（lg）、平板顶栏（md）、移动端抽屉菜单
+- **响应式布局** — 桌面侧边栏（lg）、平板顶栏（md）、移动端全屏抽屉菜单
+- **移动端显示优化** — 文章正文自动换行/断词，表格横向滚动、代码块和图片适配屏幕宽度，防止溢出
 - **平滑页面过渡** — 仅内容区域淡入切换，导航栏保持不动，无夸张动画
 - **阅读进度条** — 文章详情页顶部纯色进度指示，跟随滚动实时更新
 - **面包屑导航** — 文章详情页的层级定位
@@ -55,10 +56,26 @@ npm run build
 npm run preview
 ```
 
-### Docker 部署
+### Docker 部署（推荐）
+
+根目录 `docker-compose.yml` 统一管理所有服务：
 
 ```bash
-# 构建并运行
+# 从 docker-app 根目录构建并运行
+cd ..
+docker compose up -d --build atmblog
+
+# 或构建并运行所有服务
+docker compose up -d --build
+
+# 访问 http://localhost:8080
+```
+
+### 独立 Docker 部署
+
+```bash
+# 进入 atmblog 目录单独构建
+cd atmblog
 docker compose up -d --build
 
 # 访问 http://localhost:8080

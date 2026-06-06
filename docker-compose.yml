@@ -11,3 +11,10 @@ services:
       timeout: 5s
       retries: 3
       start_period: 10s
+    networks:
+      - docker_network
+
+networks:
+  docker_network:
+    external: true
+    name: docker_network

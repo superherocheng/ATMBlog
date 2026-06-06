@@ -35,7 +35,7 @@ export default function Layout() {
 
   return (
     <>
-      {/* Mobile Top Bar — sticky */}
+      {/* Mobile Top Bar — fixed */}
       <MobileTopBar onMenuToggle={() => setMenuOpen((p) => !p)} />
 
       {/* Tablet Nav Bar — sticky */}
@@ -48,13 +48,13 @@ export default function Layout() {
       />
 
       {/* Main Layout — sidebars + content */}
-      <div className="flex min-h-[calc(100vh-53px)] md:min-h-[calc(100vh-53px)] lg:min-h-screen">
+      <div className="flex min-h-screen pt-[53px] md:pt-0 md:min-h-[calc(100vh-53px)] lg:min-h-screen">
         {/* Left Sidebar (Desktop) — sticky, full height */}
         <SidebarNav />
 
         {/* Main Content */}
         <main
-          className="flex-1 min-h-full flex flex-col"
+          className="flex-1 min-w-0 min-h-full flex flex-col"
           id="main-content"
           tabIndex={-1}
         >

@@ -51,7 +51,7 @@ function ArticleDetailPage() {
         <meta property="og:description" content={article.excerpt} />
         <meta property="og:type" content="article" />
       </Helmet>
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
         {/* Breadcrumb */}
         <Breadcrumb
           items={[

@@ -21,7 +21,7 @@ export default function RightSidebar({ articles, timelineEvents }) {
   const sortedYears = Array.from(years).sort((a, b) => b - a);
 
   return (
-    <aside className="w-56 hidden lg:block border-l border-gray-200 dark:border-gray-700 p-5 sticky top-0 h-screen">
+    <aside className="w-56 hidden lg:block border-l border-gray-200 dark:border-gray-700 p-5 sticky top-0 h-screen overflow-y-auto">
       <div className="space-y-6">
         <div>
           <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-3">Stats</h3>

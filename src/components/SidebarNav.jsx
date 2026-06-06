@@ -6,7 +6,7 @@ export default function SidebarNav() {
   const location = useLocation();
 
   return (
-    <aside className="w-56 hidden lg:flex flex-col border-r border-gray-200 dark:border-gray-700 p-5 sticky top-0 h-screen z-30">
+    <aside className="w-56 hidden lg:flex flex-col border-r border-gray-200 dark:border-gray-700 p-5 sticky top-0 h-screen z-30 overflow-y-auto">
       <h1
         className="font-display text-2xl font-bold mb-8 cursor-pointer hover:opacity-70 transition-opacity"
         onClick={() => navigate('/')}
@@ -37,7 +37,7 @@ export default function SidebarNav() {
       <div className="mt-auto">
         <div className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
           <p className="font-medium text-gray-700 dark:text-gray-300 mb-1">About</p>
-          <p>A personal blog about technology, life, and everything in between.</p>
+          <p>A personal blog about quantitative trading, multi-factor strategies, and AI-assisted programming.</p>
         </div>
       </div>
     </aside>

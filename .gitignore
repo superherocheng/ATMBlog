@@ -6,3 +6,4 @@ dist/
 start.sh
 finish.sh
 .vite/
+articles/

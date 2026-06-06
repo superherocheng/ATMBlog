@@ -1,4 +1,6 @@
 @import "tailwindcss";
+/* Use class-based dark mode so toggling .dark on <html> works */
+@variant dark (&:is(.dark *));
 
 @theme {
   --color-wiki-black: #111111;
@@ -19,12 +21,14 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Scrollbar styling */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: #fff; }
 ::-webkit-scrollbar-thumb { background: #111; }
 .dark ::-webkit-scrollbar-track { background: #121212; }
 .dark ::-webkit-scrollbar-thumb { background: #555; }
 
+/* Article card hover */
 .article-card { transition: background-color 0.12s ease, color 0.12s ease, border-color 0.12s ease; }
 .article-card:hover { background-color: #111111; color: #FFFFFF; border-color: #111111; }
 .article-card:hover .card-title { color: #FFFFFF; }
@@ -39,31 +43,85 @@ body {
 .dark .article-card:hover .card-date { color: #555555; }
 .dark .article-card:hover .card-tag { color: #333333; border-color: #999999; }
 
+/* Intro box */
 .intro-box { background: rgba(248, 249, 255, 0.7); }
 .dark .intro-box { background: rgba(30, 30, 60, 0.4); }
 
+/* Article body typography */
+.article-body {
+  font-size: 1rem;
+  line-height: 1.85;
+  color: #1a1a1a;
+}
 .article-body h2 amp, .article-body h3 amp,
 .article-body h2 .amp, .article-body h3 .amp {
   font-family: var(--font-body);
   font-style: normal;
   font-weight: 400;
 }
+.article-body h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+}
+.article-body h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 0.6rem;
+  line-height: 1.35;
+  border-bottom: 1px solid #d1d5db;
+  padding-bottom: 0.3rem;
+}
+.article-body h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+.article-body p {
+  margin-bottom: 1em;
+}
 .article-body table th,
 .article-body table td { padding: 12px 16px; }
 .article-body ul,
 .article-body ol { padding-left: 1.5em; list-style-position: outside; }
-.article-body li { margin-bottom: 0.25em; }
-.dark .article-body { color: #d1d5db; }
+.article-body li { margin-bottom: 0.4em; }
+.article-body hr {
+  margin: 2rem 0;
+  border: 0;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* Dark mode article body */
+.dark .article-body { color: #d1d5db; line-height: 1.85; }
+.dark .article-body h1,
 .dark .article-body h2,
-.dark .article-body h3 { color: #e5e7eb !important; }
+.dark .article-body h3,
+.dark .article-body h4 { color: #e5e7eb; }
+.dark .article-body h2 { border-bottom-color: #374151; }
 .dark .article-body strong { color: #f3f4f6; }
 .dark .article-body table { border-color: #374151; }
 .dark .article-body th { color: #e5e7eb; border-color: #374151; }
 .dark .article-body td { border-color: #374151; }
 .dark .article-body thead tr { border-color: #374151; }
 .dark .article-body code { background: #1f2937; border-color: #374151; color: #d1d5db; }
+.dark .article-body pre { background: #1f2937; border: 1px solid #374151; padding: 1em; overflow-x: auto; }
 .dark .article-body a { color: #7BB8FF; }
+.dark .article-body blockquote { border-left-color: #374151; color: #9ca3af; }
+.dark .article-body hr { border-top-color: #374151; }
 
+/* Article body light mode */
+.article-body pre { background: #f5f5f5; border: 1px solid #e5e5e5; padding: 1em; overflow-x: auto; }
+.article-body code { background: #f3f4f6; border: 1px solid #e5e7eb; padding: 0.15em 0.3em; font-size: 0.875em; }
+.article-body pre code { background: none; border: none; padding: 0; }
+.article-body blockquote { border-left: 3px solid #d1d5db; padding-left: 1em; color: #6b7280; }
+.article-body img { max-width: 100%; height: auto; }
+
+/* Timeline animation */
 @keyframes timelineFadeIn {
   from { opacity: 0; transform: translateX(-12px); }
   to { opacity: 1; transform: translateX(0); }
@@ -71,8 +129,24 @@ body {
 .timeline-item-enter {
   animation: timelineFadeIn 0.5s ease forwards;
 }
+
+/* View fade in */
 @keyframes viewFadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 .view-enter { animation: viewFadeIn 0.15s ease forwards; }
+
+/* Reduced motion - respect user preference */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .timeline-item-enter {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

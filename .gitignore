@@ -2,3 +2,7 @@ node_modules/
 dist/
 *.backup.*
 .DS_Store
+.deepseek/
+start.sh
+finish.sh
+.vite/

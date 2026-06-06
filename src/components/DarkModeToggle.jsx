@@ -1,10 +1,14 @@
-export default function DarkModeToggle({ darkMode, toggle }) {
+import { useTheme } from '../context/ThemeContext.jsx';
+
+export default function DarkModeToggle() {
+  const { darkMode, toggleDark } = useTheme();
+
   return (
     <button
-      onClick={toggle}
+      onClick={toggleDark}
       className="w-9 h-9 flex items-center justify-center border border-black dark:border-gray-600 hover:bg-wiki-black hover:text-white dark:hover:bg-gray-600 dark:hover:text-white transition-colors"
-      aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
-      title={darkMode ? "Light mode" : "Dark mode"}
+      aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+      title={darkMode ? 'Light mode' : 'Dark mode'}
     >
       {darkMode ? (
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">

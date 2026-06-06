@@ -6,7 +6,7 @@ export default function SidebarNav() {
   const location = useLocation();
 
   return (
-    <aside className="w-56 hidden lg:flex flex-col border-r border-gray-200 dark:border-gray-700 p-5 sticky top-0 h-screen">
+    <aside className="w-56 hidden lg:flex flex-col border-r border-gray-200 dark:border-gray-700 p-5 sticky top-0 h-screen z-30">
       <h1
         className="font-display text-2xl font-bold mb-8 cursor-pointer hover:opacity-70 transition-opacity"
         onClick={() => navigate('/')}

@@ -4,6 +4,8 @@ import { articles } from '../data/articles.js';
 import { getArticleBody } from '../data/content.js';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import ReadingProgress from '../components/ReadingProgress.jsx';
+import Breadcrumb from '../components/Breadcrumb.jsx';
 
 function ArticleDetailPage() {
   const { id } = useParams();
@@ -19,7 +21,7 @@ function ArticleDetailPage() {
           <title>ATM Blog — Not Found</title>
         </Helmet>
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <button onClick={() => navigate(-1)} className="text-sm text-wiki-blue hover:underline mb-6 cursor-pointer">
+          <button onClick={() => navigate(-1)} className="text-sm text-wiki-blue hover:underline mb-6 inline-flex items-center gap-1 cursor-pointer">
             &larr; Back
           </button>
           <div className="text-center py-16">
@@ -29,7 +31,7 @@ function ArticleDetailPage() {
             </p>
             <button
               onClick={() => navigate('/articles')}
-              className="border border-wiki-black dark:border-gray-500 px-4 py-2 text-sm hover:bg-wiki-black hover:text-white dark:hover:bg-gray-600 transition-colors"
+              className="border border-wiki-black dark:border-gray-500 px-5 py-2.5 text-sm hover:bg-wiki-black hover:text-white dark:hover:bg-gray-600 transition-colors"
             >
               Browse articles
             </button>
@@ -41,6 +43,7 @@ function ArticleDetailPage() {
 
   return (
     <>
+      <ReadingProgress />
       <Helmet>
         <title>{article.title} — ATM Blog</title>
         <meta name="description" content={article.excerpt} />
@@ -49,29 +52,53 @@ function ArticleDetailPage() {
         <meta property="og:type" content="article" />
       </Helmet>
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <button onClick={() => navigate(-1)} className="text-sm text-wiki-blue hover:underline mb-6 inline-flex items-center gap-1 cursor-pointer">
-          &larr; Back
-        </button>
+        {/* Breadcrumb */}
+        <Breadcrumb
+          items={[
+            { label: 'Articles', path: '/articles' },
+            { label: article.title },
+          ]}
+        />
+
         <header className="mb-8">
-          <h1 className="font-display text-4xl font-bold mb-3">{article.title}</h1>
+          <h1 className="font-display text-4xl font-bold mb-3 leading-tight">{article.title}</h1>
           <div className="flex flex-wrap items-center gap-3 text-sm text-gray-500">
-            {article.tag && <span className="border border-gray-300 px-2 py-0.5 text-xs">{article.tag}</span>}
+            {article.tag && (
+              <span className="border border-wiki-border dark:border-gray-600 px-2.5 py-0.5 text-xs font-medium text-brand dark:text-brand-light">
+                {article.tag}
+              </span>
+            )}
             {article.readTime && <span>{article.readTime}</span>}
             {article.date && <span>{article.date}</span>}
           </div>
           {article.excerpt && (
-            <p className="mt-4 text-gray-600 italic leading-relaxed">{article.excerpt}</p>
+            <p className="mt-5 text-gray-600 dark:text-gray-400 leading-relaxed border-l-2 border-brand pl-4">
+              {article.excerpt}
+            </p>
           )}
         </header>
         {bodyMarkdown ? (
-          <div className="article-body prose-sm max-w-none leading-relaxed">
+          <div className="article-body">
             <Markdown remarkPlugins={[remarkGfm]}>
               {bodyMarkdown}
             </Markdown>
           </div>
         ) : (
-          <p className="text-gray-500 text-sm">Article body not available.</p>
+          <div className="text-center py-12 text-gray-500 text-sm">Article body not available.</div>
         )}
+
+        {/* Bottom navigation */}
+        <div className="mt-12 pt-6 border-t border-gray-200 dark:border-gray-700">
+          <button
+            onClick={() => navigate('/articles')}
+            className="inline-flex items-center gap-1.5 text-sm text-brand hover:text-brand-dark dark:hover:text-brand-light transition-colors font-medium"
+          >
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <path d="M10 12l-4-4 4-4" />
+            </svg>
+            Back to all articles
+          </button>
+        </div>
       </div>
     </>
   );

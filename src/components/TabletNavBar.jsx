@@ -8,7 +8,7 @@ export default function TabletNavBar() {
   const location = useLocation();
 
   return (
-    <div className="hidden md:flex lg:hidden items-center border-b border-gray-200 dark:border-gray-700 px-6 py-3">
+    <div className="hidden md:flex lg:hidden items-center border-b border-gray-200 dark:border-gray-700 px-6 py-3 sticky top-0 z-40 bg-white dark:bg-[#121212]">
       <h1
         className="font-display text-xl font-bold mr-8 cursor-pointer hover:opacity-70 transition-opacity"
         onClick={() => navigate('/')}

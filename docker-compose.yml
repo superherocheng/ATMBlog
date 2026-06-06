@@ -1,0 +1,13 @@
+services:
+  web:
+    build: .
+    container_name: atmblog
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    networks:
+      - docker_network
+
+networks:
+  docker_network:
+    external: true

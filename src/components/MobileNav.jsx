@@ -1,11 +1,8 @@
 import { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { navLinks } from '../data/articles.js';
-import { useTheme } from '../context/ThemeContext.jsx';
-import DarkModeToggle from './DarkModeToggle.jsx';
 
 export default function MobileNav({ isOpen, onClose }) {
-  const { darkMode, toggleDark } = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -26,9 +23,11 @@ export default function MobileNav({ isOpen, onClose }) {
   return (
     <div className="fixed inset-0 z-50 bg-white dark:bg-[#121212] flex flex-col" role="dialog" aria-modal="true" aria-label="Navigation menu">
       <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-700">
-        <span className="font-display text-xl font-bold">ATM Blog</span>
+        <div>
+          <span className="font-display text-xl font-bold">ATM Blog</span>
+          <p className="text-[11px] text-gray-500 dark:text-gray-400 mt-0.5">AI 编程工具与实践笔记</p>
+        </div>
         <div className="flex items-center gap-3">
-          <DarkModeToggle />
           <button onClick={onClose} className="text-2xl leading-none" aria-label="Close menu">&times;</button>
         </div>
       </div>

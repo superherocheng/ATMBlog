@@ -1,5 +1,4 @@
 import { Outlet, useLocation } from 'react-router-dom';
-import { AnimatePresence, motion } from 'framer-motion';
 import MobileTopBar from './MobileTopBar.jsx';
 import TabletNavBar from './TabletNavBar.jsx';
 import MobileNav from './MobileNav.jsx';
@@ -8,35 +7,28 @@ import RightSidebar from './RightSidebar.jsx';
 import Footer from './Footer.jsx';
 import MobileBottomBar from './MobileBottomBar.jsx';
 import ScrollToTop from './ScrollToTop.jsx';
+import { useScrollRestoration } from '../hooks/useScrollRestoration.js';
 import { articles, timelineEvents } from '../data/articles.js';
 import { useState } from 'react';
-
-/**
- * 平滑内容切换动画：
- * - 仅中间内容区域动画，导航栏不动
- * - 简单淡入 + 轻微上移，无缩放
- */
-const contentVariants = {
-  initial: { opacity: 0, y: 8 },
-  animate: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.25, ease: 'easeOut' },
-  },
-  exit: {
-    opacity: 0,
-    transition: { duration: 0.12 },
-  },
-};
 
 export default function Layout() {
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
+  const isArticlePage = location.pathname.startsWith('/article/');
+  useScrollRestoration();
 
   return (
     <>
+      {/* Skip to content */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[60] focus:bg-white focus:border focus:border-gray-300 focus:px-4 focus:py-2 focus:text-sm dark:focus:bg-[#111827] dark:focus:text-white"
+      >
+        Skip to content
+      </a>
+
       {/* Mobile Top Bar — fixed */}
-      <MobileTopBar onMenuToggle={() => setMenuOpen((p) => !p)} />
+      <MobileTopBar menuOpen={menuOpen} onMenuToggle={() => setMenuOpen((p) => !p)} />
 
       {/* Tablet Nav Bar — sticky */}
       <TabletNavBar />
@@ -47,39 +39,30 @@ export default function Layout() {
         onClose={() => setMenuOpen(false)}
       />
 
-      {/* Main Layout — sidebars + content */}
-      <div className="flex min-h-screen pt-[53px] md:pt-0 md:min-h-[calc(100vh-53px)] lg:min-h-screen">
-        {/* Left Sidebar (Desktop) — sticky, full height */}
-        <SidebarNav />
+      {/* Fixed sidebars (desktop only) + main content */}
+      <SidebarNav />
 
-        {/* Main Content */}
-        <main
-          className="flex-1 min-w-0 min-h-full flex flex-col"
-          id="main-content"
-          tabIndex={-1}
-        >
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={location.pathname}
-              variants={contentVariants}
-              initial="initial"
-              animate="animate"
-              exit="exit"
-              className="flex-1"
-            >
-              <Outlet />
-            </motion.div>
-          </AnimatePresence>
-          <Footer />
-          <MobileBottomBar articles={articles} />
-        </main>
-
-        {/* Right Sidebar (Desktop) — sticky, full height */}
+      {!isArticlePage && (
         <RightSidebar
           articles={articles}
           timelineEvents={timelineEvents}
         />
-      </div>
+      )}
+
+      {/* Main Content */}
+      <main
+        className={`min-h-screen pt-[68px] md:pt-0 lg:pl-56 flex flex-col ${isArticlePage ? 'lg:pr-0' : 'lg:pr-56'}`}
+        id="main-content"
+        tabIndex={-1}
+      >
+        <div className="flex-1">
+          <div key={location.pathname} className="page-enter">
+            <Outlet />
+          </div>
+        </div>
+        <Footer />
+        <MobileBottomBar articles={articles} />
+      </main>
 
       {/* Scroll-to-top button */}
       <ScrollToTop />

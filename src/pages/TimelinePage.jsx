@@ -62,13 +62,19 @@ function TimelinePage() {
       <Helmet>
         <title>ATM Blog — Timeline</title>
         <meta name="description" content={`Chronological timeline of ${totalEvents} milestones from ATM Blog.`} />
+        <link rel="canonical" href="https://gaodeqingchuda.icu/timeline" />
+        <meta property="og:title" content="ATM Blog — Timeline" />
+        <meta property="og:description" content={`Chronological timeline of ${totalEvents} milestones in quantitative trading and AI development.`} />
+        <meta property="og:url" content="https://gaodeqingchuda.icu/timeline" />
+        <meta name="twitter:title" content="ATM Blog — Timeline" />
+        <meta name="twitter:description" content={`Timeline of ${totalEvents} milestones from ATM Blog.`} />
       </Helmet>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header with count */}
         <div className="mb-10">
-          <h1 className="font-display text-3xl font-bold mb-2">Timeline</h1>
+          <h1 className="font-display text-3xl font-bold mb-2 tracking-tight">时间线</h1>
           <p className="text-sm text-gray-500 dark:text-gray-400">
-            {totalEvents} milestone{totalEvents !== 1 ? 's' : ''} across {years.length} year{years.length !== 1 ? 's' : ''}
+            {totalEvents} 个里程碑，覆盖 {years.length} 个年份
           </p>
         </div>
 
@@ -81,10 +87,10 @@ function TimelinePage() {
             <section key={year} id={`year-${year}`} className="mb-12">
               {/* Year header */}
               <div className="flex items-center gap-4 mb-6">
-                <div className="w-9 h-9 rounded-full bg-brand text-white flex items-center justify-center text-sm font-bold flex-shrink-0 shadow-sm">
+                <div className="w-8 h-8 bg-black dark:bg-white text-white dark:text-black flex items-center justify-center text-xs font-bold flex-shrink-0">
                   {year.slice(2)}
                 </div>
-                <h2 className="font-display text-2xl font-bold text-gray-800 dark:text-gray-200">
+                <h2 className="font-display text-xl font-bold text-gray-800 dark:text-gray-200">
                   {year}
                 </h2>
                 <div className="h-px flex-1 bg-gray-200 dark:bg-gray-700" />
@@ -102,13 +108,13 @@ function TimelinePage() {
                       style={{ animationDelay: `${idx * 120}ms` }}
                     >
                       {/* Dot on the timeline line */}
-                      <div className="hidden sm:flex absolute -left-[38px] top-1.5">
-                        <div className="w-3 h-3 rounded-full border-2 border-brand bg-white dark:bg-[#121212] timeline-dot group-hover:bg-brand group-hover:border-brand transition-colors" />
+                      <div className="hidden sm:flex absolute -left-[37px] top-[5px]">
+                        <div className="w-2.5 h-2.5 bg-gray-900 dark:bg-gray-100 timeline-dot" />
                       </div>
 
                       {/* Date badge */}
-                      <div className="hidden sm:flex flex-shrink-0 w-20 pt-0.5">
-                        <span className="font-mono text-xs font-medium text-brand dark:text-brand-light">
+                      <div className="hidden sm:flex flex-shrink-0 w-[5.5rem] pt-0.5 justify-end">
+                        <span className="font-mono text-sm font-semibold text-gray-700 dark:text-gray-300 leading-relaxed">
                           {event.date}
                         </span>
                       </div>
@@ -120,7 +126,7 @@ function TimelinePage() {
                             {event.date}
                           </span>
                         </div>
-                        <p className="text-sm leading-relaxed text-gray-700 dark:text-gray-300">
+                  <p className="text-sm leading-relaxed text-gray-700 dark:text-gray-300">
                           {event.event}
                         </p>
                       </div>

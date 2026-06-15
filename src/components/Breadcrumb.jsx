@@ -21,7 +21,7 @@ export default function Breadcrumb({ items }) {
                 {item.label}
               </button>
             ) : (
-              <span className="text-gray-700 dark:text-gray-300 font-medium">{item.label}</span>
+              <span className="text-gray-700 dark:text-gray-300 font-medium" aria-current="page">{item.label}</span>
             )}
           </li>
         ))}

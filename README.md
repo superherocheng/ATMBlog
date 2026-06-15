@@ -4,11 +4,11 @@
 
 ## 内容
 
-记录在量化交易、多因子选股、CTA 期货策略、AI 辅助编程等领域的探索与实践。
+记录在 AI 编程工具、开发工作流、量化交易与技术实践等领域的探索。
 
-- **滚动窗口稳健性验证** — Ensemble 策略在7个滚动窗口上的稳健性检验，平均年化超额 139%
-- **改进回测优化报告** — 10轮系统性参数优化，换手率从 69.5x 降至 10.7x
-- **低BARRA因子深度解析** — 12个与BARRA风格因子线性无关的截面Alpha因子库
+- **Claude Code 安装与配置完全指南** — 从零开始上手终端原生 AI 编程助手
+- **TRAE 使用心得：AI IDE 的新选择** — 从 VS Code + Copilot 迁移过来的真实体验
+- **Claude Code 多种工作模式与高阶 Prompt 技巧** — 从基础使用进阶到结构化 Prompt 和自动化工作流
 
 ## 特性
 
@@ -36,7 +36,7 @@
 | 动画 | Framer Motion 12 |
 | Markdown | react-markdown + remark-gfm |
 | SEO | react-helmet-async |
-| 部署 | Docker / Nginx / PM2 |
+| 部署 | Docker / `serve` / PM2 |
 
 ## Quick Start
 
@@ -58,7 +58,7 @@ npm run preview
 
 ### Docker 部署（推荐）
 
-根目录 `docker-compose.yml` 统一管理所有服务：
+镜像采用两阶段构建：`node:22-alpine` 编译 `dist/`，再用轻量级静态服务器 [`serve`](https://github.com/vercel/serve) 在 8080 端口托管，并启用 SPA 回退（客户端路由回退到 `index.html`）。根目录 `docker-compose.yml` 统一管理服务：
 
 ```bash
 # 从 docker-app 根目录构建并运行

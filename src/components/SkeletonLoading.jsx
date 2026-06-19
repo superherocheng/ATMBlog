@@ -1,6 +1,6 @@
 export default function SkeletonLoading() {
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 animate-pulse">
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 animate-pulse skeleton-wrapper">
       {/* Title skeleton */}
       <div className="skeleton h-8 w-48 mb-8" />
 

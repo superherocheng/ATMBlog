@@ -7,6 +7,7 @@ import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import ReadingProgress from '../components/ReadingProgress.jsx';
 import Breadcrumb from '../components/Breadcrumb.jsx';
+import ProgressiveImage from '../components/ProgressiveImage.jsx';
 
 function flattenText(children) {
   return Children.toArray(children)
@@ -33,8 +34,7 @@ function ArticleDetailPage() {
     .map((line) => {
       const text = line.replace(/^#{2,3}\s+/, '').trim();
       return { text, id: text.toLowerCase().replace(/[^\w\u4e00-\u9fa5]+/g, '-').replace(/^-+|-+$/g, '') };
-    })
-    .slice(0, 8);
+    });
   const relatedArticles = articles
     .filter((item) => item.id !== article?.id && item.tag === article?.tag)
     .slice(0, 3);
@@ -58,7 +58,19 @@ function ArticleDetailPage() {
 
     const handleCopy = async () => {
       try {
-        await navigator.clipboard.writeText(code);
+        if (navigator.clipboard?.writeText) {
+          await navigator.clipboard.writeText(code);
+        } else {
+          // Fallback for non-HTTPS or older browsers
+          const textarea = document.createElement('textarea');
+          textarea.value = code;
+          textarea.style.position = 'fixed';
+          textarea.style.opacity = '0';
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textarea);
+        }
         setCopied(true);
         window.setTimeout(() => setCopied(false), 1200);
       } catch {
@@ -96,7 +108,7 @@ function ArticleDetailPage() {
     img: ({ src, alt }) => (
       <figure className="article-figure">
         <button type="button" className="article-image-btn" onClick={() => setImagePreview({ src, alt })}>
-          <img src={src} alt={alt || ''} loading="lazy" />
+          <ProgressiveImage src={src} alt={alt || ''} />
         </button>
         {alt ? <figcaption>{alt}</figcaption> : null}
       </figure>
@@ -157,7 +169,12 @@ function ArticleDetailPage() {
           "headline": article.title,
           "description": article.excerpt,
           "datePublished": article.date,
-          "author": { "@type": "Person", "name": "ATM Blog" }
+          "dateModified": article.lastModified || article.date,
+          "author": { "@type": "Person", "name": "ATM Blog" },
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": `https://gaodeqingchuda.icu/article/${article.id}`
+          }
         })}</script>
       </Helmet>
       <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -219,7 +236,9 @@ function ArticleDetailPage() {
               </span>
             )}
           </div>
-          <h1 className="font-display text-4xl font-bold mb-3 leading-tight tracking-tight">{article.title}</h1>
+          <h1 className="font-display text-4xl font-bold mb-3 leading-tight tracking-tight">
+            {article.title}
+          </h1>
           <div className="flex flex-wrap items-center gap-3 text-sm text-gray-500">
             {article.readTime && <span>{article.readTime}</span>}
             {article.date && <span>{article.date}</span>}
@@ -297,7 +316,7 @@ function ArticleDetailPage() {
         </div>
 
         {/* Bottom navigation */}
-        <div className="mt-12 pt-6 border-t border-gray-200 dark:border-gray-700">
+        <div className="mt-12 pt-6 border-t border-gray-200 dark:border-gray-700 flex flex-wrap items-center justify-between gap-4">
           <button
             onClick={() => navigate('/articles')}
             className="inline-flex items-center gap-1.5 text-sm text-brand hover:text-brand-dark dark:hover:text-brand-light transition-colors font-medium"

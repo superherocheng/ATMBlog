@@ -10,6 +10,7 @@ import ScrollToTop from './ScrollToTop.jsx';
 import { useScrollRestoration } from '../hooks/useScrollRestoration.js';
 import { articles, timelineEvents } from '../data/articles.js';
 import { useState } from 'react';
+import { LayoutGroup, motion, AnimatePresence } from 'framer-motion';
 
 export default function Layout() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -56,9 +57,20 @@ export default function Layout() {
         tabIndex={-1}
       >
         <div className="flex-1">
-          <div key={location.pathname} className="page-enter">
-            <Outlet />
-          </div>
+          <LayoutGroup>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={location.pathname}
+                className="page-enter"
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -4 }}
+                transition={{ duration: 0.2, ease: 'easeOut' }}
+              >
+                <Outlet />
+              </motion.div>
+            </AnimatePresence>
+          </LayoutGroup>
         </div>
         <Footer />
         <MobileBottomBar articles={articles} />

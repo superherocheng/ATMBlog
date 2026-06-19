@@ -33,6 +33,15 @@ export const articles = [
     readTime: '12 min read',
     tag: 'AI工具',
   },
+  {
+    id: 4,
+    slug: 'gpt-image2-prompt-collection',
+    title: 'GPT IMAGE2提示词集锦',
+    excerpt: '精选 12 组 GPT IMAGE2 图像生成提示词，涵盖城市海报、概念草稿、中世纪手稿、设定集三视图、概念肖像与欧洲城市水彩插画等多种风格，附完整目录索引，可直接复制使用。',
+    date: '2026-06-17',
+    readTime: '6 min read',
+    tag: 'AI绘画',
+  },
 ];
 
 export const timelineEvents = [

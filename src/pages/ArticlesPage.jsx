@@ -120,7 +120,7 @@ function ArticlesPage() {
             ))}
           </div>
           {searchQuery && (
-            <p className="text-xs text-gray-500 mt-2">
+            <p className="text-xs text-gray-500 mt-2" role="status" aria-live="polite" aria-atomic="true">
               找到 {filtered.length} 条结果
               {activeTag && `，当前标签：${activeTag}`}
             </p>
@@ -129,13 +129,13 @@ function ArticlesPage() {
 
         {/* Results */}
         {filtered.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4" role="list" aria-label="文章列表">
             {filtered.map((article) => (
               <ArticleCard key={article.id} article={article} searchQuery={debouncedQuery} />
             ))}
           </div>
         ) : (
-          <div className="text-center py-16 border border-dashed border-gray-200 dark:border-gray-700">
+          <div className="text-center py-16 border border-dashed border-gray-200 dark:border-gray-700" role="status" aria-live="polite">
             <p className="text-sm text-gray-500 mb-3">没有找到符合条件的文章。</p>
             {(searchQuery || activeTag) && (
               <button

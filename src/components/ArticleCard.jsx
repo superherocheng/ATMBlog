@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
 
 /**
  * Highlight all occurrences of `query` in `text` with a brand-colored background.
@@ -66,12 +65,9 @@ export default function ArticleCard({ article, searchQuery }) {
       </div>
 
       {/* Title */}
-      <motion.h2
-        layoutId={`article-title-${article.id}`}
-        className="font-display text-xl font-bold mb-2.5 leading-snug card-title text-gray-900 dark:text-gray-100 tracking-tight"
-      >
+      <h2 className="font-display text-xl font-bold mb-2.5 leading-snug card-title text-gray-900 dark:text-gray-100 tracking-tight">
         {searchQuery ? highlightText(article.title, searchQuery) : article.title}
-      </motion.h2>
+      </h2>
 
       {/* Excerpt */}
       {article.excerpt && (

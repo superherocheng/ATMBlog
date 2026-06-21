@@ -72,7 +72,7 @@ function ArticlesPage() {
         </div>
 
         {/* Search bar */}
-        <div className="mb-5 sticky top-[84px] md:top-[68px] z-20 py-3 -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-0 lg:px-0 bg-gradient-to-b from-[rgba(247,248,252,0.98)] to-[rgba(247,248,252,0.85)] dark:from-[rgba(17,19,23,0.98)] dark:to-[rgba(17,19,23,0.85)] backdrop-blur">
+        <div className="mb-5 py-3 -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-0 lg:px-0">
           <div className="relative">
             <svg
               className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"

@@ -42,6 +42,42 @@ export const articles = [
     readTime: '6 min read',
     tag: 'AI绘画',
   },
+  {
+    id: 5,
+    slug: 'gpt-image2-architecture-cars',
+    title: 'GPT IMAGE2提示词集锦（二）：建筑与汽车设计手稿',
+    excerpt: '精选 10 组提示词，涵盖天坛、圣索菲亚大教堂、巴黎圣母院等建筑速写研究手稿，以及捷豹 XEL 和 XE SV Project 8 的汽车设计手稿，建筑师与设计师的研究笔记风格。',
+    date: '2026-06-21',
+    readTime: '8 min read',
+    tag: 'AI绘画',
+  },
+  {
+    id: 6,
+    slug: 'gpt-image2-characters-travel-fashion',
+    title: 'GPT IMAGE2提示词集锦（三）：角色设定·旅行记忆·时尚摄影',
+    excerpt: '精选 16 组提示词，涵盖 Appu / Saber / 佐助 / 狮心王查理等角色速写集合页，京都、多诺米蒂、佛罗伦萨等纸雕旅行海报，以及高圆圆通透肖像与俯拍直闪时尚摄影。',
+    date: '2026-06-21',
+    readTime: '6 min read',
+    tag: 'AI绘画',
+  },
+  {
+    id: 7,
+    slug: 'gpt-image2-stamps-city-experimental-fifa-ukiyoe',
+    title: 'GPT IMAGE2提示词集锦（四）：邮票·城市·实验·FIFA·浮世绘',
+    excerpt: '精选 14 组提示词，涵盖电影/动漫主题日本邮政邮票、东京与米兰城市肖像海报、Claude Code 开发者手稿、高达×JK、FIFA 粘土浮雕以及日式浮世绘×动漫角色。',
+    date: '2026-06-21',
+    readTime: '6 min read',
+    tag: 'AI绘画',
+  },
+  {
+    id: 8,
+    slug: 'gpt-image2-food-citywalk-bookcity-naruto',
+    title: 'GPT IMAGE2提示词集锦（五）：美食·漫游·纸雕·展览·和风',
+    excerpt: '精选 15 组提示词，涵盖意式与亚洲美食广告海报、南京/上海/罗马 Citywalk 漫游路线图、日本/意大利/希腊纸雕书封、Fate双王展览海报与漩涡鸣人和风肖像。',
+    date: '2026-06-21',
+    readTime: '6 min read',
+    tag: 'AI绘画',
+  },
 ];
 
 export const timelineEvents = [

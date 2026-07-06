@@ -78,6 +78,33 @@ export const articles = [
     readTime: '6 min read',
     tag: 'AI绘画',
   },
+  {
+    id: 9,
+    slug: 'gpt-image2-sports-travel-blueprint-poetry',
+    title: 'GPT IMAGE2提示词集锦（六）：体育杂志·旅行手账·炭笔蓝图·诗词卡片',
+    excerpt: '精选 16 组提示词，涵盖斑驳水泥墙FIFA体育杂志封面（Saber/约尔/明日香/钉崎/远坂凛）、复古水彩旅行手账海报（上海/北京/南京/青岛/西安）、炭笔工程蓝图设定（鸣人/佐助/自来也）与国风座右铭诗词卡片。',
+    date: '2026-07-06',
+    readTime: '10 min read',
+    tag: 'AI绘画',
+  },
+  {
+    id: 10,
+    slug: 'gpt-image2-3d-maps-bookmarks-inkwash',
+    title: 'GPT IMAGE2提示词集锦（七）：3D微缩地图·浮雕书签·泼墨水墨',
+    excerpt: '精选 23 组提示词，涵盖木质桌面3D微缩立体城市地图（北京/重庆/多洛米蒂/米兰/罗马/威尼斯/西安/海南/西藏/青海）、3D纸雕浮雕旅行纪念书签（意大利/土耳其/希腊/日本/成都/北京/桂林）与狂野泼墨水墨插画（悬崖城堡/神龙斗士/韩立渡劫/雨中红伞/孤峰红日）。',
+    date: '2026-07-06',
+    readTime: '12 min read',
+    tag: 'AI绘画',
+  },
+  {
+    id: 11,
+    slug: 'gpt-image2-rpg-manga-surreal-calendar-wineglass-celshaded',
+    title: 'GPT IMAGE2提示词集锦（八）：RPG面板·漫画分镜·破界·日历·高脚杯·赛璐璐',
+    excerpt: '精选 16 组提示词，涵盖RPG角色设定面板（李逍遥）、多格漫画分镜（柯南/Saber Excalibur/Saber×士郎）、超现实破界融合画、纯白极简日历、高脚杯水墨角色（DOTA2五英雄）与高对比度赛璐璐海报。',
+    date: '2026-07-06',
+    readTime: '10 min read',
+    tag: 'AI绘画',
+  },
 ];
 
 export const timelineEvents = [

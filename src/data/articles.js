@@ -105,6 +105,42 @@ export const articles = [
     readTime: '10 min read',
     tag: 'AI绘画',
   },
+  {
+    id: 12,
+    slug: 'gpt-image2-prompt-engineering-guide',
+    title: 'GPT IMAGE2提示词集锦（九）：万能模板·艺术风格·动作姿态·排版构图',
+    excerpt: 'IMAGE2提示词工程完整指南第一部分。收录6层万能骨架模板、7种艺术风格流派（素描/纸雕/浮世绘/泼溅等）、20个安全姿势库（坐姿/站姿/低仰角）与4种排版比例模板。',
+    date: '2026-07-16',
+    readTime: '10 min read',
+    tag: 'AI绘画',
+  },
+  {
+    id: 13,
+    slug: 'gpt-image2-character-battle-library',
+    title: 'GPT IMAGE2提示词集锦（十）：应用角色实战库（大汇总）',
+    excerpt: '6大IP系列×30+角色×多种风格模板。涵盖鬼灭之刃、宝可梦、Fate、原神、进击的巨人、间谍过家家、魔卡少女樱、葬送的芙莉莲、高达/EVA等角色完整提示词，配合万能骨架直接出图。',
+    date: '2026-07-16',
+    readTime: '15 min read',
+    tag: 'AI绘画',
+  },
+  {
+    id: 14,
+    slug: 'gpt-image2-variant-quality-upgrade',
+    title: 'GPT IMAGE2提示词集锦（十一）：变种与质感升级库',
+    excerpt: '背景材质升级（工业废土/复古文艺/高端秀场/赛博未来）、主题变种玩法（机车/滑雪/格斗/战术）与环境介质扩展（体积尘埃/迷幻雾气/霓虹倒影/雨滴模糊），附400错误避雷指南。',
+    date: '2026-07-16',
+    readTime: '8 min read',
+    tag: 'AI绘画',
+  },
+  {
+    id: 15,
+    slug: 'gpt-image2-new-additions-travel-sports-ink',
+    title: 'GPT IMAGE2提示词集锦（十二）：新增旅行·实验·体育·国风',
+    excerpt: '2026年7月新增提示词合集。涵盖新增纸雕旅行海报（阿根廷/土耳其/冰岛/夏威夷/澳洲）、体育杂志封面、复古水彩旅行手账、炭笔工程蓝图、国风诗词卡片等风格。',
+    date: '2026-07-16',
+    readTime: '12 min read',
+    tag: 'AI绘画',
+  },
 ];
 
 export const timelineEvents = [

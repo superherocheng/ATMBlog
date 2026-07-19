@@ -5,8 +5,9 @@ import ArticleCard from '../components/ArticleCard.jsx';
 
 function HomePage() {
   const navigate = useNavigate();
-  const featuredArticle = articles[0];
-  const latestArticles = articles.slice(0, 4);
+  const sorted = [...articles].sort((a, b) => new Date(b.date) - new Date(a.date));
+  const featuredArticle = sorted[0];
+  const latestArticles = sorted.slice(0, 4);
   const previewEvents = timelineEvents.slice(-4);
   const totalArticles = articles.length;
   const tags = [...new Set(articles.map(a => a.tag).filter(Boolean))];

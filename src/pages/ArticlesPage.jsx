@@ -41,7 +41,7 @@ function ArticlesPage() {
     if (activeTag) {
       result = result.filter((a) => a.tag === activeTag);
     }
-    return result;
+    return [...result].sort((a, b) => new Date(b.date) - new Date(a.date));
   }, [debouncedQuery, activeTag]);
 
   const handleKeyDown = (e) => {

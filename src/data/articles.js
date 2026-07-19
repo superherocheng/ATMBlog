@@ -40,7 +40,7 @@ export const articles = [
     excerpt: '精选 12 组 GPT IMAGE2 图像生成提示词，涵盖城市海报、概念草稿、中世纪手稿、设定集三视图、概念肖像与欧洲城市水彩插画等多种风格，附完整目录索引，可直接复制使用。',
     date: '2026-06-17',
     readTime: '6 min read',
-    tag: 'AI绘画',
+    tag: 'IMAGE2',
   },
   {
     id: 5,
@@ -49,7 +49,7 @@ export const articles = [
     excerpt: '精选 10 组提示词，涵盖天坛、圣索菲亚大教堂、巴黎圣母院等建筑速写研究手稿，以及捷豹 XEL 和 XE SV Project 8 的汽车设计手稿，建筑师与设计师的研究笔记风格。',
     date: '2026-06-21',
     readTime: '8 min read',
-    tag: 'AI绘画',
+    tag: 'IMAGE2',
   },
   {
     id: 6,
@@ -58,7 +58,7 @@ export const articles = [
     excerpt: '精选 16 组提示词，涵盖 Appu / Saber / 佐助 / 狮心王查理等角色速写集合页，京都、多诺米蒂、佛罗伦萨等纸雕旅行海报，以及高圆圆通透肖像与俯拍直闪时尚摄影。',
     date: '2026-06-21',
     readTime: '6 min read',
-    tag: 'AI绘画',
+    tag: 'IMAGE2',
   },
   {
     id: 7,
@@ -67,7 +67,7 @@ export const articles = [
     excerpt: '精选 14 组提示词，涵盖电影/动漫主题日本邮政邮票、东京与米兰城市肖像海报、Claude Code 开发者手稿、高达×JK、FIFA 粘土浮雕以及日式浮世绘×动漫角色。',
     date: '2026-06-21',
     readTime: '6 min read',
-    tag: 'AI绘画',
+    tag: 'IMAGE2',
   },
   {
     id: 8,
@@ -76,7 +76,7 @@ export const articles = [
     excerpt: '精选 15 组提示词，涵盖意式与亚洲美食广告海报、南京/上海/罗马 Citywalk 漫游路线图、日本/意大利/希腊纸雕书封、Fate双王展览海报与漩涡鸣人和风肖像。',
     date: '2026-06-21',
     readTime: '6 min read',
-    tag: 'AI绘画',
+    tag: 'IMAGE2',
   },
   {
     id: 9,
@@ -85,7 +85,7 @@ export const articles = [
     excerpt: '精选 16 组提示词，涵盖斑驳水泥墙FIFA体育杂志封面（Saber/约尔/明日香/钉崎/远坂凛）、复古水彩旅行手账海报（上海/北京/南京/青岛/西安）、炭笔工程蓝图设定（鸣人/佐助/自来也）与国风座右铭诗词卡片。',
     date: '2026-07-06',
     readTime: '10 min read',
-    tag: 'AI绘画',
+    tag: 'IMAGE2',
   },
   {
     id: 10,
@@ -94,7 +94,7 @@ export const articles = [
     excerpt: '精选 23 组提示词，涵盖木质桌面3D微缩立体城市地图（北京/重庆/多洛米蒂/米兰/罗马/威尼斯/西安/海南/西藏/青海）、3D纸雕浮雕旅行纪念书签（意大利/土耳其/希腊/日本/成都/北京/桂林）与狂野泼墨水墨插画（悬崖城堡/神龙斗士/韩立渡劫/雨中红伞/孤峰红日）。',
     date: '2026-07-06',
     readTime: '12 min read',
-    tag: 'AI绘画',
+    tag: 'IMAGE2',
   },
   {
     id: 11,
@@ -103,7 +103,7 @@ export const articles = [
     excerpt: '精选 16 组提示词，涵盖RPG角色设定面板（李逍遥）、多格漫画分镜（柯南/Saber Excalibur/Saber×士郎）、超现实破界融合画、纯白极简日历、高脚杯水墨角色（DOTA2五英雄）与高对比度赛璐璐海报。',
     date: '2026-07-06',
     readTime: '10 min read',
-    tag: 'AI绘画',
+    tag: 'IMAGE2',
   },
   {
     id: 12,
@@ -112,7 +112,7 @@ export const articles = [
     excerpt: 'IMAGE2提示词工程完整指南第一部分。收录6层万能骨架模板、7种艺术风格流派（素描/纸雕/浮世绘/泼溅等）、20个安全姿势库（坐姿/站姿/低仰角）与4种排版比例模板。',
     date: '2026-07-16',
     readTime: '10 min read',
-    tag: 'AI绘画',
+    tag: 'IMAGE2',
   },
   {
     id: 13,
@@ -121,7 +121,7 @@ export const articles = [
     excerpt: '6大IP系列×30+角色×多种风格模板。涵盖鬼灭之刃、宝可梦、Fate、原神、进击的巨人、间谍过家家、魔卡少女樱、葬送的芙莉莲、高达/EVA等角色完整提示词，配合万能骨架直接出图。',
     date: '2026-07-16',
     readTime: '15 min read',
-    tag: 'AI绘画',
+    tag: 'IMAGE2',
   },
   {
     id: 14,
@@ -130,7 +130,7 @@ export const articles = [
     excerpt: '背景材质升级（工业废土/复古文艺/高端秀场/赛博未来）、主题变种玩法（机车/滑雪/格斗/战术）与环境介质扩展（体积尘埃/迷幻雾气/霓虹倒影/雨滴模糊），附400错误避雷指南。',
     date: '2026-07-16',
     readTime: '8 min read',
-    tag: 'AI绘画',
+    tag: 'IMAGE2',
   },
   {
     id: 15,
@@ -139,7 +139,7 @@ export const articles = [
     excerpt: '2026年7月新增提示词合集。涵盖新增纸雕旅行海报（阿根廷/土耳其/冰岛/夏威夷/澳洲）、体育杂志封面、复古水彩旅行手账、炭笔工程蓝图、国风诗词卡片等风格。',
     date: '2026-07-16',
     readTime: '12 min read',
-    tag: 'AI绘画',
+    tag: 'IMAGE2',
   },
 ];
 

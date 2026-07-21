@@ -199,4 +199,13 @@ export const websitesData = [
     readTime: '20 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 20,
+    slug: 'asuggestion-20260721',
+    title: 'A股 AI/半导体 · 7/21 V反当日投研报告（2026-07-21）',
+    excerpt: '7/21 全线 V 反后的震荡筑底反弹判断（非直接上攻/非探底），半导体设备簇新纳入分析，江波龙 PE33 周期顶部陷阱识别，并诚实修正上期新易盛与天孚两处判断。',
+    date: '2026-07-21',
+    readTime: '20 min read',
+    tag: 'A STOCK',
+  },
 ];

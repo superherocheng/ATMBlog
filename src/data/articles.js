@@ -186,6 +186,15 @@ export const articles = [
     readTime: '20 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 21,
+    slug: 'asuggestion-20260722',
+    title: 'A股 AI/半导体 · 7/22 良性回撤 + Vera Rubin 产业链交叉验证（2026-07-22）',
+    excerpt: '7/22 良性回撤定性"二次磨底"非转弱；Vera Rubin 博文经英伟达官方交叉验证基本属实（800VDC 延后2028+）；工业富联逆周期免疫命题成立，真风险在 AI capex 与鸿海订单而非存储/设备周期。',
+    date: '2026-07-22',
+    readTime: '20 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 export const timelineEvents = [

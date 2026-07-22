@@ -9,7 +9,7 @@ const statusColors = {
 
 const techColors = {
   'AI': 'bg-brand-subtle text-brand dark:bg-brand/10 dark:text-brand-light',
-  'Python': 'bg-blue-50 text-blue-700 dark:bg-blue-900/20 dark:text-blue-400',
+  'Python': 'bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-300',
 };
 
 function WebsitesPage() {
@@ -45,7 +45,7 @@ function WebsitesPage() {
           {websitesData.map((site) => (
             <div
               key={site.id || site.name}
-              className="article-card border border-wiki-border dark:border-gray-700 p-5 bg-white dark:bg-[#121212] group"
+              className="article-card border border-hair dark:border-[#2E2B23] p-5 bg-white dark:bg-[#1C1A14] group"
             >
               <div className="flex items-start justify-between mb-3">
                 <h2 className="font-display text-xl font-bold text-gray-900 dark:text-gray-100 card-title transition-colors">

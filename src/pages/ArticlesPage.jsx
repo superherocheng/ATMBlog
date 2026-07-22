@@ -88,7 +88,7 @@ function ArticlesPage() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               onKeyDown={handleKeyDown}
-              className="w-full border border-wiki-border/80 dark:border-gray-600 pl-10 pr-10 py-3 text-sm bg-white/90 dark:bg-[#121622]/90 focus:outline-none focus:border-brand dark:focus:border-brand-light transition-colors shadow-sm"
+              className="w-full border border-hair-2 dark:border-[#3D3930] pl-10 pr-10 py-3 text-sm bg-white dark:bg-[#1C1A14]/90 focus:outline-none focus:border-brand dark:focus:border-brand-light transition-colors rounded-lg"
               aria-label="Search articles"
               role="searchbox"
             />

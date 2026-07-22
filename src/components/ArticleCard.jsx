@@ -34,7 +34,7 @@ export default function ArticleCard({ article, searchQuery }) {
 
   return (
     <div
-      className="article-card border border-gray-200/90 dark:border-gray-700/60 p-5 cursor-pointer bg-white/90 dark:bg-[#121622] group shadow-card"
+      className="article-card border border-hair dark:border-[#2E2B23] p-5 cursor-pointer bg-white dark:bg-[#1C1A14] group"
       onClick={() => navigate(`/article/${article.id}`)}
       role="button"
       tabIndex={0}

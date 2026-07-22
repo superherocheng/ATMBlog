@@ -36,7 +36,7 @@ export default function App() {
                 }
               })}</script>
             </Helmet>
-            <div className="min-h-screen bg-[radial-gradient(circle_at_top,rgba(79,70,229,0.05),transparent_34%),linear-gradient(to_bottom,#fcfcff, #f7f8fc_46%,#f4f6fb)] text-wiki-black dark:bg-[radial-gradient(circle_at_top,rgba(79,70,229,0.14),transparent_30%),linear-gradient(to_bottom,#111318,#0f1117_58%,#0d0f14)] dark:text-gray-200">
+            <div className="min-h-screen bg-[radial-gradient(circle_at_top,rgba(180,83,9,0.04),transparent_34%),linear-gradient(to_bottom,#FAF9F6,#F6F4EE_46%,#F2EFE8)] text-wiki-black dark:bg-[radial-gradient(circle_at_top,rgba(217,119,6,0.07),transparent_30%),linear-gradient(to_bottom,#14130F,#12110D_58%,#100F0B)] dark:text-gray-200">
               <Suspense fallback={<SkeletonLoading />}>
                 <Routes>
                   <Route element={<Layout />}>

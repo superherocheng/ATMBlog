@@ -1,5 +1,11 @@
 .git
 .github
+.claude
+.deepseek
+.mimocode
+.DS_Store
 README.md
 .dockerignore
 docker-compose.yml
+node_modules
+dist

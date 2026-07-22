@@ -97,7 +97,7 @@ export default function MobileNav({ isOpen, onClose }) {
         aria-hidden="true"
       />
       {/* Menu panel */}
-      <div className="relative ml-auto w-full max-w-sm h-full bg-white dark:bg-[#121212] shadow-2xl flex flex-col">
+      <div className="relative ml-auto w-full max-w-sm h-full bg-white dark:bg-[#1C1A14] shadow-2xl flex flex-col">
         <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-700">
           <div>
             <span className="font-display text-xl font-bold">ATM Blog</span>

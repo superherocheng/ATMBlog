@@ -3,14 +3,16 @@ import { Helmet } from 'react-helmet-async';
 import { timelineEvents } from '../data/articles.js';
 
 function TimelinePage() {
-  // Group by year extracted from 'YYYY-MM' date strings
+  // Group by year extracted from 'YYYY-MM' date strings, oldest first
   const eventsByYear = {};
-  timelineEvents.forEach((event) => {
-    const year = event.date.slice(0, 4);
-    if (!eventsByYear[year]) eventsByYear[year] = [];
-    eventsByYear[year].push(event);
-  });
-  const years = Object.keys(eventsByYear).sort((a, b) => b.localeCompare(a));
+  [...timelineEvents]
+    .sort((a, b) => a.date.localeCompare(b.date))
+    .forEach((event) => {
+      const year = event.date.slice(0, 4);
+      if (!eventsByYear[year]) eventsByYear[year] = [];
+      eventsByYear[year].push(event);
+    });
+  const years = Object.keys(eventsByYear).sort((a, b) => a.localeCompare(b));
 
   const observerRef = useRef(null);
   const itemRefs = useRef(new Map());
@@ -81,19 +83,19 @@ function TimelinePage() {
         {/* Year sections */}
         <div className="relative">
           {/* Vertical connecting line */}
-          <div className="absolute left-[17px] top-0 bottom-0 w-0.5 bg-gray-200 dark:bg-gray-700 hidden sm:block" />
+          <div className="absolute left-[17px] top-0 bottom-0 w-0.5 bg-hair dark:bg-[#2E2B23] hidden sm:block" />
 
           {years.map((year) => (
             <section key={year} id={`year-${year}`} className="mb-12">
               {/* Year header */}
               <div className="flex items-center gap-4 mb-6">
-                <div className="w-8 h-8 bg-black dark:bg-white text-white dark:text-black flex items-center justify-center text-xs font-bold flex-shrink-0">
+                <div className="w-8 h-8 bg-ink dark:bg-[#ECE9E1] text-white dark:text-[#14130F] flex items-center justify-center text-xs font-bold flex-shrink-0">
                   {year.slice(2)}
                 </div>
                 <h2 className="font-display text-xl font-bold text-gray-800 dark:text-gray-200">
                   {year}
                 </h2>
-                <div className="h-px flex-1 bg-gray-200 dark:bg-gray-700" />
+                <div className="h-px flex-1 bg-hair dark:bg-[#2E2B23]" />
               </div>
 
               {/* Events for this year */}
@@ -109,7 +111,7 @@ function TimelinePage() {
                     >
                       {/* Dot on the timeline line */}
                       <div className="hidden sm:flex absolute -left-[37px] top-[5px]">
-                        <div className="w-2.5 h-2.5 bg-gray-900 dark:bg-gray-100 timeline-dot" />
+                        <div className="w-2.5 h-2.5 bg-ink dark:bg-[#ECE9E1] timeline-dot" />
                       </div>
 
                       {/* Date badge */}
@@ -120,7 +122,7 @@ function TimelinePage() {
                       </div>
 
                       {/* Event card */}
-                      <div className="flex-1 min-w-0 bg-white dark:bg-[#1a1a2e] border border-gray-200 dark:border-gray-700 p-4 sm:p-5 transition-all duration-200 hover:border-brand/30 dark:hover:border-brand/30 hover:shadow-card-hover">
+                      <div className="flex-1 min-w-0 bg-white dark:bg-[#1C1A14] border border-hair dark:border-[#2E2B23] p-4 sm:p-5 transition-all duration-200 hover:border-brand/30 dark:hover:border-brand/30 hover:shadow-card-hover">
                         <div className="sm:hidden mb-1.5">
                           <span className="font-mono text-xs font-medium text-brand dark:text-brand-light">
                             {event.date}

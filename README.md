@@ -39,6 +39,10 @@
 | SEO | react-helmet-async |
 | 部署 | Docker / `serve` / PM2 |
 
+## 视觉设计
+
+「素净纸感 + 赤陶」——浅色暖纸画布（`#FAF9F6`）配墨色文字，**唯一彩色点缀为赤陶 `#B45309`**，只用在分类标签、链接、强调与阅读进度条上，绝不铺大面积。深色模式为暖炭灰伴侣（`#14130F` + 提亮赤陶 `#D97706`）。字体纯无衬线（Inter + Noto Sans SC），层级靠字号与字重；卡片用发丝边框取代阴影，留白克制。全部设计 token 集中在 `src/index.css` 的 `@theme` 块，JSX 走 Tailwind `brand`/`accent` 工具类引用。
+
 ## Quick Start
 
 ### 本地开发

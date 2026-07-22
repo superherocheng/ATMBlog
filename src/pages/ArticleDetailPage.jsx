@@ -1,4 +1,4 @@
-import { useState, useEffect, Children } from 'react';
+import { useState, useEffect, useMemo, useRef, Children } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useParams, useNavigate } from 'react-router-dom';
 import { articles } from '../data/articles.js';
@@ -19,6 +19,54 @@ function flattenText(children) {
     .join('');
 }
 
+function slugify(text) {
+  return String(text).toLowerCase().replace(/[^\w一-龥]+/g, '-').replace(/^-+|-+$/g, '');
+}
+
+// ponytail: module-scoped so its identity is stable; avoids remounting every
+// code block (and losing copy state) on each parent re-render.
+function CodeBlock({ children }) {
+  const [copied, setCopied] = useState(false);
+  // react-markdown v10 wraps block code as <pre><code>; the <pre> override below
+  // hands us the inner <code> element as children. Read text/lang off it.
+  const codeEl = Children.toArray(children)[0];
+  const className = codeEl?.props?.className || '';
+  const code = flattenText(codeEl?.props?.children).replace(/\n$/, '');
+  const language = className.match(/language-([a-z0-9+-]+)/i)?.[1] || 'code';
+
+  const handleCopy = async () => {
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(code);
+      } else {
+        // Fallback for non-HTTPS or older browsers
+        const textarea = document.createElement('textarea');
+        textarea.value = code;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+      }
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 1200);
+    } catch {
+      setCopied(false);
+    }
+  };
+
+  return (
+    <div className="code-block">
+      <span className="code-language">{language}</span>
+      <button type="button" onClick={handleCopy} className="code-copy-btn">
+        {copied ? '已复制' : '复制'}
+      </button>
+      <pre className={className}>{children}</pre>
+    </div>
+  );
+}
+
 function ArticleDetailPage() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -28,13 +76,8 @@ function ArticleDetailPage() {
   const [loading, setLoading] = useState(true);
   const [imagePreview, setImagePreview] = useState(null);
   const [tocOpen, setTocOpen] = useState(false);
-  const headings = (bodyMarkdown || '')
-    .split('\n')
-    .filter((line) => /^#{2,3}\s+/.test(line))
-    .map((line) => {
-      const text = line.replace(/^#{2,3}\s+/, '').trim();
-      return { text, id: text.toLowerCase().replace(/[^\w\u4e00-\u9fa5]+/g, '-').replace(/^-+|-+$/g, '') };
-    });
+  const [headings, setHeadings] = useState([]);
+  const articleBodyRef = useRef(null);
   const relatedArticles = articles
     .filter((item) => item.id !== article?.id && item.tag === article?.tag)
     .slice(0, 3);
@@ -51,49 +94,32 @@ function ArticleDetailPage() {
     return () => { cancelled = true; };
   }, [articleId]);
 
-  function CodeBlock({ className, children }) {
-    const [copied, setCopied] = useState(false);
-    const code = String(children).replace(/\n$/, '');
-    const language = (className || '').match(/language-([a-z0-9+-]+)/i)?.[1] || 'code';
+  // Build the TOC from the rendered DOM: can't pick up ``` fenced block lines as
+  // fake headings, ids are derived from real (rendered) text, and duplicates get
+  // -2/-3 suffixes so both the TOC keys and anchor targets stay unique.
+  useEffect(() => {
+    if (loading || !bodyMarkdown) { setHeadings([]); return; }
+    const root = articleBodyRef.current;
+    if (!root) return;
+    const seen = new Map();
+    const items = Array.from(root.querySelectorAll('h2, h3')).map((el) => {
+      const text = (el.textContent || '').trim();
+      const base = slugify(text);
+      const n = (seen.get(base) || 0) + 1;
+      seen.set(base, n);
+      const id = n === 1 ? base : `${base}-${n}`;
+      el.id = id;
+      return { text, id };
+    });
+    setHeadings(items);
+  }, [loading, bodyMarkdown]);
 
-    const handleCopy = async () => {
-      try {
-        if (navigator.clipboard?.writeText) {
-          await navigator.clipboard.writeText(code);
-        } else {
-          // Fallback for non-HTTPS or older browsers
-          const textarea = document.createElement('textarea');
-          textarea.value = code;
-          textarea.style.position = 'fixed';
-          textarea.style.opacity = '0';
-          document.body.appendChild(textarea);
-          textarea.select();
-          document.execCommand('copy');
-          document.body.removeChild(textarea);
-        }
-        setCopied(true);
-        window.setTimeout(() => setCopied(false), 1200);
-      } catch {
-        setCopied(false);
-      }
-    };
-
-    return (
-      <div className="code-block">
-        <span className="code-language">{language}</span>
-        <button type="button" onClick={handleCopy} className="code-copy-btn">
-          {copied ? '已复制' : '复制'}
-        </button>
-        <pre className={className}><code>{children}</code></pre>
-      </div>
-    );
-  }
-
-  const markdownComponents = {
-    h1: ({ children }) => <h1 id={flattenText(children).toLowerCase().replace(/[^\w\u4e00-\u9fa5]+/g, '-').replace(/^-+|-+$/g, '')}>{children}</h1>,
-    h2: ({ children }) => <h2 id={flattenText(children).toLowerCase().replace(/[^\w\u4e00-\u9fa5]+/g, '-').replace(/^-+|-+$/g, '')}>{children}</h2>,
-    h3: ({ children }) => <h3 id={flattenText(children).toLowerCase().replace(/[^\w\u4e00-\u9fa5]+/g, '-').replace(/^-+|-+$/g, '')}>{children}</h3>,
-    h4: ({ children }) => <h4 id={flattenText(children).toLowerCase().replace(/[^\w\u4e00-\u9fa5]+/g, '-').replace(/^-+|-+$/g, '')}>{children}</h4>,
+  const markdownComponents = useMemo(() => ({
+    // h2/h3 intentionally not overridden: react-markdown renders them plainly and
+    // the TOC effect below assigns their ids (deduped), so the sidebar TOC anchors
+    // always match the real headings.
+    h1: ({ children }) => <h1 id={slugify(flattenText(children))}>{children}</h1>,
+    h4: ({ children }) => <h4 id={slugify(flattenText(children))}>{children}</h4>,
     p: ({ children }) => <p>{children}</p>,
     ul: ({ children }) => <ul>{children}</ul>,
     ol: ({ children }) => <ol>{children}</ol>,
@@ -118,10 +144,11 @@ function ArticleDetailPage() {
         {children}
       </a>
     ),
-    code: ({ inline, className, children }) => (
-      inline ? <code className="inline-code">{children}</code> : <CodeBlock className={className}>{children}</CodeBlock>
-    ),
-  };
+    // react-markdown v10 dropped the `inline` prop, so block/inline split is done
+    // by structure: fenced code is wrapped in <pre> -> CodeBlock; bare <code> is inline.
+    pre: ({ children }) => <CodeBlock>{children}</CodeBlock>,
+    code: ({ className, children }) => <code className={className}>{children}</code>,
+  }), []);
 
   if (!article) {
     return (
@@ -190,7 +217,7 @@ function ArticleDetailPage() {
           <button
             type="button"
             onClick={() => setTocOpen((prev) => !prev)}
-            className="inline-flex items-center gap-2 border border-gray-300 dark:border-gray-600 bg-white/90 dark:bg-[#121622]/90 px-3 py-2 text-sm text-gray-700 dark:text-gray-300 shadow-sm"
+            className="inline-flex items-center gap-2 border border-gray-300 dark:border-gray-600 bg-white/90 dark:bg-[#1C1A14]/90 px-3 py-2 text-sm text-gray-700 dark:text-gray-300 shadow-sm"
             aria-expanded={tocOpen}
             aria-controls="mobile-article-toc"
           >
@@ -203,7 +230,7 @@ function ArticleDetailPage() {
         </div>
 
         {tocOpen && (
-          <div id="mobile-article-toc" className="xl:hidden mb-6 border border-gray-200 dark:border-gray-700 bg-white/80 dark:bg-[#121622] p-4 shadow-card">
+          <div id="mobile-article-toc" className="xl:hidden mb-6 border border-gray-200 dark:border-gray-700 bg-white/80 dark:bg-[#1C1A14] p-4 shadow-card">
             <h2 className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-3">目录</h2>
             {headings.length > 0 ? (
               <ul className="space-y-2 text-sm">
@@ -260,7 +287,7 @@ function ArticleDetailPage() {
                 <div className="skeleton h-4 w-3/4" />
               </div>
             ) : bodyMarkdown ? (
-              <div className="article-body">
+              <div className="article-body" ref={articleBodyRef}>
                 <Markdown
                   remarkPlugins={[remarkGfm]}
                   components={markdownComponents}
@@ -275,7 +302,7 @@ function ArticleDetailPage() {
 
           <aside className="hidden xl:block">
             <div className="article-support-panel sticky top-4 w-60 space-y-6 self-start">
-              <div className="border border-gray-200 dark:border-gray-700 bg-white/80 dark:bg-[#121622] p-4 shadow-card">
+              <div className="border border-gray-200 dark:border-gray-700 bg-white/80 dark:bg-[#1C1A14] p-4 shadow-card">
                 <h2 className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-3">目录</h2>
                 {headings.length > 0 ? (
                   <ul className="space-y-2 text-sm">
@@ -296,7 +323,7 @@ function ArticleDetailPage() {
               </div>
 
               {relatedArticles.length > 0 && (
-                <div className="border border-gray-200 dark:border-gray-700 bg-white/80 dark:bg-[#121622] p-4 shadow-card">
+                <div className="border border-gray-200 dark:border-gray-700 bg-white/80 dark:bg-[#1C1A14] p-4 shadow-card">
                   <h2 className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-3">相关文章</h2>
                   <div className="space-y-2">
                     {relatedArticles.map((item) => (

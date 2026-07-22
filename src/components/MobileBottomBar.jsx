@@ -6,7 +6,7 @@ export default function MobileBottomBar({ articles }) {
 
   return (
     <div
-      className={`md:hidden border-t border-gray-200 dark:border-gray-700 px-4 py-2 text-xs text-gray-500 dark:text-gray-400 flex items-center justify-between transition-opacity bg-white/95 dark:bg-[#121212]/95 backdrop-blur ${
+      className={`md:hidden border-t border-hair dark:border-[#2E2B23] px-4 py-2 text-xs text-gray-500 dark:text-gray-400 flex items-center justify-between transition-opacity bg-white/95 dark:bg-[#1C1A14]/95 backdrop-blur ${
         isArticlePage ? 'hidden' : ''
       }`}
     >

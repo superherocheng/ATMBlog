@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 /**
  * Progressive image component with blur-up placeholder.
@@ -7,7 +7,6 @@ import { useState, useRef, useEffect } from 'react';
 export default function ProgressiveImage({ src, alt, className = '' }) {
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(false);
-  const imgRef = useRef(null);
 
   useEffect(() => {
     // Reset state when src changes
@@ -33,8 +32,8 @@ export default function ProgressiveImage({ src, alt, className = '' }) {
         style={{
           opacity: loaded ? 0 : 1,
           background: error
-            ? 'linear-gradient(135deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%)'
-            : 'linear-gradient(135deg, rgba(79,70,229,0.04) 0%, rgba(14,165,233,0.03) 50%, rgba(79,70,229,0.04) 100%)',
+            ? 'linear-gradient(135deg, #F0EDE5 25%, #E5E1D7 50%, #F0EDE5 75%)'
+            : 'linear-gradient(135deg, rgba(180,83,9,0.05) 0%, rgba(217,119,6,0.03) 50%, rgba(180,83,9,0.05) 100%)',
           backgroundSize: '400% 400%',
           animation: loaded ? 'none' : 'shimmer 2s ease-in-out infinite',
         }}
@@ -42,7 +41,6 @@ export default function ProgressiveImage({ src, alt, className = '' }) {
       />
       {/* Real image */}
       <img
-        ref={imgRef}
         src={src}
         alt={alt || ''}
         loading="lazy"

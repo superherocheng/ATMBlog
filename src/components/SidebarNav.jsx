@@ -6,7 +6,7 @@ export default function SidebarNav() {
   const location = useLocation();
 
   return (
-    <aside className="w-56 hidden lg:flex flex-col border-r border-gray-200 dark:border-gray-700 p-5 fixed top-0 left-0 h-screen z-30 overflow-y-auto bg-white dark:bg-[#121212]">
+    <aside className="w-56 hidden lg:flex flex-col border-r border-hair dark:border-[#2E2B23] p-5 fixed top-0 left-0 h-screen z-30 overflow-y-auto bg-white dark:bg-[#1C1A14]">
       <h1
         className="font-display text-2xl font-bold mb-1 cursor-pointer hover:opacity-70 transition-opacity tracking-tight"
         onClick={() => navigate('/')}
@@ -26,7 +26,7 @@ export default function SidebarNav() {
                 aria-current={location.pathname === link.path ? 'page' : undefined}
                 className={`w-full text-left px-3 py-2.5 rounded-md transition-all text-sm font-medium ${
                   location.pathname === link.path
-                  ? 'bg-brand text-white dark:bg-brand dark:text-white shadow-sm shadow-brand/15'
+                  ? 'bg-brand-subtle dark:bg-brand/10 text-brand dark:text-brand-light'
                   : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-gray-200'
                 }`}
               >

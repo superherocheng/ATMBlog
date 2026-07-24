@@ -195,6 +195,15 @@ export const articles = [
     readTime: '20 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 22,
+    slug: 'asuggestion-20260723',
+    title: 'A股 AI/半导体 · 7/23 科创独立杀跌 + 宏观地缘压力测试 + 拥挤出清后半段（2026-07-23）',
+    excerpt: '7/23 科创 50 独杀 −3.78%、权重平盘的结构性二次回踩（非基本面崩塌）：拥挤设备/光模块出清 vs 工业富联三日避风港 +3.6%。叠加用户宏观地缘压力测试（供给冲击型通胀/油价 70~100 区间反身性/加息成新主线/黄金避险失效），提出"低久期+高可见度+弱宏观相关性"选股框架；天孚下调减持、芯原/中芯国产替代 hedge 新增。',
+    date: '2026-07-23',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 export const timelineEvents = [

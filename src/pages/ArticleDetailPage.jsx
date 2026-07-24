@@ -23,6 +23,12 @@ function slugify(text) {
   return String(text).toLowerCase().replace(/[^\w一-龥]+/g, '-').replace(/^-+|-+$/g, '');
 }
 
+// Drop a leading section numeral (「一、」「〇、」「五、」「1.」…) so the TOC label
+// doesn't read "PART 2: 一、行情复盘" — PART N already carries the ordering.
+function stripLeadingNumeral(text) {
+  return text.replace(/^[0-9〇一二三四五六七八九十百]+[、.．]\s*/, '');
+}
+
 // ponytail: module-scoped so its identity is stable; avoids remounting every
 // code block (and losing copy state) on each parent re-render.
 function CodeBlock({ children }) {
@@ -94,22 +100,24 @@ function ArticleDetailPage() {
     return () => { cancelled = true; };
   }, [articleId]);
 
-  // Build the TOC from the rendered DOM: can't pick up ``` fenced block lines as
-  // fake headings, ids are derived from real (rendered) text, and duplicates get
-  // -2/-3 suffixes so both the TOC keys and anchor targets stay unique.
+  // Build the TOC from the rendered DOM: h2 only (big sections), not h3 — h3
+  // subsections (1.1/1.2) made the TOC unusably long. Can't pick up ``` fenced
+  // block lines as fake headings, ids are derived from real (rendered) text, and
+  // duplicates get -2/-3 suffixes so both the TOC keys and anchor targets stay
+  // unique. Label is "PART N: <title>" with the leading numeral stripped.
   useEffect(() => {
     if (loading || !bodyMarkdown) { setHeadings([]); return; }
     const root = articleBodyRef.current;
     if (!root) return;
     const seen = new Map();
-    const items = Array.from(root.querySelectorAll('h2, h3')).map((el) => {
+    const items = Array.from(root.querySelectorAll('h2')).map((el, i) => {
       const text = (el.textContent || '').trim();
       const base = slugify(text);
       const n = (seen.get(base) || 0) + 1;
       seen.set(base, n);
       const id = n === 1 ? base : `${base}-${n}`;
       el.id = id;
-      return { text, id };
+      return { text, id, label: `PART ${i + 1}: ${stripLeadingNumeral(text)}` };
     });
     setHeadings(items);
   }, [loading, bodyMarkdown]);
@@ -241,7 +249,7 @@ function ArticleDetailPage() {
                       onClick={() => setTocOpen(false)}
                       className="text-gray-700 dark:text-gray-300 hover:text-brand dark:hover:text-brand-light transition-colors"
                     >
-                      {heading.text}
+                      {heading.label}
                     </a>
                   </li>
                 ))}
@@ -312,7 +320,7 @@ function ArticleDetailPage() {
                           href={`#${heading.id}`}
                           className="text-gray-700 dark:text-gray-300 hover:text-brand dark:hover:text-brand-light transition-colors"
                         >
-                          {heading.text}
+                          {heading.label}
                         </a>
                       </li>
                     ))}

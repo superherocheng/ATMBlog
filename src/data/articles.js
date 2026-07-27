@@ -2,10 +2,9 @@ export const navLinks = [
   { label: '首页', view: 'home', path: '/' },
   { label: '文章', view: 'articles', path: '/articles' },
   { label: '时间线', view: 'timeline', path: '/timeline' },
-  { label: '资源', view: 'websites', path: '/websites' },
 ];
 
-export const articles = [
+const allArticles = [
   {
     id: 1,
     slug: 'claude-code-installation-guide',
@@ -41,6 +40,7 @@ export const articles = [
     date: '2026-06-17',
     readTime: '6 min read',
     tag: 'IMAGE2',
+    hidden: true,
   },
   {
     id: 5,
@@ -50,6 +50,7 @@ export const articles = [
     date: '2026-06-21',
     readTime: '8 min read',
     tag: 'IMAGE2',
+    hidden: true,
   },
   {
     id: 6,
@@ -59,6 +60,7 @@ export const articles = [
     date: '2026-06-21',
     readTime: '6 min read',
     tag: 'IMAGE2',
+    hidden: true,
   },
   {
     id: 7,
@@ -68,6 +70,7 @@ export const articles = [
     date: '2026-06-21',
     readTime: '6 min read',
     tag: 'IMAGE2',
+    hidden: true,
   },
   {
     id: 8,
@@ -77,6 +80,7 @@ export const articles = [
     date: '2026-06-21',
     readTime: '6 min read',
     tag: 'IMAGE2',
+    hidden: true,
   },
   {
     id: 9,
@@ -86,6 +90,7 @@ export const articles = [
     date: '2026-07-06',
     readTime: '10 min read',
     tag: 'IMAGE2',
+    hidden: true,
   },
   {
     id: 10,
@@ -95,6 +100,7 @@ export const articles = [
     date: '2026-07-06',
     readTime: '12 min read',
     tag: 'IMAGE2',
+    hidden: true,
   },
   {
     id: 11,
@@ -104,6 +110,7 @@ export const articles = [
     date: '2026-07-06',
     readTime: '10 min read',
     tag: 'IMAGE2',
+    hidden: true,
   },
   {
     id: 12,
@@ -113,6 +120,7 @@ export const articles = [
     date: '2026-07-16',
     readTime: '10 min read',
     tag: 'IMAGE2',
+    hidden: true,
   },
   {
     id: 13,
@@ -122,6 +130,7 @@ export const articles = [
     date: '2026-07-16',
     readTime: '15 min read',
     tag: 'IMAGE2',
+    hidden: true,
   },
   {
     id: 14,
@@ -131,6 +140,7 @@ export const articles = [
     date: '2026-07-16',
     readTime: '8 min read',
     tag: 'IMAGE2',
+    hidden: true,
   },
   {
     id: 15,
@@ -140,6 +150,7 @@ export const articles = [
     date: '2026-07-16',
     readTime: '12 min read',
     tag: 'IMAGE2',
+    hidden: true,
   },
   {
     id: 16,
@@ -224,17 +235,16 @@ export const articles = [
   },
 ];
 
-export const timelineEvents = [
-  { date: '2025-09', event: '开始接触量化交易' },
-  { date: '2026-01', event: '开始接触 OPENCLAW' },
-  { date: '2026-02', event: '开始接触 GLM 模型' },
-  { date: '2026-03', event: '开始尝试使用 DeepSeek API' },
-  { date: '2026-04', event: '学习使用 Coding 完成各种编程任务' },
-  { date: '2026-05', event: '开始学习编程辅助量化策略开发' },
-];
+// `articles` exposes only non-hidden items. Every consumer (home, articles list,
+// article detail, sidebars, footer counts) automatically excludes hidden posts.
+// Set `hidden: true` on an item below to unpublish it without deleting content.
+export const articles = allArticles.filter((a) => !a.hidden);
 
-export const websitesData = [
-  { id: 1, name: 'Claude Code', description: 'Anthropic 推出的终端原生 AI 编程助手，支持全仓库上下文理解和自动命令执行。', url: 'https://docs.anthropic.com/en/docs/claude-code', tech: 'AI', status: 'Active' },
-  { id: 2, name: 'DeepSeek', description: '高性能大语言模型，提供 V4 系列 API，支持复杂代码生成与推理。', url: 'https://deepseek.com', tech: 'AI', status: 'Active' },
-  { id: 3, name: '掘金量化', description: '专业的量化交易平台，支持多市场、多策略的回测与实盘。', url: 'https://www.myquant.cn', tech: 'Python', status: 'Active' },
+export const timelineEvents = [
+  { date: '2025-09', event: 'Start VibeCoding' },
+  { date: '2026-01', event: 'Try Openclaw' },
+  { date: '2026-02', event: 'Try GLM Model' },
+  { date: '2026-03', event: 'Try Deepseek' },
+  { date: '2026-04', event: 'Personal Website Online' },
+  { date: '2026-05', event: 'A Stock Research' },
 ];

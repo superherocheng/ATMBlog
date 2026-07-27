@@ -10,7 +10,6 @@ const HomePage = lazy(() => import('./pages/HomePage.jsx'));
 const ArticlesPage = lazy(() => import('./pages/ArticlesPage.jsx'));
 const TimelinePage = lazy(() => import('./pages/TimelinePage.jsx'));
 const ArticleDetailPage = lazy(() => import('./pages/ArticleDetailPage.jsx'));
-const WebsitesPage = lazy(() => import('./pages/WebsitesPage.jsx'));
 const NotFoundPage = lazy(() => import('./pages/NotFound.jsx'));
 
 export default function App() {
@@ -44,7 +43,6 @@ export default function App() {
                     <Route path="articles" element={<ArticlesPage />} />
                     <Route path="article/:id" element={<ArticleDetailPage />} />
                     <Route path="timeline" element={<TimelinePage />} />
-                    <Route path="websites" element={<WebsitesPage />} />
                     <Route path="*" element={<NotFoundPage />} />
                   </Route>
                 </Routes>

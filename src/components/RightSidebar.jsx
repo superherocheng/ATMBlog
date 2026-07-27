@@ -1,5 +1,4 @@
 import { useLocation, useNavigate } from 'react-router-dom';
-import { websitesData } from '../data/articles.js';
 
 export default function RightSidebar({ articles: articleList, timelineEvents }) {
   const location = useLocation();
@@ -40,10 +39,6 @@ export default function RightSidebar({ articles: articleList, timelineEvents }) 
             <div className="flex justify-between">
               <span className="text-gray-500 dark:text-gray-400">标签</span>
               <span className="font-medium">{tags.size}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-500 dark:text-gray-400">资源</span>
-              <span className="font-medium">{websitesData.length}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-gray-500 dark:text-gray-400">时间线</span>

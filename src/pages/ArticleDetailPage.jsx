@@ -9,6 +9,13 @@ import ReadingProgress from '../components/ReadingProgress.jsx';
 import Breadcrumb from '../components/Breadcrumb.jsx';
 import ProgressiveImage from '../components/ProgressiveImage.jsx';
 
+// 目录 (Table of Contents) rail — temporarily hidden. Flip SHOW_TOC to true to
+// restore the in-article TOC (mobile dropdown + desktop sidebar holding 目录
+// and 相关文章) and the 820px-body / 240px-rail two-column layout. While false,
+// the article body fills the full content width and 相关文章 shows in a bottom
+// strip instead, so cross-article navigation isn't lost.
+const SHOW_TOC = false;
+
 function flattenText(children) {
   return Children.toArray(children)
     .map((child) => {
@@ -212,7 +219,7 @@ function ArticleDetailPage() {
           }
         })}</script>
       </Helmet>
-      <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="w-full px-4 sm:px-6 lg:px-8 py-8">
         {/* Breadcrumb */}
         <Breadcrumb
           items={[
@@ -221,6 +228,8 @@ function ArticleDetailPage() {
           ]}
         />
 
+        {SHOW_TOC && (
+          <>
         <div className="xl:hidden mb-4 flex items-center justify-between gap-3">
           <button
             type="button"
@@ -259,6 +268,8 @@ function ArticleDetailPage() {
             )}
           </div>
         )}
+          </>
+        )}
 
         <header className="mb-8">
           <div className="flex flex-wrap items-center gap-2 mb-4">
@@ -284,7 +295,7 @@ function ArticleDetailPage() {
             </p>
           )}
         </header>
-        <div className="grid gap-10 xl:grid-cols-[minmax(0,820px)_240px] xl:justify-center">
+        <div className={SHOW_TOC ? 'grid gap-10 xl:grid-cols-[minmax(0,820px)_240px] xl:justify-center' : 'w-full'}>
           <div className="min-w-0">
             {loading ? (
               <div className="space-y-4 animate-pulse">
@@ -308,6 +319,7 @@ function ArticleDetailPage() {
             )}
           </div>
 
+          {SHOW_TOC && (
           <aside className="hidden xl:block">
             <div className="article-support-panel sticky top-4 w-60 space-y-6 self-start">
               <div className="border border-gray-200 dark:border-gray-700 bg-white/80 dark:bg-[#1C1A14] p-4 shadow-card">
@@ -348,7 +360,25 @@ function ArticleDetailPage() {
               )}
             </div>
           </aside>
+          )}
         </div>
+
+        {!SHOW_TOC && relatedArticles.length > 0 && (
+          <div className="mt-10 border border-gray-200 dark:border-gray-700 bg-white/80 dark:bg-[#1C1A14] p-5 shadow-card">
+            <h2 className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-3">相关文章</h2>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              {relatedArticles.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => navigate(`/article/${item.id}`)}
+                  className="block w-full text-left text-sm text-gray-700 dark:text-gray-300 hover:text-brand dark:hover:text-brand-light transition-colors leading-relaxed border border-gray-100 dark:border-gray-800 p-3 hover:border-brand/30"
+                >
+                  {item.title}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Bottom navigation */}
         <div className="mt-12 pt-6 border-t border-gray-200 dark:border-gray-700 flex flex-wrap items-center justify-between gap-4">

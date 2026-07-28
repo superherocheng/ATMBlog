@@ -15,10 +15,10 @@ function HomePage() {
       <Helmet>
         <title>ATM Blog — AI Tools & Development</title>
         <meta name="description" content="ATM Blog pairs quantitative trading with AI tooling — Claude Code for coding and DeepSeek-class models for reasoning — logging real workflows from strategy development to backtesting." />
-        <link rel="canonical" href="https://gaodeqingchuda.icu/" />
+        <link rel="canonical" href="https://home.gaodeqingchuda.icu/" />
         <meta property="og:title" content="ATM Blog — AI Tools & Development" />
         <meta property="og:description" content="Quant trading meets AI coding: Claude Code, DeepSeek, and the workflows behind strategy development." />
-        <meta property="og:url" content="https://gaodeqingchuda.icu/" />
+        <meta property="og:url" content="https://home.gaodeqingchuda.icu/" />
         <meta name="twitter:title" content="ATM Blog — AI Tools & Development" />
         <meta name="twitter:description" content="Quant trading meets AI coding: Claude Code, DeepSeek, and the workflows behind strategy development." />
       </Helmet>

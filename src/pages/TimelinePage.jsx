@@ -64,10 +64,10 @@ function TimelinePage() {
       <Helmet>
         <title>ATM Blog — Timeline</title>
         <meta name="description" content={`Chronological timeline of ${totalEvents} milestones from ATM Blog.`} />
-        <link rel="canonical" href="https://gaodeqingchuda.icu/timeline" />
+        <link rel="canonical" href="https://home.gaodeqingchuda.icu/timeline" />
         <meta property="og:title" content="ATM Blog — Timeline" />
         <meta property="og:description" content={`Chronological timeline of ${totalEvents} milestones in quantitative trading and AI development.`} />
-        <meta property="og:url" content="https://gaodeqingchuda.icu/timeline" />
+        <meta property="og:url" content="https://home.gaodeqingchuda.icu/timeline" />
         <meta name="twitter:title" content="ATM Blog — Timeline" />
         <meta name="twitter:description" content={`Timeline of ${totalEvents} milestones from ATM Blog.`} />
       </Helmet>

@@ -55,10 +55,10 @@ function ArticlesPage() {
       <Helmet>
         <title>ATM Blog — Articles</title>
         <meta name="description" content={`Browse ${articles.length} articles about AI programming tools, Claude Code, TRAE IDE, and modern development workflows.`} />
-        <link rel="canonical" href="https://gaodeqingchuda.icu/articles" />
+        <link rel="canonical" href="https://home.gaodeqingchuda.icu/articles" />
         <meta property="og:title" content="ATM Blog — Articles" />
         <meta property="og:description" content={`Browse ${articles.length} articles about AI tools, Claude Code, TRAE IDE, and development insights.`} />
-        <meta property="og:url" content="https://gaodeqingchuda.icu/articles" />
+        <meta property="og:url" content="https://home.gaodeqingchuda.icu/articles" />
         <meta name="twitter:title" content="ATM Blog — Articles" />
         <meta name="twitter:description" content={`Browse ${articles.length} articles about AI tools and development.`} />
       </Helmet>

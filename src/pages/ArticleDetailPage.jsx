@@ -271,7 +271,11 @@ function ArticleDetailPage() {
           </>
         )}
 
-        <header className="mb-8">
+        {/* Align title/excerpt with the body+TOC grid below: 820 body + 40 gap
+            + 240 toc = 1100, centered the same way, instead of spanning full
+            container width. xl-only (the 2-col grid only exists at xl); gated
+            on SHOW_TOC since body is full-width when the TOC is hidden. */}
+        <header className={`mb-8${SHOW_TOC ? ' xl:max-w-[1100px] xl:mx-auto' : ''}`}>
           <div className="flex flex-wrap items-center gap-2 mb-4">
             <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-widest text-brand dark:text-brand-light bg-brand-subtle dark:bg-brand/10 px-2.5 py-1">
               文章详情

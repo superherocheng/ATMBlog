@@ -9,12 +9,12 @@ import ReadingProgress from '../components/ReadingProgress.jsx';
 import Breadcrumb from '../components/Breadcrumb.jsx';
 import ProgressiveImage from '../components/ProgressiveImage.jsx';
 
-// 目录 (Table of Contents) rail — temporarily hidden. Flip SHOW_TOC to true to
-// restore the in-article TOC (mobile dropdown + desktop sidebar holding 目录
-// and 相关文章) and the 820px-body / 240px-rail two-column layout. While false,
-// the article body fills the full content width and 相关文章 shows in a bottom
-// strip instead, so cross-article navigation isn't lost.
-const SHOW_TOC = false;
+// 目录 (Table of Contents) rail. When true, the in-article TOC shows (mobile
+// dropdown + desktop sidebar holding 目录 and 相关文章) with the 820px-body /
+// 240px-rail two-column layout. Flip to false to hide it — the article body
+// then fills the full content width (better for wide tables) and 相关文章
+// shows in a bottom strip instead.
+const SHOW_TOC = true;
 
 function flattenText(children) {
   return Children.toArray(children)

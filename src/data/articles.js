@@ -233,6 +233,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 25,
+    slug: 'asuggestion-20260728',
+    title: 'A股 AI/半导体速评 · 2026-07-28 黑色星期二·创业板−7.35%·AI硬件链去杠杆',
+    excerpt: '7/28 黑色星期二创业板 −7.35%/科创50 −6.33%，AI 硬件链去杠杆——四重外部催化（英伟达 CDS 创纪录飙升/KOSPI −10.84% 三次熔断/长鑫 1411 亿 IPO 虹吸/旭创港股平价零溢价）+ FOMC 前夕避险 + 两融 13 连降踩踏引发 PE 压缩，定性「杀估值不杀业绩」。暴跌完成去伪存真四色分化：首选工业富联（PE28/回购价上限 103 元 +77%/PEG<0.3）、沪电（forward PE 23.5）、新易盛（PEG 0.6 光模块首选）；本期拓荆由减持重新审视为逢低（forward PE 37 簇最优）；避雷天孚（PE91 区间 −63% 仍贵）、光迅（PE139 最高）、寒武纪（高盛 2406 极虚）、江波龙（低 PE 周期顶陷阱）、至纯（造假续亏套现 15 亿）。7/27「反弹非反转」预判暴力坐实。',
+    date: '2026-07-28',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

@@ -251,6 +251,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 27,
+    slug: 'us-macro-fed-warsh-microsoft-20260729',
+    title: '美股宏观速评 · 2026-07-29 美联储按兵不动+3票加息异议·沃什鹰派首秀·微软capex未减反增',
+    excerpt: '7/29 FOMC 维持 3.50–3.75% 不变但 3 票异议要求加息（鹰派超预期），沃什以主席身份重申 2% 目标、拒谈加息、捍卫独立性，美股下跌、30 年期美债收益率创 2007 新高 → 利空。交叉验证证伪「微软减少 capex」：全年 $115.9B 同比 +79%、Q4 翻倍，只是维持指引不再上调，股价反涨 8%。',
+    date: '2026-07-29',
+    readTime: '10 min read',
+    tag: '宏观',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

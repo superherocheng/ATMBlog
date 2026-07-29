@@ -242,6 +242,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 26,
+    slug: 'asuggestion-20260729',
+    title: 'A股 AI/半导体速评 · 2026-07-29 分化型弱反弹·科创50逆势创20日新低·反弹非反转第三日·龙头回购对冲',
+    excerpt: '7/29 分化型弱反弹：上证 +0.4%/创业板 +1.55% 但科创50 −0.87% 逆势创 20 日新低，全部指数仍破 MA20，AI 硬件链整体跑输大盘、反弹靠风格轮动（银行/有色/红利）而非 AI——「反弹非反转」第三日。去伪存真加速：首选工业富联（PE28/回购价上限 103 元、现价低于 35 位分析师共识最低 64.01/PEG0.2）、沪电（forward PE22.9）、新易盛（PEG<0.5）；中际旭创 7/29 公告 40-80 亿回购对冲港股分流、由 🟡 升 🟢。避雷寒武纪（群益 7/29 当日下调目标 1450→1350、PE265）、天孚（PE91 区间 −63% 仍贵）、光迅（PE135 最高）、江波龙（低 PE 周期顶陷阱）、至纯（造假续亏套现 15 亿）。',
+    date: '2026-07-29',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

@@ -305,6 +305,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 33,
+    slug: 'cpo-optical-module-ban-20260804',
+    title: '光模块禁令深度 · 2026-08-04 特朗普起草禁中国数据中心光模块·多源交叉验证·产业链影响（工业富联相对绝缘）',
+    excerpt: '路透8/4独家经6源交叉验证为真：FCC拟以"覆盖清单"机制禁止中国光模块新型号（非存量）在美授权——精准封堵1.6T下一代产品入美路径；但8/4 A股光模块+8~17%报复反弹是消化前日杀跌、与禁令无关，定价8/5才开始。分主体并不对称：中际旭创/新易盛/天孚（90%收入境外、高度依赖北美云厂）实质偏空但存量无忧、海外组装可部分对冲；Coherent/Lumentum明确利好却已透支（TTM PE 127倍+）；工业富联（AI服务器ODM、不在靶心、未上1260H、CPO系统侧受益）相对绝缘甚至略偏多；CPO或成意外加速器但量产推迟至2028-29，短期仍是供应紧张+涨价而非切换。',
+    date: '2026-08-04',
+    readTime: '12 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

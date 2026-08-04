@@ -296,6 +296,15 @@ const allArticles = [
     readTime: '25 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 32,
+    slug: 'asuggestion-20260804',
+    title: 'A股 AI/半导体速评 · 2026-08-04 capex点燃普涨·光模块报复反弹·中微扣非硬超却滞涨·反弹非反转·存储"见顶论"被高盛/TrendForce部分证伪',
+    excerpt: '8/4 capex点燃放量普涨(创业板+5.64%/科创50+4.09%/2.23万亿)：光模块簇+8~17%报复反弹(天孚+17%/新易盛+14%/旭创+13%)、PCB三家涨停，半导体设备簇反而滞涨(中微8/3晚H1扣非+86~123%硬超却仅+2.5%，282%headline含18.15亿投资收益水分)。最硬中微滞涨vs最贵天孚领涨="好业绩≠好股票"反向标本；反弹是真(北美capex集体上调+CPO量产)、反转未至(全部指数仍破MA20/科创50仍-11.17%)。本期修正:存储"周期见顶确立"被澎湃/高盛/TrendForce部分证伪(合约Q3仍涨13-18%/现货有价无市非真崩/HBM紧缺至2027)→江波龙避雷措辞下调为"风险未确认"。首选工业富联(PE29全池最便宜#1)/沪电/新易盛(PE58)/旭创(PE80)——便宜的光才是底气；避雷天孚(PE106增速垫底)/光迅(PE138最高)/寒武纪(8/8 sell-the-news)/江波龙(周期顶)。',
+    date: '2026-08-04',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

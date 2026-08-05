@@ -130,7 +130,7 @@ export default function MobileNav({ isOpen, onClose }) {
                 }}
               >
                 <button
-                  onClick={() => handleNav(link.path)}
+                  onClick={() => link.external ? (window.location.href = link.path) : handleNav(link.path)}
                   aria-current={location.pathname === link.path ? 'page' : undefined}
                   className={`text-lg font-medium transition-colors ${
                     location.pathname === link.path

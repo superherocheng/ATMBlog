@@ -23,7 +23,7 @@ export default function Footer() {
             {navLinks.map((link) => (
               <button
                 key={link.view}
-                onClick={() => navigate(link.path)}
+                onClick={() => link.external ? (window.location.href = link.path) : navigate(link.path)}
                 className="text-xs text-gray-500 dark:text-gray-400 hover:text-brand dark:hover:text-brand-light transition-colors cursor-pointer"
               >
                 {link.label}

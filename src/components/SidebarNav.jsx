@@ -22,7 +22,7 @@ export default function SidebarNav() {
           {navLinks.map((link) => (
             <li key={link.view}>
               <button
-                onClick={() => navigate(link.path)}
+                onClick={() => link.external ? (window.location.href = link.path) : navigate(link.path)}
                 aria-current={location.pathname === link.path ? 'page' : undefined}
                 className={`w-full text-left px-3 py-2.5 rounded-md transition-all text-sm font-medium ${
                   location.pathname === link.path

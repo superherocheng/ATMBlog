@@ -2,6 +2,7 @@ export const navLinks = [
   { label: '首页', view: 'home', path: '/' },
   { label: '文章', view: 'articles', path: '/articles' },
   { label: '时间线', view: 'timeline', path: '/timeline' },
+  { label: 'A股大盘规律', view: 'astock', path: '/AStockBenchmark', external: true },
 ];
 
 const allArticles = [

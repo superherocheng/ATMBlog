@@ -20,7 +20,7 @@ export default function TabletNavBar() {
           {navLinks.map((link) => (
             <li key={link.view}>
               <button
-                onClick={() => navigate(link.path)}
+                onClick={() => link.external ? (window.location.href = link.path) : navigate(link.path)}
                 aria-current={location.pathname === link.path ? 'page' : undefined}
                 className={`text-sm font-medium transition-colors ${
                   location.pathname === link.path

@@ -314,6 +314,15 @@ const allArticles = [
     readTime: '12 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 34,
+    slug: 'asuggestion-20260805',
+    title: 'A股 AI/半导体速评 · 2026-08-05 领涨梯队切换·主板收复MA20·反弹升级但分化加剧·设备靠被否认出海传闻暴拉(三星官方否认)·光模块被禁令传闻错杀(券商一致"落地难")·工富涨停避风港·中微扣非硬超终被定价',
+    excerpt: '8/5 反弹升级：主板收复 MA20、领涨梯队从「贵的光」切换到「便宜+业绩」的设备（中微 +12.7%，8/3 晚扣非硬超终被定价），但两大催化一虚一实——设备暴拉靠一则被三星官方否认的「出海」传闻，光模块杀跌因 FCC 禁令传闻（中信/中金/花旗一致判「落地难」）。首选买入工业富联（涨停/PE32 全池最便宜）、沪电股份，光模块双雄新易盛/中际旭创被禁令错杀=黄金坑；避雷天孚/光迅（贵）、寒武纪（8/8 sell-the-news）、江波龙（周期顶）、至纯（造假）。',
+    date: '2026-08-05',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

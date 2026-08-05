@@ -323,6 +323,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 35,
+    slug: 'a-stock-industry-chain-20260805',
+    title: 'A 股产业链投研 · 2026-08-05 AI 部分（NPO 光互联/AI 上游材料/FCC 新规）+ 非 AI 部分（8 月策略/历次反弹复盘/债市）8 份研报整合',
+    excerpt: '8 份桌面卖方研报整合配置框架。AI 部分：NPO 是国产算力弯道超车新主线（中际旭创/新易盛/光迅/华工），AI 上游材料迎「用量+单价+利润率」三重升级（云南锗业/菲利华/宏和科技），FCC 新规「成本+周期」双杀精准卡中国光模块对美认证（最大赢家东山精密、冲击新易盛/天孚）；非 AI 部分：A 股处于盈利驱动上行第三阶段、杠杆去化收尾，再平衡首选创新药（胜率+赔率双优）、证券（PB 历史低位+公募持仓<1%）、煤炭（红利+景气）。综合框架：一条主线（AI 中游光互联）+ 一个再平衡（低估值+景气）+ 两个对冲（黄金/债券）。',
+    date: '2026-08-05',
+    readTime: '25 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

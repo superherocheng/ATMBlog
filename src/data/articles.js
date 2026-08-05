@@ -355,4 +355,5 @@ export const timelineEvents = [
   { date: '2026-03', event: 'Try Deepseek' },
   { date: '2026-04', event: 'Personal Website Online' },
   { date: '2026-05', event: 'A Stock Research' },
+  { date: '2026-08', event: 'Commodity & Metals Research' },
 ];

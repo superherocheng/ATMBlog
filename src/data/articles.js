@@ -351,6 +351,15 @@ const allArticles = [
     readTime: '15 min read',
     tag: '有色金属',
   },
+  {
+    id: 38,
+    slug: 'macro-iran-war-rate-pivot-20260806',
+    title: '降息梦碎、加息重来：美伊战争点燃二次通胀，全球宏观全景（2026-08-06）',
+    excerpt: '美伊战争把油价推至126美元、霍尔木兹中断，美国核心PCE仍黏在3.3%、9月加息概率升至65%——市场从年初"降息3-4次"彻底翻转为"可能加息"；中国PMI三指数齐穿荣枯线（制造业49.2）但高技术制造仍扩张（53.3）。利率、黄金（$4000-4200筑底）、原油（布伦特74-80）的短期走向全被8月非农、CPI与8/21对伊石油豁免到期绑架。',
+    date: '2026-08-06',
+    readTime: '12 min read',
+    tag: '宏观',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

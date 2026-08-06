@@ -360,6 +360,15 @@ const allArticles = [
     readTime: '12 min read',
     tag: '宏观',
   },
+  {
+    id: 39,
+    slug: 'macro-us-treasury-term-premium-20260805',
+    title: '美债定价范式之变：期限溢价接棒，AI 资本开支为何反噬自身估值？（2026-08-05）',
+    excerpt: '外部数据验证国联民生核心判断：10Y 美债触 4.7%，旧金山联储 CR 模型显示其中 1.32 个百分点纯为期限溢价——长端利率不再由「降息预期」而是由「风险补偿」定价，单靠宽松博弈压不动长端。增量发现：美联储主席沃什亲口把 AI capex 列为通胀推手，云厂 2026 已发债 1940 亿，AI 资本开支正经供给、政策、基本面三路径反向压制自身估值。',
+    date: '2026-08-05',
+    readTime: '15 min read',
+    tag: '宏观',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

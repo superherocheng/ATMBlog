@@ -369,6 +369,15 @@ const allArticles = [
     readTime: '15 min read',
     tag: '宏观',
   },
+  {
+    id: 40,
+    slug: 'asuggestion-20260806',
+    title: 'A股 AI/半导体速评 · 2026-08-06 好业绩也怕贵：闪迪超预期盘后却−12%·沪指3连阳收复3900缩量观望·设备簇未回吐8/5涨幅·等寒武纪8/8定方向',
+    excerpt: '8/6 缩量分歧日沪指 3 连阳收复 3900，但「好业绩也怕贵」——闪迪 FY26Q4 超预期却盘后 −12%（NAND 配给至 2027 后=存储超级周期确认未顶，但 stretched 估值也杀），设备簇未回吐 8/5 涨幅证伪「出海被否认→回落」担忧。首选工富（区间 −15.8% 全池最浅）、沪电、光模块双雄（禁令错杀黄金坑）；避雷寒武纪（8/8 中报 sell-the-news、一致预期 1116<现价）、天孚（区间 −54.7% 最深）、江波龙（周期顶陷阱）。',
+    date: '2026-08-06',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

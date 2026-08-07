@@ -378,6 +378,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 41,
+    slug: 'asuggestion-20260807',
+    title: 'A股 AI/半导体速评 · 2026-08-07 反弹广化龙头却跳水：沪指4连阳创业板沪深300收复MA20·旭创天量跳水541亿振幅10%(AAOI扩产+禁令双杀vs高盛小摩增持)·PCB覆铜板涨停潮(涨价至2027中)·等寒武纪8/8明天定方向',
+    excerpt: '8/7 放量 4 连阳反弹广化（创业板/沪深 300 收复 MA20、仅科创 50 未收复），但龙头中际旭创天量跳水 541 亿/振幅 10%（AAOI 扩产+禁令双杀 vs 高盛小摩增持对冲），PCB 覆铜板涨停潮确认超级周期主线。首选工富（区间 −15.9% 全池最浅）、沪电（PCB 涨价至 2027 中）、光模块双雄（禁令+AAOI 双杀待 8/24 正文破局）；避雷寒武纪（8/8 中报 sell-the-news、一致预期 1116<现价 1199.93）、天孚（区间 −53.6% 最深）、江波龙（周期顶存货 179 亿陷阱）；8/7 晚非农意外 −2.3 万转负+下修 10.3 万=衰退预警（利好高 PE 降息通道但增增长风险）。',
+    date: '2026-08-07',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

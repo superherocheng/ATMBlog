@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useRef, Children } from 'react';
+import { useState, useEffect, useMemo, Children } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useParams, useNavigate } from 'react-router-dom';
 import { articles } from '../data/articles.js';
@@ -8,6 +8,7 @@ import remarkGfm from 'remark-gfm';
 import ReadingProgress from '../components/ReadingProgress.jsx';
 import Breadcrumb from '../components/Breadcrumb.jsx';
 import ProgressiveImage from '../components/ProgressiveImage.jsx';
+import { useScrollSpy } from '../hooks/useScrollSpy.js';
 
 // 目录 (Table of Contents) rail. When true, the in-article TOC shows (mobile
 // dropdown + desktop sidebar holding 目录 and 相关文章) with the 820px-body /
@@ -35,6 +36,74 @@ function slugify(text) {
 function stripLeadingNumeral(text) {
   return text.replace(/^[0-9〇一二三四五六七八九十百]+[、.．]\s*/, '');
 }
+
+// The <header> above already renders article.title + article.excerpt, so the
+// markdown body must NOT re-emit its own leading H1 / excerpt blockquote —
+// otherwise the title and subtitle each show twice (and the page has two <h1>s).
+// Strip a single leading "# title" plus the contiguous "> excerpt" blockquote
+// that immediately follows it. Bodies with no leading H1 (e.g. article-32) pass
+// through unchanged. A blockquote that is NOT right under the H1 (like the
+// 速评 bar-chart legend deeper in the body) is left intact.
+function stripFrontMatter(md) {
+  if (!md) return md;
+  const lines = md.split('\n');
+  let i = 0;
+  if (!/^#\s+/.test(lines[i] || '')) return md;   // no leading H1 → nothing to strip
+  i += 1;
+  const swallow = () => { while (lines[i] !== undefined && lines[i].trim() === '') i += 1; };
+  swallow();
+  if (/^>/.test(lines[i] || '')) {                // strip the excerpt blockquote run
+    while (lines[i] !== undefined && /^>/.test(lines[i])) i += 1;
+    swallow();
+  }
+  if (/^(-{3}|\*{3}|_{3})\s*$/.test(lines[i] || '')) {  // drop the --- that often separates
+    i += 1;                                             // front matter from the body
+    swallow();
+  }
+  return lines.slice(i).join('\n');
+}
+
+// Split front-matter-stripped markdown into sections at top-level `## ` headings
+// (fence-aware: a `## ` inside a ``` code block is never treated as a split point).
+// Returns [{ title: null, body }, { title, body }, …]: the first entry, when the
+// body has lead content before any `## `, has title === null. Each later entry is
+// one `## section` with its body = everything until the next `## `.
+function splitSections(md) {
+  if (!md) return [];
+  const lines = md.split('\n');
+  const out = [];
+  const lead = [];
+  let cur = null;
+  let inFence = false;
+  let fence = '';
+  const flush = () => {
+    if (cur) {
+      out.push({ title: cur.title, body: cur.body.join('\n').replace(/^\n+/, '') });
+      cur = null;
+    }
+  };
+  for (const line of lines) {
+    const m = /^\s*(`{3,}|~{3,})/.exec(line);
+    if (m) {
+      if (!inFence) { inFence = true; fence = m[1][0]; }
+      else if (line.trim().startsWith(fence)) { inFence = false; fence = ''; }
+    }
+    if (!inFence && /^##\s+\S/.test(line)) {
+      flush();
+      cur = { title: line.replace(/^##\s+/, '').trim(), body: [] };
+    } else if (cur) {
+      cur.body.push(line);
+    } else {
+      lead.push(line);
+    }
+  }
+  flush();
+  if (lead.length && lead.join('').trim()) out.unshift({ title: null, body: lead.join('\n') });
+  return out;
+}
+
+// Titles that are pure appendix → default-collapsed (reader expands if wanted).
+const COLLAPSE_BY_DEFAULT = /方法论|数据说明|附[:：]|信息来源|来源与说明/;
 
 // ponytail: module-scoped so its identity is stable; avoids remounting every
 // code block (and losing copy state) on each parent re-render.
@@ -80,6 +149,39 @@ function CodeBlock({ children }) {
   );
 }
 
+// One `## section` rendered with a clickable header (toggle collapse) and the
+// markdown body below. `id` is pre-computed so TOC anchors match by construction.
+// `highlight` marks it as the key-takeaway section (核心结论) for card styling.
+// Untitled lead content (title === null) renders plain, with no toggle.
+function ArticleSection({ section, id, open, onToggle, highlight, components }) {
+  if (section.title === null) {
+    if (!section.body.trim()) return null;
+    return (
+      <div className="article-section-intro">
+        <Markdown remarkPlugins={[remarkGfm]} components={components}>{section.body}</Markdown>
+      </div>
+    );
+  }
+  return (
+    <section className={`article-section${highlight ? ' takeaway-card' : ''}`}>
+      <div
+        className="section-head"
+        role="button"
+        tabIndex={0}
+        aria-expanded={open}
+        onClick={onToggle}
+        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onToggle(); } }}
+      >
+        <h2 id={id}>{section.title}</h2>
+        <span className="section-chevron" aria-hidden="true">{open ? '▾' : '▸'}</span>
+      </div>
+      <div className="section-body" hidden={!open}>
+        <Markdown remarkPlugins={[remarkGfm]} components={components}>{section.body}</Markdown>
+      </div>
+    </section>
+  );
+}
+
 function ArticleDetailPage() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -89,8 +191,7 @@ function ArticleDetailPage() {
   const [loading, setLoading] = useState(true);
   const [imagePreview, setImagePreview] = useState(null);
   const [tocOpen, setTocOpen] = useState(false);
-  const [headings, setHeadings] = useState([]);
-  const articleBodyRef = useRef(null);
+  const [collapsed, setCollapsed] = useState(() => new Set());
   const relatedArticles = articles
     .filter((item) => item.id !== article?.id && item.tag === article?.tag)
     .slice(0, 3);
@@ -100,34 +201,68 @@ function ArticleDetailPage() {
     setLoading(true);
     getArticleBody(articleId).then((body) => {
       if (!cancelled) {
-        setBodyMarkdown(body);
+        setBodyMarkdown(body ? stripFrontMatter(body) : body);
         setLoading(false);
       }
     });
     return () => { cancelled = true; };
   }, [articleId]);
 
-  // Build the TOC from the rendered DOM: h2 only (big sections), not h3 — h3
-  // subsections (1.1/1.2) made the TOC unusably long. Can't pick up ``` fenced
-  // block lines as fake headings, ids are derived from real (rendered) text, and
-  // duplicates get -2/-3 suffixes so both the TOC keys and anchor targets stay
-  // unique. Label is "PART N: <title>" with the leading numeral stripped.
-  useEffect(() => {
-    if (loading || !bodyMarkdown) { setHeadings([]); return; }
-    const root = articleBodyRef.current;
-    if (!root) return;
+  // Split the body into `## ` sections (fence-aware) and derive the TOC headings
+  // + deduped anchor ids from them directly, so ids match the rendered <h2>s by
+  // construction (no DOM query needed).
+  const sections = useMemo(() => splitSections(bodyMarkdown), [bodyMarkdown]);
+  const { headings, sectionIds, takeawayIdx } = useMemo(() => {
     const seen = new Map();
-    const items = Array.from(root.querySelectorAll('h2')).map((el, i) => {
-      const text = (el.textContent || '').trim();
-      const base = slugify(text);
+    const headings = [];
+    const sectionIds = sections.map(() => null);
+    let takeawayIdx = -1;
+    sections.forEach((sec, i) => {
+      if (sec.title === null) return;
+      const base = slugify(sec.title);
       const n = (seen.get(base) || 0) + 1;
       seen.set(base, n);
       const id = n === 1 ? base : `${base}-${n}`;
-      el.id = id;
-      return { text, id, label: `PART ${i + 1}: ${stripLeadingNumeral(text)}` };
+      sectionIds[i] = id;
+      headings.push({ id, text: sec.title, label: `PART ${headings.length + 1}: ${stripLeadingNumeral(sec.title)}`, sectionIndex: i });
+      if (takeawayIdx === -1 && /结论/.test(sec.title)) takeawayIdx = i;
     });
-    setHeadings(items);
-  }, [loading, bodyMarkdown]);
+    return { headings, sectionIds, takeawayIdx };
+  }, [sections]);
+
+  // Default-collapse pure-appendix sections (方法论/数据说明/附…). Re-runs per article.
+  useEffect(() => {
+    const init = new Set();
+    sections.forEach((s, i) => { if (s.title && COLLAPSE_BY_DEFAULT.test(s.title)) init.add(i); });
+    setCollapsed(init);
+  }, [sections]);
+
+  const toggleSection = (i) => setCollapsed((prev) => {
+    const next = new Set(prev);
+    if (next.has(i)) next.delete(i); else next.add(i);
+    return next;
+  });
+
+  const activeId = useScrollSpy(headings.map((h) => h.id));
+
+  const jumpTo = (heading) => {
+    setCollapsed((prev) => { const next = new Set(prev); next.delete(heading.sectionIndex); return next; });
+    setTocOpen(false);
+    requestAnimationFrame(() => {
+      const el = document.getElementById(heading.id);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  };
+
+  // First bold line of the takeaway section — shown as a sticky "本期要点" sidebar card.
+  const takeaway = useMemo(() => {
+    if (takeawayIdx < 0) return null;
+    const body = sections[takeawayIdx].body;
+    const bold = body.match(/\*\*([^*\n>]{4,90})\*\*/);
+    if (bold) return bold[1].trim();
+    const plain = body.replace(/[#>*`]/g, '').replace(/\s+/g, ' ').trim();
+    return plain.slice(0, 90) || null;
+  }, [sections, takeawayIdx]);
 
   const markdownComponents = useMemo(() => ({
     // h2/h3 intentionally not overridden: react-markdown renders them plainly and
@@ -143,7 +278,14 @@ function ArticleDetailPage() {
     table: ({ children }) => <div className="table-wrap"><table>{children}</table></div>,
     thead: ({ children }) => <thead>{children}</thead>,
     tbody: ({ children }) => <tbody>{children}</tbody>,
-    tr: ({ children }) => <tr>{children}</tr>,
+    tr: ({ children }) => {
+      // Tag rows carrying a tier emoji (🟢🟡🟠🔴) so CSS can paint a left
+      // accent — turns the 速评 recommendation tables into scannable tier bands.
+      const map = { '🟢': 'g', '🟡': 'y', '🟠': 'o', '🔴': 'r' };
+      const text = flattenText(children);
+      const tier = Object.keys(map).find((e) => text.includes(e));
+      return <tr data-tier={tier ? map[tier] : undefined}>{children}</tr>;
+    },
     th: ({ children }) => <th>{children}</th>,
     td: ({ children }) => <td>{children}</td>,
     img: ({ src, alt }) => (
@@ -164,6 +306,26 @@ function ArticleDetailPage() {
     pre: ({ children }) => <CodeBlock>{children}</CodeBlock>,
     code: ({ className, children }) => <code className={className}>{children}</code>,
   }), []);
+
+  // Shared TOC item list (mobile dropdown + desktop rail), with scroll-spy active
+  // highlight and smooth-scroll-on-click that also expands a collapsed target.
+  const renderTocItems = () => headings.length > 0 ? (
+    <ul className="space-y-1.5 text-sm">
+      {headings.map((h) => (
+        <li key={h.id}>
+          <button
+            type="button"
+            onClick={() => jumpTo(h)}
+            className={`toc-link block w-full text-left transition-colors ${activeId === h.id ? 'toc-active' : 'text-gray-600 dark:text-gray-400 hover:text-brand dark:hover:text-brand-light'}`}
+          >
+            {h.label}
+          </button>
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <p className="text-xs text-gray-500 dark:text-gray-400">这篇文章暂时没有可提取的二级标题。</p>
+  );
 
   if (!article) {
     return (
@@ -249,23 +411,7 @@ function ArticleDetailPage() {
         {tocOpen && (
           <div id="mobile-article-toc" className="xl:hidden mb-6 border border-gray-200 dark:border-gray-700 bg-white/80 dark:bg-[#1C1A14] p-4 shadow-card">
             <h2 className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-3">目录</h2>
-            {headings.length > 0 ? (
-              <ul className="space-y-2 text-sm">
-                {headings.map((heading) => (
-                  <li key={heading.id}>
-                    <a
-                      href={`#${heading.id}`}
-                      onClick={() => setTocOpen(false)}
-                      className="text-gray-700 dark:text-gray-300 hover:text-brand dark:hover:text-brand-light transition-colors"
-                    >
-                      {heading.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p className="text-xs text-gray-500 dark:text-gray-400">这篇文章暂时没有可提取的二级标题。</p>
-            )}
+            {renderTocItems()}
           </div>
         )}
           </>
@@ -299,7 +445,7 @@ function ArticleDetailPage() {
             </p>
           )}
         </header>
-        <div className={SHOW_TOC ? 'grid gap-10 xl:grid-cols-[minmax(0,820px)_240px] xl:justify-center' : 'w-full'}>
+        <div className={SHOW_TOC ? 'grid gap-10 xl:grid-cols-[minmax(0,820px)_240px] xl:justify-center print:block' : 'w-full'}>
           <div className="min-w-0">
             {loading ? (
               <div className="space-y-4 animate-pulse">
@@ -310,13 +456,18 @@ function ArticleDetailPage() {
                 <div className="skeleton h-4 w-3/4" />
               </div>
             ) : bodyMarkdown ? (
-              <div className="article-body" ref={articleBodyRef}>
-                <Markdown
-                  remarkPlugins={[remarkGfm]}
-                  components={markdownComponents}
-                >
-                  {bodyMarkdown}
-                </Markdown>
+              <div className="article-body">
+                {sections.map((sec, i) => (
+                  <ArticleSection
+                    key={i}
+                    section={sec}
+                    id={sectionIds[i]}
+                    open={!collapsed.has(i)}
+                    onToggle={() => toggleSection(i)}
+                    highlight={i === takeawayIdx}
+                    components={markdownComponents}
+                  />
+                ))}
               </div>
             ) : (
               <div className="text-center py-12 text-gray-500 text-sm">文章正文暂不可用。</div>
@@ -324,26 +475,18 @@ function ArticleDetailPage() {
           </div>
 
           {SHOW_TOC && (
-          <aside className="hidden xl:block">
+          <aside className="hidden xl:block print:hidden">
             <div className="article-support-panel sticky top-4 w-60 space-y-6 self-start">
+              {takeaway && (
+                <div className="border border-brand/30 dark:border-brand-light/30 bg-brand-subtle/70 dark:bg-brand/10 p-4 shadow-card">
+                  <h2 className="text-xs font-semibold uppercase tracking-wider text-brand dark:text-brand-light mb-2">本期要点</h2>
+                  <p className="text-sm text-gray-700 dark:text-gray-200 leading-relaxed">{takeaway}</p>
+                </div>
+              )}
+
               <div className="border border-gray-200 dark:border-gray-700 bg-white/80 dark:bg-[#1C1A14] p-4 shadow-card">
                 <h2 className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-3">目录</h2>
-                {headings.length > 0 ? (
-                  <ul className="space-y-2 text-sm">
-                    {headings.map((heading) => (
-                      <li key={heading.id}>
-                        <a
-                          href={`#${heading.id}`}
-                          className="text-gray-700 dark:text-gray-300 hover:text-brand dark:hover:text-brand-light transition-colors"
-                        >
-                          {heading.label}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  <p className="text-xs text-gray-500 dark:text-gray-400">这篇文章暂时没有可提取的二级标题。</p>
-                )}
+                {renderTocItems()}
               </div>
 
               {relatedArticles.length > 0 && (

@@ -53,6 +53,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 84px;   /* leave room for the fixed mobile top bar on anchor jumps */
   overflow-x: clip;
   background-color: var(--color-paper);
 }
@@ -240,6 +241,17 @@ body::before {
   text-align: left;
   font-weight: 600;
 }
+/* Zebra rows + tier left-accent for the 速评 recommendation tables */
+.article-body tbody tr:nth-child(even) {
+  background: rgba(28, 27, 25, 0.025);
+}
+.article-body tr[data-tier] td:first-child {
+  font-weight: 600;
+}
+.article-body tr[data-tier="g"] td:first-child { box-shadow: inset 3px 0 0 #16A34A; }
+.article-body tr[data-tier="y"] td:first-child { box-shadow: inset 3px 0 0 #CA8A04; }
+.article-body tr[data-tier="o"] td:first-child { box-shadow: inset 3px 0 0 #EA580C; }
+.article-body tr[data-tier="r"] td:first-child { box-shadow: inset 3px 0 0 #DC2626; }
 .article-body ul,
 .article-body ol {
   padding-left: 1.4em;
@@ -269,6 +281,7 @@ body::before {
 .dark .article-body th { color: #ECE9E1; border-color: #3D3930; }
 .dark .article-body td { border-color: #3D3930; }
 .dark .article-body thead tr { border-color: #3D3930; }
+.dark .article-body tbody tr:nth-child(even) { background: rgba(255, 255, 255, 0.03); }
 .dark .article-body code { background: #241F18; border-color: #3D3930; color: #D8D4CB; }
 .dark .article-body pre { background: #241F18; border: 1px solid #3D3930; padding: 1rem 1.1rem; overflow-x: auto; }
 .dark .article-body a { color: #D97706; }
@@ -314,6 +327,71 @@ body::before {
   max-width: 100%;
   height: auto;
   border-radius: 10px;
+}
+
+/* ── Collapsible sections + key-takeaway card + scroll-spy TOC ── */
+.article-section .section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  cursor: pointer;
+  user-select: none;
+  padding-top: 2.25rem;
+  padding-bottom: 0.3rem;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid var(--color-hair);
+}
+.article-section .section-head h2 {
+  margin: 0;                   /* reset .article-body h2 margin/border (head carries them) */
+  padding-bottom: 0;
+  border-bottom: none;
+}
+.article-section .section-chevron {
+  flex-shrink: 0;
+  font-size: 0.85rem;
+  line-height: 1;
+  color: var(--color-ink-3);
+  transition: transform 0.18s ease, color 0.15s ease;
+}
+.article-section .section-head:hover h2 { color: var(--color-brand); }
+.article-section .section-head:hover .section-chevron { color: var(--color-brand); }
+.article-section .section-body > :first-child { margin-top: 0; }
+
+/* The 核心结论 section — surfaced as a highlighted card */
+.takeaway-card {
+  margin: 1.5rem 0 2rem;
+  padding: 1.1rem 1.4rem 1.3rem;
+  border: 1px solid rgba(180, 83, 9, 0.35);
+  border-left: 4px solid var(--color-brand);
+  border-radius: 0 12px 12px 0;
+  background: rgba(180, 83, 9, 0.05);
+}
+.takeaway-card .section-head {
+  padding-top: 0;
+  border-bottom-color: rgba(180, 83, 9, 0.25);
+}
+.takeaway-card .section-body > :last-child { margin-bottom: 0; }
+.takeaway-card .section-body > p:first-child { font-weight: 500; }
+
+/* Scroll-spy TOC active link */
+.toc-link {
+  padding: 0.15rem 0 0.15rem 0.6rem;
+  border-left: 2px solid transparent;
+  line-height: 1.4;
+}
+.toc-active {
+  color: var(--color-brand) !important;
+  font-weight: 600;
+  border-left-color: var(--color-brand);
+}
+.dark .toc-active { border-left-color: var(--color-brand-light); }
+
+.dark .article-section .section-head { border-bottom-color: #2E2B23; }
+.dark .takeaway-card {
+  border-color: rgba(217, 119, 6, 0.4);
+  border-left-color: var(--color-brand-light);
+  background: rgba(217, 119, 6, 0.08);
 }
 
 /* Timeline animation */
@@ -574,4 +652,19 @@ body::before {
   object-fit: contain;
   border-radius: 12px;
   box-shadow: 0 30px 80px rgb(0 0 0 / 0.35);
+}
+
+/* Print / PDF — strip the chrome, flatten the layout, keep the article readable */
+@media print {
+  html, body { background: #fff !important; }
+  body::before { display: none !important; }
+  /* hide fixed/sticky chrome: sidebars, top/bottom bars, reading progress, back-to-top, TOC panel */
+  .reading-progress, .scroll-top-btn { display: none !important; }
+  .fixed, .sticky { display: none !important; }
+  #main-content { padding: 0 !important; max-width: 100% !important; }
+  .article-body { font-size: 11pt; line-height: 1.6; color: #000 !important; }
+  .article-body h1, .article-body h2, .article-body h3, .article-body h4 { color: #000 !important; }
+  .article-body a { color: #000 !important; }
+  .article-body h2, .article-body h3, .article-body h4 { page-break-after: avoid; }
+  .article-body .table-wrap, .article-body pre, .article-body .article-figure, .article-body tr, .article-body img { page-break-inside: avoid; }
 }

@@ -387,6 +387,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 42,
+    slug: 'ai-xiaojinshu-20260808',
+    title: '被AI重新定价的小金属——一份研报的拆解与勘误（2026-08-08）',
+    excerpt: '平安证券 8/6《AI浪潮下的小金属投资机遇》点名钨钼铟镓锗稀土十只票（中船特气、洛阳钼业、云南锗业等），看多"AI 需求+出口管制=供需缺口扩大"。方向经得起验证——出口管制真实、六氟化钨年内涨数倍、国产替代加速；但报告核心催化"日本 7/1 永久停产"已被当事方撤回，看多强度需下调一档，且报告不谈估值/目标价，属主题报告而非择时报告。',
+    date: '2026-08-08',
+    readTime: '15 min read',
+    tag: '有色金属',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

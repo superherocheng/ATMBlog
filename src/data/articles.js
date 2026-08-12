@@ -423,6 +423,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 46,
+    slug: 'ai-selloff-three-reports-20260812',
+    title: '6月科技大跌是终点还是中继？广发·国投·华福三份研报交叉验证',
+    excerpt: '广发、国投、华福三份8月研报殊途同归：6月科技大跌是阶段性出清而非趋势终结，AI主线未破、8月初是逢低布局窗口。增量在量化层——华福微盘三段式择时年化30.6%/夏普1.80，但16次信号/93.75%胜率高度依赖2024踩踏反转，本质是回撤控制层而非收益alpha。',
+    date: '2026-08-12',
+    readTime: '15 min read',
+    tag: '量化研究',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

@@ -432,6 +432,15 @@ const allArticles = [
     readTime: '15 min read',
     tag: '量化研究',
   },
+  {
+    id: 47,
+    slug: 'asuggestion-20260813',
+    title: 'A股 AI/半导体速评 · 2026-08-13 利好兑现却放量跳水：CPI偏鸽反成抛压、科创50假突破坐实，反弹转震荡',
+    excerpt: '8/12晚美国7月CPI全面符合预期偏鸽+隔夜SOX+2.49%本该涨，A股却高开低走放量跳水——科创50−1.11%再破MA20(8/12假突破确认)、两市2.55万亿放量3985亿，反弹正式转震荡。光模块由英伟达入股传闻切真实催化(Lumentum营收+109%/泵浦激光器彻底售罄)，寒武纪8/12业绩说明会回避核心疑虑。首选沪电/光模块双雄/工富(逢跌分批)；避雷寒武纪(PE137)、天孚(PE129最贵)、江波龙(存储周期顶)。',
+    date: '2026-08-13',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

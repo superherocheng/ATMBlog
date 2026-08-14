@@ -450,6 +450,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 49,
+    slug: 'sandisk-investor-day-china-semiconductor-20260814',
+    title: '闪迪投资者日全解读：NAND超级周期确认，中国半导体的"成长与估值"之辩',
+    excerpt: '8/13闪迪投资者日发布FY2028-30长期模型(营收年化mid-to-high teens/毛利率80%/FCF率50%)、8份NBM长协锁定939亿美元保底收入、NAND市场2026→2027年3000→5000亿美元，股价+13.67%——存储行业从"周期股"被重新定价为"长协锁定型基础设施股"。对比之下中国半导体仍处追赶加速期(长鑫/长江存储双雄资本化、NAND 294层追平SK海力士)，但A股半导体5月PE冲180-250倍后60日腰斩52%。闪迪财报对中国科技的影响呈"情绪映射→利润验证→长期共振"三段式传导：短期双刃剑、中期看8月底中报、长期超级周期与国产替代共振。',
+    date: '2026-08-14',
+    readTime: '18 min read',
+    tag: '宏观',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

@@ -70,7 +70,7 @@ export default function RightSidebar({ articles: articleList, timelineEvents }) 
             {Array.from(tags).map((tag) => (
               <button
                 key={tag}
-                onClick={() => navigate('/articles')}
+                onClick={() => navigate(`/articles?tag=${encodeURIComponent(tag)}`)}
                 className="text-[11px] px-2 py-0.5 bg-brand-subtle dark:bg-brand/10 text-brand dark:text-brand-light border border-brand/10 dark:border-brand/20 hover:bg-brand-lighter dark:hover:bg-brand/20 transition-colors"
               >
                 {tag}

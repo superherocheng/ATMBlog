@@ -24,5 +24,8 @@ COPY --from=builder /app/dist ./dist
 
 EXPOSE 8080
 
-# `-s` enables single-page-app mode (rewrites unknown routes to index.html)
-CMD ["serve", "-s", "dist", "-l", "8080"]
+# SPA fallback comes from dist/serve.json (copied from public/ at build):
+# cleanUrls lets /AStockBenchmark resolve to AStockBenchmark.html, while the
+# targeted rewrites send app routes to index.html. Do NOT add `-s` here —
+# single mode rewrites *everything* (including /AStockBenchmark) to the SPA.
+CMD ["serve", "dist", "-l", "8080"]

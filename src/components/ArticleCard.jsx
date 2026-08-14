@@ -1,32 +1,44 @@
 import { useNavigate } from 'react-router-dom';
 
 /**
- * Highlight all occurrences of `query` in `text` with a brand-colored background.
+ * Highlight the characters of `query` matched inside `text` with a
+ * brand-colored background. Uses the same greedy subsequence algorithm as
+ * fuzzyMatch (so every filtered-in card shows its highlight), and merges
+ * consecutive hits into single runs — substring matches render exactly like
+ * the old indexOf version.
  */
 function highlightText(text, query) {
   if (!query || !text) return text;
-  const lower = text.toLowerCase();
   const q = query.toLowerCase();
-  const parts = [];
-  let lastIndex = 0;
-
-  let idx = lower.indexOf(q, lastIndex);
-  while (idx !== -1) {
-    if (idx > lastIndex) {
-      parts.push(text.slice(lastIndex, idx));
+  const t = text.toLowerCase();
+  const idx = [];
+  let qi = 0;
+  for (let ti = 0; ti < t.length && qi < q.length; ti++) {
+    if (t[ti] === q[qi]) {
+      idx.push(ti);
+      qi += 1;
     }
+  }
+  if (qi < q.length) return text;
+
+  const parts = [];
+  let last = 0;
+  let i = 0;
+  while (i < idx.length) {
+    let j = i;
+    while (j + 1 < idx.length && idx[j + 1] === idx[j] + 1) j += 1;
+    const start = idx[i];
+    if (start > last) parts.push(text.slice(last, start));
     parts.push(
-      <mark key={idx} className="bg-brand-lighter dark:bg-brand/30 text-inherit px-0.5">
-        {text.slice(idx, idx + q.length)}
+      <mark key={start} className="bg-brand-lighter dark:bg-brand/30 text-inherit px-0.5">
+        {text.slice(start, idx[j] + 1)}
       </mark>
     );
-    lastIndex = idx + q.length;
-    idx = lower.indexOf(q, lastIndex);
+    last = idx[j] + 1;
+    i = j + 1;
   }
-  if (lastIndex < text.length) {
-    parts.push(text.slice(lastIndex));
-  }
-  return parts.length > 0 ? parts : text;
+  if (last < text.length) parts.push(text.slice(last));
+  return parts;
 }
 
 export default function ArticleCard({ article, searchQuery }) {

@@ -68,7 +68,7 @@ npm run preview
 
 ### Docker 部署（推荐）
 
-镜像采用两阶段构建：`node:22-alpine` 编译 `dist/`，再用轻量级静态服务器 [`serve`](https://github.com/vercel/serve) 在 8080 端口托管，并启用 SPA 回退（客户端路由回退到 `index.html`）。根目录 `docker-compose.yml` 统一管理服务：
+镜像采用两阶段构建：`node:22-alpine` 编译 `dist/`，再用轻量级静态服务器 [`serve`](https://github.com/vercel/serve) 在 8080 端口托管。SPA 回退与 clean URLs 由 `public/serve.json` 提供（构建时自动进入 `dist/`，serve 自动读取）：`/article/**`、`/articles`、`/timeline` 重写到 `index.html`，`/AStockBenchmark` 直接解析到 `AStockBenchmark.html`。**不要**给 serve 加 `-s` 参数——single 模式会把包括 `/AStockBenchmark` 在内的所有未知路径都重写成 SPA。根目录 `docker-compose.yml` 统一管理服务：
 
 ```bash
 # 从 docker-app 根目录构建并运行
@@ -101,7 +101,7 @@ cd ATMBlog
 # 2. 构建
 npm install && npm run build
 
-# 3. 启动服务（使用 Node）
+# 3. 启动服务（使用 Node；dist 内置 serve.json，自动提供 SPA 回退，无需 -s）
 npx serve dist -l 3000
 
 # 或使用 PM2 进程管理

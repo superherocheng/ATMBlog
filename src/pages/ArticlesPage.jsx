@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { articles } from '../data/articles.js';
 import { fuzzyMatch } from '../data/helper.js';
 import ArticleCard from '../components/ArticleCard.jsx';
@@ -8,8 +8,18 @@ import ArticleCard from '../components/ArticleCard.jsx';
 function ArticlesPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [debouncedQuery, setDebouncedQuery] = useState('');
+  const [activeTag, setActiveTag] = useState(null);
   const inputRef = useRef(null);
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  // URL entry points: ?q= backs the JSON-LD SearchAction, ?tag= backs the
+  // right-sidebar tag links. Syncs on mount and whenever the params change
+  // (navigating from /articles to /articles?tag=X must not be ignored).
+  useEffect(() => {
+    setSearchQuery(searchParams.get('q') || '');
+    setActiveTag(searchParams.get('tag') || null);
+  }, [searchParams]);
 
   // Debounce search input
   useEffect(() => {
@@ -27,8 +37,6 @@ function ArticlesPage() {
     });
     return counts;
   }, []);
-
-  const [activeTag, setActiveTag] = useState(null);
 
   const filtered = useMemo(() => {
     const q = debouncedQuery.trim();

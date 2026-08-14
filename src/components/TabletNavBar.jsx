@@ -9,12 +9,12 @@ export default function TabletNavBar() {
 
   return (
     <div className="hidden md:flex lg:hidden items-center border-b border-hair dark:border-[#2E2B23] px-6 py-3 sticky top-0 z-40 bg-white/95 dark:bg-[#1C1A14]/95 backdrop-blur">
-      <h1
+      <div
         className="font-display text-xl font-bold mr-8 cursor-pointer hover:opacity-70 transition-opacity tracking-tight"
         onClick={() => navigate('/')}
       >
         ATM Blog
-      </h1>
+      </div>
       <nav className="flex-1" aria-label="Tablet navigation">
         <ul className="flex items-center gap-6">
           {navLinks.map((link) => (

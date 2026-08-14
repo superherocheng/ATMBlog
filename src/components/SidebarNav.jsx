@@ -7,12 +7,14 @@ export default function SidebarNav() {
 
   return (
     <aside className="w-56 hidden lg:flex flex-col border-r border-hair dark:border-[#2E2B23] p-5 fixed top-0 left-0 h-screen z-30 overflow-y-auto bg-white dark:bg-[#1C1A14]">
-      <h1
+      {/* Site title as a plain div (not h1) — every page already renders its
+          own h1, so a second one here would dilute document semantics. */}
+      <div
         className="font-display text-2xl font-bold mb-1 cursor-pointer hover:opacity-70 transition-opacity tracking-tight"
         onClick={() => navigate('/')}
       >
         ATM Blog
-      </h1>
+      </div>
       <p className="text-xs text-gray-500 dark:text-gray-500 mb-8 leading-relaxed">
         AI 编程工具、工作流和实践笔记
       </p>

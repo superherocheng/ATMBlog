@@ -2,7 +2,10 @@ export const navLinks = [
   { label: '首页', view: 'home', path: '/' },
   { label: '文章', view: 'articles', path: '/articles' },
   { label: '时间线', view: 'timeline', path: '/timeline' },
-  { label: 'A股大盘规律', view: 'astock', path: '/AStockBenchmark', external: true },
+  // External static page (public/AStockBenchmark.html). Link with the .html
+  // suffix so it works in `vite dev`/`preview` (public file) AND in production
+  // (serve.json cleanUrls 301s it to /AStockBenchmark and serves the file).
+  { label: 'A股大盘规律', view: 'astock', path: '/AStockBenchmark.html', external: true },
 ];
 
 const allArticles = [

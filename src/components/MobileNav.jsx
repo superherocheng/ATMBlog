@@ -9,18 +9,19 @@ export default function MobileNav({ isOpen, onClose }) {
   const closeBtnRef = useRef(null);
   const [animState, setAnimState] = useState('closed');
 
-  // Manage animation states: closed → opening → open → closing → closed
+  // Manage animation states: closed → opening → open → closing → closed.
+  // On mount with isOpen=false we stay 'closed' (no ghost overlay for 300ms).
   useEffect(() => {
     if (isOpen) {
       setAnimState('opening');
       requestAnimationFrame(() => {
         requestAnimationFrame(() => setAnimState('open'));
       });
-    } else {
-      setAnimState('closing');
-      const timer = setTimeout(() => setAnimState('closed'), 300);
-      return () => clearTimeout(timer);
+      return;
     }
+    setAnimState((prev) => (prev === 'closed' ? prev : 'closing'));
+    const timer = setTimeout(() => setAnimState('closed'), 300);
+    return () => clearTimeout(timer);
   }, [isOpen]);
 
   // Prevent body scroll when menu is open/animating

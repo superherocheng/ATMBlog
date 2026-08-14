@@ -3,7 +3,9 @@ import { useEffect, useState } from 'react';
 // Returns the id of the heading currently in view, for scroll-spy TOC highlighting.
 // Active = the last heading whose top has scrolled past `offset` px from the viewport top.
 // Uses a rAF-throttled scroll listener; fine for short TOCs (≤ ~10 headings).
-export function useScrollSpy(ids, offset = 120) {
+// `refreshKey` re-runs the position pass when layout shifts without a scroll —
+// e.g. expanding/collapsing an article section moves every heading below it.
+export function useScrollSpy(ids, offset = 120, refreshKey) {
   const [active, setActive] = useState(ids[0] || null);
 
   useEffect(() => {
@@ -27,7 +29,7 @@ export function useScrollSpy(ids, offset = 120) {
       window.removeEventListener('resize', onScroll);
       if (raf) cancelAnimationFrame(raf);
     };
-  }, [ids.join('|'), offset]);
+  }, [ids.join('|'), offset, refreshKey]);
 
   return active;
 }

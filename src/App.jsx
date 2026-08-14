@@ -21,7 +21,7 @@ export default function App() {
             <Helmet>
               <link rel="canonical" href="https://home.gaodeqingchuda.icu/" />
               <meta property="og:site_name" content="ATM Blog" />
-              <meta name="twitter:card" content="summary_large_image" />
+              <meta name="twitter:card" content="summary" />
               <script type="application/ld+json">{JSON.stringify({
                 "@context": "https://schema.org",
                 "@type": "WebSite",

@@ -35,7 +35,9 @@ export default function ProgressiveImage({ src, alt, className = '' }) {
             ? 'linear-gradient(135deg, #F0EDE5 25%, #E5E1D7 50%, #F0EDE5 75%)'
             : 'linear-gradient(135deg, rgba(180,83,9,0.05) 0%, rgba(217,119,6,0.03) 50%, rgba(180,83,9,0.05) 100%)',
           backgroundSize: '400% 400%',
-          animation: loaded ? 'none' : 'shimmer 2s ease-in-out infinite',
+          // Stop the shimmer on error too — a failed image should read as
+          // "unavailable" (static tinted placeholder), not forever-loading.
+          animation: loaded || error ? 'none' : 'shimmer 2s ease-in-out infinite',
         }}
         aria-hidden="true"
       />

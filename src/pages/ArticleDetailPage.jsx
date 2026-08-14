@@ -243,7 +243,8 @@ function ArticleDetailPage() {
     return next;
   });
 
-  const activeId = useScrollSpy(headings.map((h) => h.id));
+  // `collapsed` as refreshKey: toggling a section re-measures heading positions.
+  const activeId = useScrollSpy(headings.map((h) => h.id), 120, collapsed);
 
   const jumpTo = (heading) => {
     setCollapsed((prev) => { const next = new Set(prev); next.delete(heading.sectionIndex); return next; });
@@ -332,6 +333,7 @@ function ArticleDetailPage() {
       <>
         <Helmet>
           <title>ATM Blog — Not Found</title>
+          <meta name="robots" content="noindex" />
         </Helmet>
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <button onClick={() => { if (window.history.length > 1) navigate(-1); else navigate('/articles'); }} className="text-sm text-wiki-blue hover:underline mb-6 inline-flex items-center gap-1 cursor-pointer">

@@ -7,7 +7,7 @@ export default function MobileTopBar({ onMenuToggle, menuOpen }) {
   return (
     <div className="md:hidden flex items-center justify-between border-b border-hair dark:border-[#2E2B23] px-4 py-3 fixed top-0 left-0 right-0 z-40 bg-white/95 dark:bg-[#1C1A14]/95 backdrop-blur">
       <div>
-        <h1 className="font-display text-lg font-bold tracking-tight">ATM Blog</h1>
+        <div className="font-display text-lg font-bold tracking-tight">ATM Blog</div>
         <p className="text-[11px] text-gray-500 dark:text-gray-400">AI 编程工具与实践笔记</p>
       </div>
       <div className="flex items-center gap-2">

@@ -441,6 +441,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 48,
+    slug: 'asuggestion-20260814',
+    title: 'A股 AI/半导体速评 · 2026-08-14 缩量反弹赚指数不赚钱：中芯Q2首破30亿美元点燃"业绩兑现"主线，CPO借旭创入股中石科技再爆发',
+    excerpt: '8/14缩量分化反弹(创业板+1.12%但超2900家下跌/2.14万亿缩量4081亿)：中芯Q2营收30.06亿美元单季首破30亿+毛利率25.3%超预期，点燃"业绩兑现"主线——同日寒武纪/海光等"透支组"镜像齐跌，奖励兑现、惩罚透支从框架变盘面。旭创17.47亿入股中石科技布局散热引爆CPO(通信+3.45%领跑)。首选沪电/光模块双雄/工富；避雷寒武纪(兑现期失血)、天孚(PE134)、江波龙(周期顶)。',
+    date: '2026-08-14',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

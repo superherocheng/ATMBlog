@@ -480,6 +480,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 52,
+    slug: 'macro-2026h2-timeline',
+    title: '英伟达财报48小时后，沃什登台杰克逊霍尔：2026下半年宏观·政治·AI大事时间线',
+    excerpt: '下半年事件密度极不均匀：8月最后一周把AI定价锚与央行定调窗塞进同一个96小时（8/26英伟达财报、8/28沃什杰克逊霍尔首秀），11月一周内连落中期选举、对华关税豁免到期、APEC深圳三枚钉子；9/15-16带点阵图的FOMC是全年最大宏观风险点，市场对加息约五五开。',
+    date: '2026-08-18',
+    readTime: '10 min read',
+    tag: '宏观',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

@@ -507,6 +507,15 @@ const allArticles = [
     readTime: '15 min read',
     tag: '宏观',
   },
+  {
+    id: 55,
+    slug: 'gold-treasury-oscillation-20260819',
+    title: '黄金+2.8%、美债"变脸"：判定震荡反复，不是扭转（2026-08-19）',
+    excerpt: '伦敦金隔夜暴跌1.85%后单日+2.8%站上4450、收复200日线——导火索是30Y美债从19年新高5.34回落+美元破位，本质是「政策预期转鸽 vs 期限溢价恶化」两股力量的拉锯，方向抉择被推迟到FOMC纪要→英伟达→Jackson Hole→9月议息。附黄金/纳指/A股全套上下关键位与短中长期研判。',
+    date: '2026-08-19',
+    readTime: '15 min read',
+    tag: '宏观',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

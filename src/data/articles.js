@@ -498,6 +498,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 54,
+    slug: 'tech-rebound-debate-ai-credit-20260819',
+    title: 'B浪还是新牛？科技反弹的多空之辩与AI的信用约束——中信建投·浙商·中信期货三报综读（2026-08-19）',
+    excerpt: '纳指距前高仅2.2%而A股算力落后费半约17.5个百分点；公募电子+通信超配20.37%已超2021年"核心资产"峰值，云厂商Capex占经营现金流达96%、年发债近2000亿美元推高30年美债至5.32%——三报合流：指数独立新高概率小于50%，个股alpha大于beta。',
+    date: '2026-08-19',
+    readTime: '15 min read',
+    tag: '宏观',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

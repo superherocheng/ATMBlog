@@ -489,6 +489,15 @@ const allArticles = [
     readTime: '10 min read',
     tag: '宏观',
   },
+  {
+    id: 53,
+    slug: 'asuggestion-20260819',
+    title: 'A股 AI/半导体速评 · 2026-08-19 黑色星期三：创业板−6.26%、电子失血581亿，天孚"符合难超"三连击——盘后SK海力士40万亿韩元回购点亮夜盘，明日中微正文的裁判环境一夜逆转',
+    excerpt: '30Y美债5.32%贴现率×公募电子超配19.2%×监管斩高位股三因共振，上证MA60得而复失、芯原/盛美领杀、中芯最抗跌升格🟢。暴跌加深度不证伪逻辑：首选沪电（空间+67%）/工富（PE 26全池最低、空间+96%），光模块双雄正文前分批；避雷中石（距旭创受让锚仍−36%）/光迅（明晚正文）/寒武纪。明晚中微正文开考设备簇，SKH回购映射存储链高开。',
+    date: '2026-08-19',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

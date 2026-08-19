@@ -516,6 +516,15 @@ const allArticles = [
     readTime: '15 min read',
     tag: '宏观',
   },
+  {
+    id: 56,
+    slug: 'etf-timing-20260819',
+    title: '越跌越买的二十年：宽基ETF量价与份额，能否择时A股？',
+    excerpt: '9只宽基ETF×2005-2026全样本实证："越跌越买"是主导形态（科创50份额×当日收益相关-0.40），但按日期聚类+多重检验校正后，日线方向择时无一站得住；唯一样本外稳健的是恐慌抛售后反转买入（胜率67-71%、回撤减半），MA200趋势过滤2019年后失效。附各阶段各方法置信度/胜率总表与8/19黑色星期三时点读数。',
+    date: '2026-08-19',
+    readTime: '20 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

@@ -525,6 +525,15 @@ const allArticles = [
     readTime: '20 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 57,
+    slug: 'asuggestion-20260820',
+    title: 'A股 AI/半导体速评 · 2026-08-20 卖事实四连击日：中微扣非+108%仍跌1.8%，KOSPI暴涨5.89%、SK海力士+12.9%救不动A股存储链——寒武纪盘中破千，明日旭创Q2大考',
+    excerpt: '8/19放量出清后的缩量分化修复（2.08万亿、科创50独自-0.87%）："预告区间内正文不给溢价"四连击确立，光迅+56%与中微同日落地即跌——外部回购墙过不了本地筹码闸。🟢首选沪电/工富/中芯/光模块双雄（旭创明日Q2，一致预期营收229亿/+184%，无预告锚=唯一可能打破魔咒的裁判）；🔴避雷寒武纪/太辰光（+18.4%暴涨后重新倒挂）/光迅/中石/至纯。',
+    date: '2026-08-20',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

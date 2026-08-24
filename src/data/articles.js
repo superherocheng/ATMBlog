@@ -543,6 +543,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 59,
+    slug: 'asuggestion-20260824',
+    title: 'A股 AI/半导体速评 · 2026-08-24 叙事雷对撞日：SKH论文+FCC阴云带崩"易中天"一日蒸发1544亿、韩国杠杆崩（三星−8%）——设备簇借长存IPO逆势成避风港，旭创−7.7%落进"错杀买点"档',
+    excerpt: '光模块三重叙事雷（SKH"以光为中心"论文×英伟达CPO量产名单×ITI反对FCC限令被反向解读）撞上韩国杠杆崩，双创盘中−4%、2.01万亿放量下跌、全指数跌破MA20；同日长江存储330亿IPO受理（26Q1净利334亿），拓荆+1.6%全池唯一红盘、北方华创/中微/盛美全线抗跌——资金一日之内从"光模块叙事"切向"设备订单"。🟢首选沪电/工富（PE 25.5全池最低）/中芯+新易盛（412入分批区）/旭创（870错杀分批、8/26 NVDA财报前留子弹）；🔴避雷寒武纪/太辰光/光迅/中石/至纯；E4恐慌阈值全线一步之遥。',
+    date: '2026-08-24',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

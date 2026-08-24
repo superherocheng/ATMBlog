@@ -552,6 +552,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 60,
+    slug: 'september-showdown-four-reports-20260824',
+    title: '9月"决胜窗口"还是B浪兑现？——国金·天风·浙商·兴业四报综读（2026-08-24）',
+    excerpt: '30Y美债冲上5.32%（2007年来新高）的推手是AI巨头发债挤出主权债、而非加息定价——四家在"产业景气未证伪、盈利成唯一引擎"上惊人一致，分歧只在分母端与拥挤度：兴业赌9月利率见顶+Anthropic招股书双催化，浙商以公募电子+通信超配20.37%（超2021极值）押独立新高概率<50%、定性B浪反弹；8/24盘面（创业板-3.21%、黄金4640新高、防御碾压）暂时站在谨慎一方，8/27-29杰克逊霍尔是第一道验证闸门。',
+    date: '2026-08-24',
+    readTime: '15 min read',
+    tag: '宏观',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

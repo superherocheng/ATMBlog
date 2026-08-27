@@ -588,6 +588,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 64,
+    slug: 'futures-momentum-scan-20260827',
+    title: '别追焦煤：44品种期货动量扫描后的开仓清单',
+    excerpt: '焦煤20日+31%、集运欧线年化波动137%——最热的地方赔率最差。三向共振的高胜率清单：豆粕01回踩3200-3250做多、纯碱/玻璃反弹至60日线做空、多焦空矿对冲；长线沪铜10.3-10.5万分批多。',
+    date: '2026-08-27',
+    readTime: '12 min read',
+    tag: '宏观',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

@@ -583,7 +583,7 @@ const allArticles = [
     id: 63,
     slug: 'asuggestion-20260827',
     title: '2026-08-27 A股盘后分析',
-    excerpt: '',
+    excerpt: '今日：反弹第三日首次放量确认修复，仍看震荡修复而非反转——终审在今晚美股NVDA收盘。',
     date: '2026-08-27',
     readTime: '22 min read',
     tag: 'A STOCK',

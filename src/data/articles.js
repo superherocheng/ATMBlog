@@ -597,6 +597,15 @@ const allArticles = [
     readTime: '12 min read',
     tag: '宏观',
   },
+  {
+    id: 65,
+    slug: 'asuggestion-20260828',
+    title: '2026-08-28 A股盘后分析',
+    excerpt: '今日：NVDA +8.74% 打破"见光死"模板，A股却冲高回落兑现休整——修复未证伪，等回踩不追涨。',
+    date: '2026-08-28',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

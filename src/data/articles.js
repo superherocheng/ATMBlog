@@ -606,6 +606,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 66,
+    slug: 'asuggestion-20260831',
+    title: '2026-08-31 A股盘后分析',
+    excerpt: '今日：沃什鹰派低开高走V型收官，中报兑现对冲分母利空、沪指站上MA60——单日V反非趋势，9/16 FOMC前仍看震荡、回踩分批。',
+    date: '2026-08-31',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

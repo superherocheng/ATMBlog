@@ -615,6 +615,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 67,
+    slug: 'asuggestion-20260902',
+    title: '2026-09-02 A股盘后分析',
+    excerpt: '今日：债市危机+美伊油价三杀，分母杀估值连跌第二日——沪指失MA60、创业板破年线，缩量近5个月地量、无护盘，高PE链出清未完，9/16 FOMC前看震荡、回踩分批、不追高。',
+    date: '2026-09-02',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

@@ -624,6 +624,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 68,
+    slug: 'asuggestion-20260903',
+    title: '2026-09-03 A股盘后分析',
+    excerpt: '今日：1.76万亿再创地量的非农前夜十字星——隔夜美股AI硬件反弹而A股光模块零反应，筹码出清压过海外映射；非农落地前仓位中性，结构向低PE兑现腿倾斜、不追高。',
+    date: '2026-09-03',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

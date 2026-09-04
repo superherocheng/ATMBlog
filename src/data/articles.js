@@ -633,6 +633,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 69,
+    slug: 'asuggestion-20260904',
+    title: '2026-09-04 A股盘后分析',
+    excerpt: '今日：GPT-6引爆"硬件切应用"——2.03万亿放量下跌、科创50创20日新低，浪潮跌停与光模块双雄翻红同日上演；非农落地前仓位不动，深回撤无题材残留的兑现票分批、题材腿回避。',
+    date: '2026-09-04',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

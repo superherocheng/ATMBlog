@@ -642,6 +642,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 70,
+    slug: 'macro-nfp-review-20260904',
+    title: '非农夜全景推演：16.2万强数据命中后的加息博弈与A股策略',
+    excerpt: '非农+162K远超共识+53K，🔴场景精准兑现。加息概率从45%推至55-65%，年底前加息概率75-80%。美股先跌后涨解读为"软着陆"。A股：创业板E4一步之遥，上证3800是尾部风险。核心逻辑"杀结构性而非杀全面"，工业富联为避风港，等放量恐慌信号再分批接飞刀。',
+    date: '2026-09-04',
+    readTime: '22 min read',
+    tag: '宏观',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

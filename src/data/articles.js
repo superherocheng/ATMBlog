@@ -651,6 +651,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: '宏观',
   },
+  {
+    id: 71,
+    slug: 'macro-four-reports-crosscheck-20260906',
+    title: '强非农撞上8000亿开闸：四大券商周报交叉验证——9月反弹可期，大波段还早',
+    excerpt: '非农+16.2万里藏约6万一次性因素，9月加息概率升至~58%却把裁决权交给9/10-11的8月CPI；国内DR001稳于1.36%、8000亿工具仅落地16.81亿。四份研报数据锚对BLS/央行公开数据逐项对账通过，基准路径：股结构性反弹、债短稳长跌。',
+    date: '2026-09-06',
+    readTime: '22 min read',
+    tag: '宏观',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

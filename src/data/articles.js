@@ -660,6 +660,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: '宏观',
   },
+  {
+    id: 72,
+    slug: 'asuggestion-20260907',
+    title: '2026-09-07 A股盘后分析',
+    excerpt: '今日：非农16.2万超预期反成AI硬件全球反弹的燃料，创业板+3.41%、旭创376亿放量确认修复——但缩量反弹、全指数仍压MA20下方，反弹非反转，9/11 CPI前只调结构不加仓。',
+    date: '2026-09-07',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

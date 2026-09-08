@@ -669,6 +669,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 73,
+    slug: 'asuggestion-20260908',
+    title: '2026-09-08 A股盘后分析',
+    excerpt: '今日：AI硬件全球共振"一日游"回吐，沪强深弱——沪指微涨首收MA20、双创领跌，资金切向涨价与红利；反弹非反转框架维持，方向选择留给9/11 CPI。',
+    date: '2026-09-08',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

@@ -678,6 +678,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 74,
+    slug: 'asuggestion-20260909',
+    title: '2026-09-09 A股盘后分析',
+    excerpt: '今日：指数红个股冷、光内高低切——隔夜美股"道指跌费半涨光通信爆"下AI硬件退化为结构行情，华工/光纤放量主攻而CPO龙头缩量持稳；高位题材与国产算力仍在挤泡沫，CPI前只调结构不加仓。',
+    date: '2026-09-09',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

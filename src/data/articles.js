@@ -687,6 +687,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 75,
+    slug: 'asuggestion-20260910',
+    title: '2026-09-10 A股盘后分析',
+    excerpt: '今日：地量退潮——1.65万亿年内次低、沪指跌回MA20（上期假突破预警当日兑现）、近4500家跌；涨价链独活（覆铜板涨停潮+银行批量新高）对冲AI硬件退潮（华工巨量兑现、港股大模型崩）；燧原明日挂牌+CPI落地前夜，只调结构不加总仓。',
+    date: '2026-09-10',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

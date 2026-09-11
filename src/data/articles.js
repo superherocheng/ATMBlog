@@ -696,6 +696,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 76,
+    slug: 'asuggestion-20260911',
+    title: '2026-09-11 A股盘后分析',
+    excerpt: '今日：放量选择向下——1.97万亿放量下跌、沪指贴20日箱体下沿仅6点，但通信全市场独红+国家队ETF重新进场=箱底承接初现；地量不是底、放量才是方向选择；CPI+FOMC两闸未过，只调结构不加总仓。',
+    date: '2026-09-11',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

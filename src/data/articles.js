@@ -705,6 +705,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 77,
+    slug: 'asuggestion-20260914',
+    title: '2026-09-14 A股盘后分析',
+    excerpt: '今日：AI降速叙事雷下缩量悬停箱底——1.63万亿年内次低量、沪指距箱底下沿仅3点，但超3100家上涨=指数弱非普跌、情绪雷非基本面证伪；变盘选择日顺延至FOMC，落地前只调结构不动总仓。',
+    date: '2026-09-14',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

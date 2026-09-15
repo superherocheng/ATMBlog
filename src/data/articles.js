@@ -714,6 +714,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 78,
+    slug: 'asuggestion-20260915',
+    title: '2026-09-15 A股盘后分析',
+    excerpt: '今日：政策对冲叙事雷——沪指缩量创20日新低、宽度恶化仅千余家上涨，但科创50独红+设备簇领涨=半导体国产替代独立逻辑与SOX背离首日；箱底不是防线是过程，总闸门在明晨FOMC点阵图。',
+    date: '2026-09-15',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

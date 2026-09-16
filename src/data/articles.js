@@ -723,6 +723,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 79,
+    slug: 'asuggestion-20260916',
+    title: '2026-09-16 A股盘后分析',
+    excerpt: '今日：放量分子反攻——1.84万亿终结三连缩、科创50收复MA20，苹果锁价存储涨价+高盛上修光模块需求点燃科技链，但反弹成色待今夜FOMC点阵图验收，右侧三件套已齐其二。',
+    date: '2026-09-16',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

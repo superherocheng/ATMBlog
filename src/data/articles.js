@@ -732,6 +732,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 80,
+    slug: 'asuggestion-20260917',
+    title: '2026-09-17 A股盘后分析',
+    excerpt: '今日：鹰派加息落地、缩量卖事实——三大指数小跌、科创50 MA20得而复失，黄金股重挫、沐曦解禁反成利空出尽；反弹定性回落为修复中的震荡，明日A50生效+日央行决议双闸门。',
+    date: '2026-09-17',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

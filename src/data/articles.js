@@ -741,6 +741,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 81,
+    slug: 'asuggestion-20260918',
+    title: '2026-09-18 A股盘后分析',
+    excerpt: '今日：放量普涨买验证——SOX大涨与高盛双调研点燃存储/设备/光模块三主线，科创50收复MA20、旭创新易盛重建许可达标；定性上调右侧试探期，分批不追高，中秋国庆双节压缩下周仅四个交易日。',
+    date: '2026-09-18',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

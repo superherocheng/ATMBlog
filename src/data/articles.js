@@ -750,6 +750,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 82,
+    slug: 'asuggestion-20260921',
+    title: '2026-09-21 A股盘后分析',
+    excerpt: '今日：缩量普涨轮动日——医药“十五五”规划吸走主线、AI链温和分化让位；A50/富时50双生效日温和落幕、存储涨价链逆势最强，中秋前仅剩3个交易日，分批不追高、9/30美光×PCE双裁判日前不加仓。',
+    date: '2026-09-21',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

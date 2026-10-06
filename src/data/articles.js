@@ -759,6 +759,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 83,
+    slug: 'asuggestion-20261006',
+    title: '2026-10-06 A股盘后分析',
+    excerpt: '今日：国庆假期第6天——节前AI链已深蹲一周（OpenAI二次停训+美债5.2%所致、无基本面证伪），假期双裁判齐转暖（美光大超+核心PCE低于预期、10月加息概率降至约20%），10/8高开是修复不是反转：高开不追、回踩分批，10/15三季报预告截止为下期主线。',
+    date: '2026-10-06',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

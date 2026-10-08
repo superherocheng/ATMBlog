@@ -768,6 +768,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 84,
+    slug: 'asuggestion-20261008',
+    title: '2026-10-08 A股盘后分析',
+    excerpt: '今日：利好出货日——假期外盘利好全数落地却未换来A股分子定价，高开冲高后单边派发、AI硬件成杀跌主力，全池仅三只未跌；定性为拥挤度再平衡而非基本面证伪，上游涨价链是唯一走出的结构腿，执行口径不接高开、回踩分批，10/13 FCC生效与10/15三季报预告截止是下两个靴子。',
+    date: '2026-10-08',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

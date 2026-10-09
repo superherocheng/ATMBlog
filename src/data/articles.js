@@ -777,6 +777,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 85,
+    slug: 'asuggestion-20261009',
+    title: '2026-10-09 A股盘后分析',
+    excerpt: '今日：深V救市日——早盘公募重仓的覆铜板跌停潮（生益-5.8%、金安国纪跌停，涨价链防御一日证伪）砸破创业板3000，午后国家队宽基ETF 1.74×放量深V翻红，E4统计买点（中证1000）正式触发；定性为筹码出清而非基本面证伪（台积电+51%超指引vs OpenAI营收缺口劈叉），执行口径回踩分批低PE组（工富/中芯/旭创），10/13 FCC生效日=悲观假设验证窗口。',
+    date: '2026-10-09',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

@@ -786,6 +786,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 86,
+    slug: 'asuggestion-20261009-new',
+    title: '2026-10-09 A股盘后分析 new',
+    excerpt: '今日：与上一篇同日同行情（深V救市·筹码出清第二刀），本篇为「极端恐慌仪表盘」上线首期——读数 76.0 准备区、未到 85 出手线；第四节新增分批执行阶梯（承诺单）：触发=读数≥85 且企稳确认，触发前纪律动作是"什么都不做"。',
+    date: '2026-10-09',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

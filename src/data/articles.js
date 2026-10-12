@@ -795,6 +795,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 87,
+    slug: 'asuggestion-20261012',
+    title: '2026-10-12 A股盘后分析',
+    excerpt: '今日：缩量补跌第三日，闸门仍关——AI 硬件再度补跌、创业板创阶段新低，外部法律与政策三连击（ITC 337 调查 / 大摩 FCC 65% 推演二次发酵 / 花旗调研称美资偏好本土光学）把上期的低 PE 防御逻辑打穿；恐慌读数未过 85 出手线，本期动作仍是「什么都不做」。',
+    date: '2026-10-12',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

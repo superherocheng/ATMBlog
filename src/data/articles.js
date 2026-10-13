@@ -804,6 +804,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 88,
+    slug: 'asuggestion-20261013',
+    title: '2026-10-13 A股盘后分析',
+    excerpt: '今日：深V翻红但反弹非反转——增量资金是宽基 ETF 托底（1.37× 未达 1.5× 闸），当日最强腿是覆铜板涨价链，光模块按「有没有被 FCC 管」分层而非按景气度（政策暴露低的领涨、境外占比>90%的仅微红）；三季报预告池内仍是零新增，恐慌读数未过 85 出手线，本期动作仍是「什么都不做」。',
+    date: '2026-10-13',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

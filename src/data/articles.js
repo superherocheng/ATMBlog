@@ -813,6 +813,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 89,
+    slug: 'asuggestion-20261014',
+    title: '2026-10-14 A股盘后分析',
+    excerpt: '今日：深V只撑了一天——缩量普跌、双创跌超 3%，AI 算力硬件成领跌主线，两融创年内新低、主力净流出 243.59 亿；逆势的是油气/煤炭/银行，PCB 靠覆铜板涨价链与三季报预告相对抗跌；恐慌读数 75.1 仍未过 85 出手线，本期动作仍是「什么都不做」。',
+    date: '2026-10-14',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

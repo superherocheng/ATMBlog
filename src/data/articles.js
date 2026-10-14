@@ -822,6 +822,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 90,
+    slug: 'ai-financing-tech-catchup-20261014',
+    title: '分母不松，分子将紧：中国科技的补涨条件，与 AI 融资的账期拐点——国信·申万两报综读（2026-10-14）',
+    excerpt: '同一条 5.24% 的美债，两份报告给出了不同的期限：国信把 A 股科技的跑输读作权重股造成的假象（科创50 −10.9% 的同时 CPO/PCB +20.3%/+29.6%），并给出三个尚未打开的开关；申万则量化了另一面——科技 WACC 由 5.5%/6.2% 升至 10.7%/10.6%，云厂 9 月发债归零、认购倍数 4.66→1.61 倍、自由现金流同比 −82%，"AI 债的科技溢价基本消失"。前者是估值端的短期扰动，后者是能倒逼云厂在 Q3 收缩 capex 的结构性抬升。',
+    date: '2026-10-14',
+    readTime: '16 min read',
+    tag: '宏观',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

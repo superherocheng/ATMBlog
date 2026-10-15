@@ -831,6 +831,15 @@ const allArticles = [
     readTime: '16 min read',
     tag: '宏观',
   },
+  {
+    id: 91,
+    slug: 'asuggestion-20261015',
+    title: '2026-10-15 A股盘后分析',
+    excerpt: '今日：全球 AI 硬件同步去估值——韩国 KOSPI 盘中熔断收跌 7.57%、费半六连跌，沪指 −1.59%、5108 只下跌；但内部出现一次干净的「切腿」，光模块/存储权重端净流出（新易盛 −19.27 亿、旭创 −18.16 亿），设备/PCB/中芯逆势收红（北方华创 +6.38 亿居全市场第二）。真传导物是「AI 融资链」而非存储需求（CoreWeave 债收益率破 15%），但存储的涨价弹性确实在见顶（江波龙 Q3 单季环比 −35%~−49% 且公告自认「边际贡献显著趋缓」）。恐慌读数 81.2 距 85 出手线仅 3.8 个点，本期动作仍是「什么都不做」。',
+    date: '2026-10-15',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

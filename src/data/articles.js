@@ -840,6 +840,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 92,
+    slug: 'asuggestion-20261016',
+    title: '2026-10-16 A股盘后分析',
+    excerpt: '今日：缩量反弹、尾盘宽基 ETF 再放量，但闸门不是更近而是更远——恐慌读数由 81.2 回落至 77.0，E4 双触发次日全部失效，承诺单第五次未触发。资金结构确实反转（本池主力净额 −76.89 亿→+27.95 亿），但多头筹码落在军工/低空等事件腿上，不在光模块/PCB/存储腿上；「美债回落→科技反攻」这条本期被拆穿——沃什未转鸽、10Y 仍比 8 月底高约 40–60bp、9 月全球 AI 相关债务融资额较 6 月峰值降约 80%。',
+    date: '2026-10-16',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

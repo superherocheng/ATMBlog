@@ -418,10 +418,34 @@ body::before {
   background: linear-gradient(90deg, #D97706, #F59E0B);
 }
 
+/* Daily page-view counter — bottom-right */
+.visit-counter {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 40;
+  padding: 0.3rem 0.65rem;
+  border: 1px solid var(--color-hair);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.92);
+  color: var(--color-ink-3);
+  font-size: 11px;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  backdrop-filter: blur(8px);
+  pointer-events: none;
+  user-select: none;
+}
+.dark .visit-counter {
+  border-color: #2E2B23;
+  background: rgb(28 26 20 / 0.92);
+  color: #8A857C;
+}
+
 /* Scroll-to-top button */
 .scroll-top-btn {
   position: fixed;
-  bottom: 2rem;
+  bottom: 4.25rem;
   right: 2rem;
   z-index: 50;
   opacity: 0;

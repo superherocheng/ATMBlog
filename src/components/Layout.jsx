@@ -7,6 +7,7 @@ import RightSidebar from './RightSidebar.jsx';
 import Footer from './Footer.jsx';
 import MobileBottomBar from './MobileBottomBar.jsx';
 import ScrollToTop from './ScrollToTop.jsx';
+import VisitCounter from './VisitCounter.jsx';
 import { useScrollRestoration } from '../hooks/useScrollRestoration.js';
 import { articles, timelineEvents } from '../data/articles.js';
 import { useState } from 'react';
@@ -78,6 +79,9 @@ export default function Layout() {
 
       {/* Scroll-to-top button */}
       <ScrollToTop />
+
+      {/* Daily page-view counter — bottom-right */}
+      <VisitCounter />
     </>
   );
 }

@@ -1,0 +1,22 @@
+[Unit]
+Description=ATMBlog daily visit counter
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+ExecStart=/usr/bin/python3 /usr/local/lib/atmblog-visit/server.py
+Environment=VISIT_STATE_FILE=/var/lib/atmblog-visits/counts.json
+Environment=VISIT_BIND=127.0.0.1
+Environment=VISIT_PORT=18081
+Environment=VISIT_TZ=Asia/Shanghai
+Restart=always
+RestartSec=3
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/var/lib/atmblog-visits
+
+[Install]
+WantedBy=multi-user.target

@@ -849,6 +849,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 93,
+    slug: 'citi-2027-outlook-924-odds-20261017',
+    title: '保"4"时代：花旗看见 2027 年的"924"——但放量大阳不会在 3800 点等它',
+    excerpt: '花旗《2027 中国经济展望》：GDP 4.6%→4.1% 的保四之年、地产投资 −30%、重回通缩，924 式政策转向在未来 12-18 个月概率约七成；但转向是"跌出来的"——杠杆腿已洗满（两融自峰值离场约 5300 亿、仪表盘成分打满 100 分位），恐慌溢价腿（贴水 42/ERP 56/QVIX 68）远未到危机档，读数 78.8 距 85 闸门 6.2 点，"洗掉了杠杆、还没洗掉信仰"。超级放量大阳的无条件概率约四成，且大多数路径下它发生时的点位低于当前。',
+    date: '2026-10-17',
+    readTime: '15 min read',
+    tag: '宏观',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

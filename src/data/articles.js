@@ -858,6 +858,15 @@ const allArticles = [
     readTime: '15 min read',
     tag: '宏观',
   },
+  {
+    id: 94,
+    slug: 'asuggestion-20261019',
+    title: '2026-10-19 A股盘后分析',
+    excerpt: '今日：红盘掩护下的高位清算——指数低开高走收红但 3129 只下跌、科创50 −2.2%，金融街论坛无降准降息；好业绩的定价权在环比斜率：生益定价日 +2.6% 主力净流入，长鑫环比降速利好出尽 −7.8% 主力净流出全市场第一；恐慌读数 78.5 距闸门 6.5 点，承诺单第六次不激活，继续等。',
+    date: '2026-10-19',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

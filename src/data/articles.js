@@ -867,6 +867,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 95,
+    slug: 'market-bottom-and-ai-supply-test-20261019',
+    title: '磨底不磨结构：三份研报共识底部临近，AI 买点只在少数环节',
+    excerpt: '天风看到 ETF 成交占比 11.7% 超 7 月峰值、国家队通道三季度加仓；中航按严格口径测算单位跌幅承接仅 59 亿份/pp、只有 7 月一半——底部信号现而未确认。结构上中金供给框架点名中国半导体设备、电网设备景气最稳，全球数字芯片设计（寒武纪、澜起所在组）最需警惕，而电子 +816.7 亿融资余额成全市场唯一还在加杠杆的拥挤环节。',
+    date: '2026-10-19',
+    readTime: '15 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

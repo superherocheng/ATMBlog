@@ -876,6 +876,15 @@ const allArticles = [
     readTime: '15 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 96,
+    slug: 'asuggestion-20261020',
+    title: '2026-10-20 A股盘后分析',
+    excerpt: '今日：国家队三度进场、主力连续第十日净流出——磨底靠轮动不靠反转；海光正文"营收超/利润符/现金流差"，光模块"价跌钱进"断裂而工富首现"价涨钱进"；恐慌读数 74.5 跌回预警区，承诺单第七次不激活，弹性仓继续等闸门。',
+    date: '2026-10-20',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

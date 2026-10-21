@@ -885,6 +885,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 97,
+    slug: 'asuggestion-20261021',
+    title: '2026-10-21 A股盘后分析',
+    excerpt: '今日：主力回流第一日、缩量未背书——宁德三季报杀穿创业板2700，AI硬件主力净额十月来首次转正，反弹质量待量能与正文双确认。',
+    date: '2026-10-21',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

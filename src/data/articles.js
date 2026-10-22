@@ -894,6 +894,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 98,
+    slug: 'asuggestion-20261022',
+    title: '2026-10-22 A股盘后分析',
+    excerpt: '今日：GTC扩产名单外的出清日——AI硬件放量重挫、主力净额−112.6亿回流证伪；恐慌读数80.9逼近85闸门、E4创业板触发，等企稳确认，不加仓。',
+    date: '2026-10-22',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

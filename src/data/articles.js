@@ -903,6 +903,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 99,
+    slug: 'asuggestion-20261023',
+    title: '2026-10-23 A股盘后分析',
+    excerpt: '今日：外部利空被本地公告托底，深V是情绪修复不是反转——创业板+4.16%的力气集中在机器人而非AI硬件，光模块六家集体公告实为投关旧闻；恐慌读数回落至70.8，继续什么都不做。',
+    date: '2026-10-23',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

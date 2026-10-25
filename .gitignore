@@ -7,3 +7,5 @@ start.sh
 finish.sh
 .vite/
 articles/
+.claude/
+.mimocode/

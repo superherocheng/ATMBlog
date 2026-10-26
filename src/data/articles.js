@@ -921,6 +921,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 101,
+    slug: 'sellside-11-reports-20261026',
+    title: '反弹已开，大底未至：11 份卖方研报的共识与分歧',
+    excerpt: '创业板自高点-41%、融资去化20%、宽基ETF单日555亿托底——六家策略一致确认反弹开启，但无一家敢称历史大底；分歧从"周五低点即年内最低"到"二次破底概率加大"，裁决交给10/28 FOMC、11/3中期选举与11/17英伟达财报。',
+    date: '2026-10-26',
+    readTime: '18 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

@@ -912,6 +912,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 100,
+    slug: 'asuggestion-20261026',
+    title: '2026-10-26 A股盘后分析',
+    excerpt: '今日：业绩最硬的筹码被集中兑现——光迅超预期正文照样跌、生益盘中跌停，杀跌动力在本地筹码不在隔夜美股；正文潮10/27–31前只持有不新增，恐慌读数63.9不开闸。',
+    date: '2026-10-26',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

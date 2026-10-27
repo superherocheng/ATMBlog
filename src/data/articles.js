@@ -930,6 +930,15 @@ const allArticles = [
     readTime: '18 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 102,
+    slug: 'asuggestion-20261027',
+    title: '2026-10-27 A股盘后分析',
+    excerpt: '今日：外围 AI 叙事重燃，A 股却把利好当出货窗口——高开低走、科创50 −4.81%；主力流出从 PCB 轮斩到设备簇，恐慌读数重回准备区，正文潮（10/28–31）兑现前不新增仓位。',
+    date: '2026-10-27',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

@@ -939,6 +939,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 103,
+    slug: 'asuggestion-20261028',
+    title: '2026-10-28 A股盘后分析',
+    excerpt: '今日：放量反包第一天，但仍不是反转——九指数无一收复 MA20，量能还低于 10/23 那次两日即失败的反包；设备簇盘后正文转弱，正文潮兑现前不新增仓位。',
+    date: '2026-10-28',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

@@ -19,18 +19,18 @@ export default function App() {
         <ErrorBoundary>
           <BrowserRouter>
             <Helmet>
-              <link rel="canonical" href="https://home.gaodeqingchuda.icu/" />
+              <link rel="canonical" href="https://home.awuluan.wiki/" />
               <meta property="og:site_name" content="ATM Blog" />
               <meta name="twitter:card" content="summary" />
               <script type="application/ld+json">{JSON.stringify({
                 "@context": "https://schema.org",
                 "@type": "WebSite",
                 "name": "ATM Blog",
-                "url": "https://home.gaodeqingchuda.icu/",
+                "url": "https://home.awuluan.wiki/",
                 "description": "A personal wiki-style blog exploring quantitative finance, AI-assisted trading, and systems engineering.",
                 "potentialAction": {
                   "@type": "SearchAction",
-                  "target": "https://home.gaodeqingchuda.icu/articles?q={search_term_string}",
+                  "target": "https://home.awuluan.wiki/articles?q={search_term_string}",
                   "query-input": "required name=search_term_string"
                 }
               })}</script>

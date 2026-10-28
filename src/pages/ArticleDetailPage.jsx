@@ -362,11 +362,11 @@ function ArticleDetailPage() {
       <Helmet>
         <title>{article.title} — ATM Blog</title>
         <meta name="description" content={article.excerpt} />
-        <link rel="canonical" href={`https://home.gaodeqingchuda.icu/article/${article.id}`} />
+        <link rel="canonical" href={`https://home.awuluan.wiki/article/${article.id}`} />
         <meta property="og:title" content={article.title} />
         <meta property="og:description" content={article.excerpt} />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content={`https://home.gaodeqingchuda.icu/article/${article.id}`} />
+        <meta property="og:url" content={`https://home.awuluan.wiki/article/${article.id}`} />
         <meta name="twitter:title" content={article.title} />
         <meta name="twitter:description" content={article.excerpt} />
         <script type="application/ld+json">{JSON.stringify({
@@ -379,7 +379,7 @@ function ArticleDetailPage() {
           "author": { "@type": "Person", "name": "ATM Blog" },
           "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": `https://home.gaodeqingchuda.icu/article/${article.id}`
+            "@id": `https://home.awuluan.wiki/article/${article.id}`
           }
         })}</script>
       </Helmet>

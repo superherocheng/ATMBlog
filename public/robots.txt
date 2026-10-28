@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://home.gaodeqingchuda.icu/sitemap.xml
+Sitemap: https://home.awuluan.wiki/sitemap.xml

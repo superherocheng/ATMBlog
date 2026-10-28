@@ -8,7 +8,7 @@ import { articles } from './src/data/articles.js';
 // non-hidden set, so hidden IMAGE2 posts are excluded. No public/sitemap.xml
 // (the plugin is the single source); dev doesn't need one.
 function sitemapPlugin() {
-  const DOMAIN = 'https://home.gaodeqingchuda.icu';
+  const DOMAIN = 'https://home.awuluan.wiki';
   return {
     name: 'atmblog-sitemap',
     apply: 'build',

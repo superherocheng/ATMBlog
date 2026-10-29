@@ -948,6 +948,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 104,
+    slug: 'asuggestion-20261029',
+    title: '2026-10-29 A股盘后分析',
+    excerpt: '今日：业绩兑现日变成砸盘日——天孚 Q3 净利同比 +55% 只因差预期两千万被按跌停，跌停家数本轮首次反超涨停；定价锚已从"花了多少钱"移到"赚回多少钱"，只认超预期与自有现金流，正文大考前不新增仓位。',
+    date: '2026-10-29',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

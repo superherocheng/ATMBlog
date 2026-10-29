@@ -957,6 +957,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 105,
+    slug: 'fii-q3-2026-cashflow-deepdive',
+    title: '166 亿 vs −41.76 亿：工业富联三季报拆解——利润超预期，现金流没交卷',
+    excerpt: '扣非增速（+64.8%）跑赢归母（+60.4%）、加权 ROE 21.77%、前三季利润已超去年全年——这是一份主业赚出来的超预期；但应收账款 +78% 跑赢营收 +56%，账期换增长的账下一季必须还。明日定价规则：高开不追，44 元失守线不变。',
+    date: '2026-10-29',
+    readTime: '15 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

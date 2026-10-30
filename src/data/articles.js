@@ -975,6 +975,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 107,
+    slug: 'sellside-9-reports-20261030',
+    title: '九份研报同日阅：AI 走进"验证窗口"，11月地缘时钟启动',
+    excerpt: 'Meta 自由现金流 2012 年来首次单季转负却上调 capex 下限、CoreWeave CDS 破 1000bp——AI 定价切换到"收入-现金流-信用"三重验证；国内利率市场化同期重塑银行与理财行为，3 年内信用债仍有稳定配置盘，超长端定价权交给保险。',
+    date: '2026-10-30',
+    readTime: '30 min read',
+    tag: '宏观',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

@@ -966,6 +966,15 @@ const allArticles = [
     readTime: '15 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 106,
+    slug: 'asuggestion-20261030',
+    title: '2026-10-30 A股盘后分析',
+    excerpt: '今日：判据日四判齐斩——工富现金流、北方华创毛利率双双失守降档，🟢池只剩浪潮；放量下跌失守3600，恐慌读数84.2首次逼近85闸门，继续等。',
+    date: '2026-10-30',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

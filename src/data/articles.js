@@ -993,6 +993,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 109,
+    slug: 'sellside-4-reports-20261102',
+    title: '四份研报定调 2027：AI"慢即是快"，美联储再加息 2-3 次，人民币却看升 6.12',
+    excerpt: '华泰中美双展望、国盛政策半月观、西部固收月报交叉印证：2027 中国增长换挡至 4.5%（地产投资 -22%、土地出让收入再降三成，对冲靠"六张网"1 万亿增量与中央财政托底），中美利差倒挂 344bp 下人民币却由财政自律与顺差定价；四份报告共同的尾部风险只有一个——AI 年发债 8000 亿美元、占美债净发行近四成的融资反噬。',
+    date: '2026-11-02',
+    readTime: '15 min read',
+    tag: '宏观',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

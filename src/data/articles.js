@@ -984,6 +984,15 @@ const allArticles = [
     readTime: '30 min read',
     tag: '宏观',
   },
+  {
+    id: 108,
+    slug: 'asuggestion-20261102',
+    title: '2026-11-02 A股盘后分析',
+    excerpt: '今日：政策底接住黑周五——两市放量 1.78 万亿广度反弹、涨跌中位数跑赢指数，但长鑫主力流出放大、筹码出清未完成，恐慌读数 70.8 跌出 85 闸门；定性反弹第一日而非反转，档位零变动，什么都不做。',
+    date: '2026-11-02',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

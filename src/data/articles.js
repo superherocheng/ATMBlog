@@ -1002,6 +1002,15 @@ const allArticles = [
     readTime: '15 min read',
     tag: '宏观',
   },
+  {
+    id: 110,
+    slug: 'asuggestion-20261103',
+    title: '2026-11-03 A股盘后分析',
+    excerpt: '今日：反弹一日游坐实、出清进入第二段——Marvell 千亿美元收购 Lumentum 把光模块定价尺换成"2027 议价权"，科创50 创 9 月以来收盘新低；两尺冲突裁决落地：85 闸门保留（E4 触发但读数<85 的历史胜率仅约五成），E4/GF 只记录不执行。',
+    date: '2026-11-03',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

@@ -1011,6 +1011,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 111,
+    slug: 'asuggestion-20261104',
+    title: '2026-11-04 A股盘后分析',
+    excerpt: '今日：央行再贷款降息+伪研报澄清+AMD 超预期三击引爆修复脉冲——科创50 大涨 9.92%、两市重上 2 万亿、全池主力净流入 174.91 亿完全镜像；定性为修复脉冲而非反转确认，追高禁令不因长阳解除，85 闸门错过此日是裁决已明示的设计代价首次实付。',
+    date: '2026-11-04',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

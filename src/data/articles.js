@@ -1020,6 +1020,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 112,
+    slug: 'asuggestion-20261105',
+    title: '2026-11-05 A股盘后分析',
+    excerpt: '今日：修复脉冲第三日走向结构分裂——指数普涨、两市连续第二日破 2 万亿，但昨夜"蓝色浪潮"定价 SOX −3.13% 后，海外算力链被反手卖、国产链被加买；华虹正文超预期升 🟠、长鑫主力两日确认失败，读数 52.2 闸门远，继续不加仓。',
+    date: '2026-11-05',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

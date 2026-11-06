@@ -1029,6 +1029,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 113,
+    slug: 'asuggestion-20261106',
+    title: '2026-11-06 A股盘后分析',
+    excerpt: '今日：SOX −12.25% 的第一承接日——隔夜 AI capex 政治折价总爆发，A 股缩量阴跌显韧性（沪指 −1.10%、两市缩量 4602 亿），系统按"需求地"完成最极致分拣：海外算力链全线 −6~−10% 被卖、国产链逆势收红（中芯 SOX −12 日收红、华虹三连强）；工富降档触发器盘中擦过收盘未确认、档位零变动，读数 56.0 距闸门远——第二十次什么都不做，等 11/12-13 中芯正文与 11/17 NVDA 终裁。',
+    date: '2026-11-06',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

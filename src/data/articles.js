@@ -1038,6 +1038,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 114,
+    slug: 'asuggestion-20261109',
+    title: '2026-11-09 A股盘后分析',
+    excerpt: '今日：政策底牌与超卖反弹托起的缩量修复日——"需求地"分拣首次反向（海外链全买回、全池主力转正），但量能与广度都不认，反弹非反转；黄仁勋事件把 11/17 英伟达终裁升维为"财报+人事"双裁决。首选浪潮，避雷联讯。',
+    date: '2026-11-09',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

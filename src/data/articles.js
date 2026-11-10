@@ -1047,6 +1047,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 115,
+    slug: 'asuggestion-20261110',
+    title: '2026-11-10 A股盘后分析',
+    excerpt: '今日：放量普涨的修复第二日——量能重回 1.5 万亿、跌停归零、主力两日确认达成，但今晚 CPI 与 11/17-18 NVDA 双裁决未过，反弹非反转；美股把"NVDA 公司风险"与"AI 行业景气"分开定价，A 股风格反转（上证50 唯一收跌、中证1000 站上 MA20）。首选浪潮，避雷联讯。',
+    date: '2026-11-10',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

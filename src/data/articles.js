@@ -1065,6 +1065,16 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 117,
+    slug: 'annual-strategy-2027-crosscheck',
+    title: '算力通胀的账算完了，AI 应用的账还没开张',
+    excerpt:
+      '五份年度报告的时间表对得上：27 年 3-4 月前是不创新低的窗口、27H2 才谈"第二阶段上涨"，宏观把出口增速从 25% 砍到 15%，行业比较给电子通信的筹码打分是 −2。真正的分歧只有一个——全年防守，还是下半年进攻。',
+    date: '2026-11-11',
+    readTime: '30 min read',
+    tag: '宏观',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

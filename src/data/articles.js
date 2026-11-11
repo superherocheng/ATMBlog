@@ -1075,6 +1075,16 @@ const allArticles = [
     readTime: '30 min read',
     tag: '宏观',
   },
+  {
+    id: 118,
+    slug: 'macro-double-vacuum-20261111',
+    title: '加税是结构性必然，降息要等到 2027 年下半年',
+    excerpt:
+      '高盛北京路演的六条判断、黄金目标价 4,150/4,800，加上三封观众来信里的曼谷工厂与网贷账单，指向同一个答案：2026Q4 到 2027H1 是政策与利率的双真空期，而黄金是这套判断里最干净的表达工具。',
+    date: '2026-11-11',
+    readTime: '20 min read',
+    tag: '宏观',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

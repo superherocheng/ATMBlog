@@ -1056,6 +1056,15 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 116,
+    slug: 'asuggestion-20261111',
+    title: '2026-11-11 A股盘后分析',
+    excerpt: '今日：旧闻重定价——微软游说 FCC 只是"进行时"，禁令本体与大摩 10/1 的 3.2T 门槛一个月前已被交易过；光模块/PCB 涨停潮买的是落地概率而非订单，杠杆已出清但机构仍拥挤，属超跌修复第一波而非重估起点。首选工富，避雷华虹。',
+    date: '2026-11-11',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

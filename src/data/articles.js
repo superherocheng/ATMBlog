@@ -1085,6 +1085,16 @@ const allArticles = [
     readTime: '20 min read',
     tag: '宏观',
   },
+  {
+    id: 119,
+    slug: 'asuggestion-20261112',
+    title: '2026-11-12 A股盘后分析',
+    excerpt:
+      '今日：隔夜费半暴涨但英伟达盘后曝罢免门，A股冲高回落切成哑铃——英伟达链兑现、国产链接棒；中芯三季报三裁判全过而资本开支环比腰斩，罢免决议与明早说明会是接下来24小时仅有的两个真开关。',
+    date: '2026-11-12',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

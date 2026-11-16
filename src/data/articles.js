@@ -1095,6 +1095,16 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 120,
+    slug: 'asuggestion-20261116',
+    title: '2026-11-16 A股盘后分析',
+    excerpt:
+      '今日：黄仁勋辞职落地，达链两日连环崩（台股 −6% 史上第二大单日跌点），但中芯说明会与 AMAT 财报证明这是治理折价而非需求证伪；恐慌读数 72.9 未开闸，11/17 NVDA 财报是全池总闸，财报前不动手。',
+    date: '2026-11-16',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

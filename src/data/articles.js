@@ -1105,6 +1105,16 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 121,
+    slug: 'asuggestion-20261119',
+    title: '2026-11-19 A股盘后分析',
+    excerpt:
+      '今日：缩量六连阴的出清后段——NVDA 财报大超却绩后创 16 月新低，A股重定价的是制造端国产替代（代工涨价+BIS 新规）而非达链修复；恐慌 84.8 距闸门 0.2pp、E4 已触发，但企稳确认未到，继续什么都不做。',
+    date: '2026-11-19',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

@@ -1115,6 +1115,16 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 122,
+    slug: 'asuggestion-20261123',
+    title: '2026-11-23 A股盘后分析',
+    excerpt:
+      '今日：外部杀估值与内部托底正面对撞，放量 V 反只是政策底确认、不是反转——🟢 池恢复工富/新易盛/旭创，避雷华虹 A 与浪潮（42 为除名线）。',
+    date: '2026-11-23',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

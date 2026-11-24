@@ -1125,6 +1125,16 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 123,
+    slug: 'asuggestion-20261124',
+    title: '2026-11-24 A股盘后分析',
+    excerpt:
+      '今日：外部总闸打开而 A 股不认——隔夜英伟达复职暴涨只换来一次高开低走，放量滞涨是筹码出清不是新定价，恐慌 71.1 退回预警区，继续什么都不做。',
+    date: '2026-11-24',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

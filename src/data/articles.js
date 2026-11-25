@@ -1135,6 +1135,16 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 124,
+    slug: 'asuggestion-20261125',
+    title: '2026-11-25 A股盘后分析',
+    excerpt:
+      '今日：订单被确认、估值被否决——戴尔大超预期没能拦住费半 −7.88%，A 股缩量失守 3500，恐慌 85.3 进解锁区但企稳确认未到，继续什么都不做。',
+    date: '2026-11-25',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

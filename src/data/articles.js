@@ -1145,6 +1145,16 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 125,
+    slug: 'asuggestion-20261126',
+    title: '2026-11-26 A股盘后分析',
+    excerpt:
+      '今日：缩量反抽，托住的是指数不是筹码，钱只认订单；恐慌读数退回准备区、企稳确认未到，继续什么都不做。',
+    date: '2026-11-26',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,

@@ -1155,6 +1155,16 @@ const allArticles = [
     readTime: '22 min read',
     tag: 'A STOCK',
   },
+  {
+    id: 126,
+    slug: 'asuggestion-20261127',
+    title: '2026-11-27 A股盘后分析',
+    excerpt:
+      '今日：国常会盘中定调，放量长阳是政策底亮牌不是市场底确认；存量搬家而非增量入场，持有不追、回踩再分批。',
+    date: '2026-11-27',
+    readTime: '22 min read',
+    tag: 'A STOCK',
+  },
 ];
 
 // `articles` exposes only non-hidden items. Every consumer (home, articles list,
